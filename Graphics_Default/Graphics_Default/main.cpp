@@ -11,6 +11,7 @@
 
 #include"Constants.h"
 #include"Transform.h"
+#include"Camera.h"
 
 float r = 0.0f , g = 0.0f , b = 0.0f;
 
@@ -153,6 +154,9 @@ int main(int argc, char* argv[])
 
     Transform transform = Transform();
     transform.position = glm::vec3(0.5, 1, 0);
+    Camera camera = Camera();
+    glm::mat4 worldPos = camera.projection * camera.matrix() * glm::vec4(camera.transform.position, 1.0f);
+    worldPos = 
 
     //Main window loop:
     while (true)

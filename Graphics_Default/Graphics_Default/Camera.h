@@ -5,7 +5,7 @@ class Camera
 public:
 	//Attributes:
 	Transform transform;
-	glm::mat4 perspective;
+	glm::mat4 projection;
 
 	//Methods:
 	glm::vec3 forward();
