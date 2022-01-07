@@ -8,9 +8,13 @@
 #include<SDL.h>
 #include<iostream>
 
+#include"Constants.h"
+#include"Window.h"
+
 
 int main(int argc, char* argv[])
 {
+    /*
     SDL_Init(SDL_INIT_EVERYTHING); //Initialise all of SDL's systems.
 
     //Instruct SDL with how we want to set up openGL.
@@ -25,7 +29,7 @@ int main(int argc, char* argv[])
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 
     //Create a window and context for openGL to render too.
-    SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 880, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
 
     //Glew status:
@@ -39,18 +43,24 @@ int main(int argc, char* argv[])
     if (status != GLEW_OK) std::cout << "GLEW failed initialisation." << std::endl;
 
     SDL_Event sdlEvent;
+    */
+
+    SDL_Window* window;
+    Window sdlWindow = Window(window);
+
+
 
     //Main window loop:
     while (true)
     {
         //Exit loop if any key is pressed.
-        SDL_PollEvent(&sdlEvent);
-        if (sdlEvent.type == SDL_KEYDOWN) break;
+        SDL_PollEvent(&sdlWindow.sdlEvent);
+        if (sdlWindow.sdlEvent.type == SDL_KEYDOWN) break;
 
         //Otherwise, render the window.
         glClearColor(1.0f, 0.15f, 0.3f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glViewport(0, 0, 800, 600);
+        glViewport(0, 0, 100, 200);
 
         SDL_GL_SwapWindow(window);
     }
@@ -58,7 +68,7 @@ int main(int argc, char* argv[])
 
 
     //Clean up program:
-    SDL_GL_DeleteContext(glContext); //Always delete context first.
+    SDL_GL_DeleteContext(sdlWindow.glContext); //Always delete context first.
     SDL_DestroyWindow(window);
     window = nullptr;
     SDL_Quit();
