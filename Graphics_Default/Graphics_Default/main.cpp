@@ -7,14 +7,74 @@
 #include<gtc/type_ptr.hpp>
 #include<SDL.h>
 #include<iostream>
+#include<string>
 
 #include"Constants.h"
-#include"Window.h"
+
+float r = 0.0f , g = 0.0f , b = 0.0f;
+
+const GLchar* VertexShaderCode =
+"#version 450\n"
+"in vec3 vp;"
+"void main(){"
+"	gl_Position = vec4(vp, 1.0);"
+"}";
+
+const GLchar* FragmentShaderCode =
+"#version 450\n"
+"out vec4 frag_colour;"
+"void main(){"
+"	frag_colour = vec4(1.0, 0.0, 0.0, 0.0);"
+"}";
+
+
+
+//Functions:
+void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
+{
+    GLint success = 0;
+    GLchar error[1024] = { 0 };
+
+    if (isProgram) glGetProgramiv(shader, flag, &success);
+    else glGetShaderiv(shader, flag, &success);
+
+    if (success == GL_FALSE)
+    {
+        if (isProgram) glGetProgramInfoLog(shader, sizeof(error), NULL, error);
+        else glGetProgramInfoLog(shader, sizeof(error), NULL, error);
+        std::cerr << errorMessage << ": '" << error << "'" << std::endl;
+    }
+}
+
+GLuint getObject(const float* verticies)
+{
+    //Draw a triangle:
+    GLuint VertexBufferObject = 0; //GL-uint represents an unsigned integer.
+    glGenBuffers(1, &VertexBufferObject);
+    glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), verticies, GL_STATIC_DRAW);
+
+    //Create a vertex array object:
+    GLuint VertexArrayObject = 0;
+    glGenVertexArrays(1, &VertexArrayObject);
+    glBindVertexArray(VertexArrayObject);
+    glEnableVertexAttribArray(0);
+
+    //Bind vertex buffer object:
+    glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glBindVertexArray(0);
+
+    return VertexBufferObject;
+}
+
+
+
 
 
 int main(int argc, char* argv[])
 {
-    /*
+
     SDL_Init(SDL_INIT_EVERYTHING); //Initialise all of SDL's systems.
 
     //Instruct SDL with how we want to set up openGL.
@@ -43,10 +103,51 @@ int main(int argc, char* argv[])
     if (status != GLEW_OK) std::cout << "GLEW failed initialisation." << std::endl;
 
     SDL_Event sdlEvent;
-    */
 
-    SDL_Window* window;
-    Window sdlWindow = Window(window);
+    //Linking and compiling the shaders:
+    GLuint VertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(VertexShader, 1, &VertexShaderCode, NULL);
+    glCompileShader(VertexShader);
+    GLuint FragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(FragmentShader, 1, &FragmentShaderCode, NULL);
+    glCompileShader(FragmentShader);
+
+    //Connect the shaders to a shader program:
+    GLuint ShaderProgram = glCreateProgram();
+    glAttachShader(ShaderProgram, VertexShader);
+    glAttachShader(ShaderProgram, FragmentShader);
+
+    //Link and validate the shader program:
+    glLinkProgram(ShaderProgram);
+    CheckShaderError(ShaderProgram, GL_LINK_STATUS, true, "ERROR: program linking failed: ");
+    glValidateProgram(ShaderProgram);
+    CheckShaderError(ShaderProgram, GL_LINK_STATUS, true, "ERROR: program is invalid: ");
+
+    //Set clear colour port:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
+    glViewport(0, 0, 800, 600);
 
 
 
@@ -54,13 +155,17 @@ int main(int argc, char* argv[])
     while (true)
     {
         //Exit loop if any key is pressed.
-        SDL_PollEvent(&sdlWindow.sdlEvent);
-        if (sdlWindow.sdlEvent.type == SDL_KEYDOWN) break;
+        SDL_PollEvent(&sdlEvent);
+        if (sdlEvent.type == SDL_KEYDOWN) break;
 
         //Otherwise, render the window.
-        glClearColor(1.0f, 0.15f, 0.3f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glViewport(0, 0, 100, 200);
+        glUseProgram(ShaderProgram);
+        glBindVertexArray(getObject(verticies));
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBindVertexArray(getObject(verts2));
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+        SDL_Delay(16);
 
         SDL_GL_SwapWindow(window);
     }
@@ -68,7 +173,7 @@ int main(int argc, char* argv[])
 
 
     //Clean up program:
-    SDL_GL_DeleteContext(sdlWindow.glContext); //Always delete context first.
+    SDL_GL_DeleteContext(glContext); //Always delete context first.
     SDL_DestroyWindow(window);
     window = nullptr;
     SDL_Quit();
