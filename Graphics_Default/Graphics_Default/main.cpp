@@ -10,14 +10,16 @@
 #include<string>
 
 #include"Constants.h"
+#include"Transform.h"
 
 float r = 0.0f , g = 0.0f , b = 0.0f;
 
 const GLchar* VertexShaderCode =
 "#version 450\n"
 "in vec3 vp;"
+"uniform mat4 model;"
 "void main(){"
-"	gl_Position = vec4(vp, 1.0);"
+"	gl_Position = model * vec4(vp, 1.0);"
 "}";
 
 const GLchar* FragmentShaderCode =
@@ -149,7 +151,8 @@ int main(int argc, char* argv[])
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
 
-
+    Transform transform = Transform();
+    transform.position = glm::vec3(0.5, 1, 0);
 
     //Main window loop:
     while (true)
@@ -161,9 +164,12 @@ int main(int argc, char* argv[])
         //Otherwise, render the window.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(ShaderProgram);
+
+        GLint modelLoc = glGetUniformLocation(ShaderProgram, "model");
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &transform.matrix()[0][0]);
+
+
         glBindVertexArray(getObject(verticies));
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-        glBindVertexArray(getObject(verts2));
         glDrawArrays(GL_TRIANGLES, 0, 3);
         SDL_Delay(16);
 
