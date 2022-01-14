@@ -13,6 +13,7 @@
 #include"Transform.h"
 #include"Camera.h"
 #include"Mesh.h"
+#include"Input.h"
 float vertices[]{ 0.0f, 0.0f, 0.0f, 0.1f, -0.2f, 0.0f, -0.1f, -0.2f, 0.0f };
 
 float r = 0.0f , g = 0.0f , b = 0.0f;
@@ -20,9 +21,9 @@ float r = 0.0f , g = 0.0f , b = 0.0f;
 const GLchar* VertexShaderCode =
 "#version 450\n"
 "in vec3 vp;"
-"uniform mat4 model;"
+"uniform mat4 model; uniform mat4 projection; uniform mat4 view; vec3 position;"
 "void main(){"
-"	gl_Position = model * vec4(vp, 1.0);"
+"	gl_Position = projection * view * model * vec4(position, 1.0);"
 "}";
 
 const GLchar* FragmentShaderCode =
@@ -128,10 +129,8 @@ int main(int argc, char* argv[])
     glValidateProgram(ShaderProgram);
     CheckShaderError(ShaderProgram, GL_LINK_STATUS, true, "ERROR: program is invalid: ");
 
-    //Set clear colour port:
-
-
-
+    //Camera:
+    Camera camera = Camera();
 
 
 
@@ -155,16 +154,16 @@ int main(int argc, char* argv[])
     glViewport(0, 0, 800, 600);
 
     Transform transform = Transform();
-    transform.position = glm::vec3(0.5, 1, 0);
+    transform.position = glm::vec3(0.5, 2, 0);
 
     Mesh tri = Mesh(vertices, 3);
-
+    camera.Recalculate();
     //Main window loop:
     while (true)
     {
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
-        if (sdlEvent.type == SDL_KEYDOWN) break;
+        if (Input::GetKey(SDLK_ESCAPE)) break;
 
         tri.draw();
 
@@ -173,8 +172,14 @@ int main(int argc, char* argv[])
         glUseProgram(ShaderProgram);
 
         GLint modelLoc = glGetUniformLocation(ShaderProgram, "model");
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &transform.matrix()[0][0]);
+        GLint posLoc = glGetUniformLocation(ShaderProgram, "position");
+        GLint viewLoc = glGetUniformLocation(ShaderProgram, "view");
+        GLint projLoc = glGetUniformLocation(ShaderProgram, "projection");
 
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &transform.matrix()[0][0]);
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &camera.view[0][0]);
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, &camera.perspective[0][0]);
+        glUniform3f(posLoc, camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
         tri.draw();
         SDL_Delay(16);
 
