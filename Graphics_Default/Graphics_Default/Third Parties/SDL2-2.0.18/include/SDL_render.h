@@ -1618,7 +1618,7 @@ extern DECLSPEC int SDLCALL SDL_RenderCopyExF(SDL_Renderer * renderer,
  */
 extern DECLSPEC int SDLCALL SDL_RenderGeometry(SDL_Renderer *renderer,
                                                SDL_Texture *texture,
-                                               const SDL_Vertex *vertices, int num_vertices,
+                                               const SDL_Vertex *verticies, int num_vertices,
                                                const int *indices, int num_indices);
 
 /**

@@ -47,13 +47,13 @@ void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::str
     }
 }
 
-GLuint getObject(const float* vertices)
+GLuint getObject(const float* verticies)
 {
     //Draw a triangle:
     GLuint VertexBufferObject = 0; //GL-uint represents an unsigned integer.
     glGenBuffers(1, &VertexBufferObject);
     glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), verticies, GL_STATIC_DRAW);
 
     //Create a vertex array object:
     GLuint VertexArrayObject = 0;
@@ -134,7 +134,10 @@ int main(int argc, char* argv[])
     Transform transform = Transform();
     transform.position = glm::vec3(0.5, 2.0f, -20.0f);
 
-    Mesh tri = Mesh(vertices, 3);
+    unsigned int indicies[]{ 0,1,2,0,2,3 };
+
+    Mesh tri = Mesh(&Primitives::Square()[0], Primitives::Square().size(), &indicies[0], 6);
+
     camera.Recalculate();
     //Main window loop:
     while (true)
