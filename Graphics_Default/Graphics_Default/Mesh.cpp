@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(float* verts, unsigned int count)
+Mesh::Mesh(const float* verts, unsigned int count) : transform(Transform())
 {
 	glGenVertexArrays(1, &vertices);
 	glBindVertexArray(vertices);

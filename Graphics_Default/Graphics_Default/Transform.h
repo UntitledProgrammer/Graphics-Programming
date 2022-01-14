@@ -22,7 +22,6 @@ public:
 	~Transform();
 
 	//Methods:
-
 	/// <summary>Returns a matrix using the context of each component.</summary>
 	inline glm::mat4 matrix() const
 	{

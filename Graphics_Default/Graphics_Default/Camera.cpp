@@ -7,7 +7,12 @@ glm::mat4 Camera::matrix()
     return glm::lookAt(transform.position, glm::vec3(0), up);
 }
 
-Camera::Camera() : transform(Transform()), perspective(glm::mat4(1)) { Recalculate(); };
+Camera::Camera() : transform(Transform()), perspective(glm::mat4(1)) 
+{ 
+    perspective = glm::perspective(fov, aspect, 1.0f, 100.0f);
+    transform.position = glm::vec3(0.0f, 0.0f, 2.0f);
+    Recalculate();
+};
 
 Camera::~Camera()
 {

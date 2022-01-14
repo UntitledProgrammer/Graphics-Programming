@@ -2,6 +2,7 @@
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 #include<glew.h>
+#include"Transform.h"
 
 class Mesh
 {
@@ -13,9 +14,11 @@ private:
 	GLuint vertices = 0;
 
 public: 
+	//Attributes:
+	Transform transform;
 
 	//Constructor:
-	Mesh(float* verts, unsigned int count);
+	Mesh(const float* verts, unsigned int count);
 
 	//Deconstructor:
 	~Mesh();

@@ -9,21 +9,16 @@
 #include<iostream>
 #include<string>
 
-#include"Constants.h"
-#include"Transform.h"
 #include"Camera.h"
 #include"Mesh.h"
 #include"Input.h"
-float vertices[]{ 0.0f, 0.0f, 0.0f, 0.1f, -0.2f, 0.0f, -0.1f, -0.2f, 0.0f };
-
-float r = 0.0f , g = 0.0f , b = 0.0f;
 
 const GLchar* VertexShaderCode =
 "#version 450\n"
 "in vec3 vp;"
 "uniform mat4 model; uniform mat4 projection; uniform mat4 view; vec3 position;"
 "void main(){"
-"	gl_Position = projection * view * model * vec4(position, 1.0);"
+"	gl_Position = projection * view * model * vec4(vp, 1.0);"
 "}";
 
 const GLchar* FragmentShaderCode =
@@ -133,28 +128,11 @@ int main(int argc, char* argv[])
     Camera camera = Camera();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
 
     Transform transform = Transform();
-    transform.position = glm::vec3(0.5, 2, 0);
+    transform.position = glm::vec3(0.5, 2.0f, -20.0f);
 
     Mesh tri = Mesh(vertices, 3);
     camera.Recalculate();
@@ -179,7 +157,8 @@ int main(int argc, char* argv[])
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &transform.matrix()[0][0]);
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &camera.view[0][0]);
         glUniformMatrix4fv(projLoc, 1, GL_FALSE, &camera.perspective[0][0]);
-        glUniform3f(posLoc, camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
+        glUniform3f(posLoc, transform.position.x, transform.position.y, transform.position.z);
+
         tri.draw();
         SDL_Delay(16);
 
