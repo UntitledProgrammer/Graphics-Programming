@@ -12,6 +12,8 @@
 #include"Constants.h"
 #include"Transform.h"
 #include"Camera.h"
+#include"Mesh.h"
+float vertices[]{ 0.0f, 0.0f, 0.0f, 0.1f, -0.2f, 0.0f, -0.1f, -0.2f, 0.0f };
 
 float r = 0.0f , g = 0.0f , b = 0.0f;
 
@@ -49,13 +51,13 @@ void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::str
     }
 }
 
-GLuint getObject(const float* verticies)
+GLuint getObject(const float* vertices)
 {
     //Draw a triangle:
     GLuint VertexBufferObject = 0; //GL-uint represents an unsigned integer.
     glGenBuffers(1, &VertexBufferObject);
     glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), verticies, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), vertices, GL_STATIC_DRAW);
 
     //Create a vertex array object:
     GLuint VertexArrayObject = 0;
@@ -154,9 +156,8 @@ int main(int argc, char* argv[])
 
     Transform transform = Transform();
     transform.position = glm::vec3(0.5, 1, 0);
-    Camera camera = Camera();
-    glm::mat4 worldPos = camera.projection * camera.matrix() * glm::vec4(camera.transform.position, 1.0f);
-    worldPos = 
+
+    Mesh tri = Mesh(vertices, 3);
 
     //Main window loop:
     while (true)
@@ -165,6 +166,8 @@ int main(int argc, char* argv[])
         SDL_PollEvent(&sdlEvent);
         if (sdlEvent.type == SDL_KEYDOWN) break;
 
+        tri.draw();
+
         //Otherwise, render the window.
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(ShaderProgram);
@@ -172,9 +175,7 @@ int main(int argc, char* argv[])
         GLint modelLoc = glGetUniformLocation(ShaderProgram, "model");
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, &transform.matrix()[0][0]);
 
-
-        glBindVertexArray(getObject(verticies));
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        tri.draw();
         SDL_Delay(16);
 
         SDL_GL_SwapWindow(window);
