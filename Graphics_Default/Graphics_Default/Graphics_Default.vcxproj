@@ -88,12 +88,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\Documents\Tom Jacobs\Graphics Programming\Graphics_Default\Graphics_Default\Third Parties\SDL2-2.0.18\include;C:\Users\Administrator\Documents\Tom Jacobs\Graphics Programming\Graphics_Default\Graphics_Default\Third Parties\glm-0.9.9.8\glm;C:\Users\Administrator\Documents\Tom Jacobs\Graphics Programming\Graphics_Default\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.18\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Administrator\Documents\Tom Jacobs\Graphics Programming\Graphics_Default\Graphics_Default\Third Parties\SDL2-2.0.18\lib\x86;C:\Users\Administrator\Documents\Tom Jacobs\Graphics Programming\Graphics_Default\Graphics_Default\Third Parties\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.18\lib\x86;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

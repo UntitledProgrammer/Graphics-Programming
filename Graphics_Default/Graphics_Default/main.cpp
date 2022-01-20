@@ -126,6 +126,7 @@ int main(int argc, char* argv[])
 
     //Camera:
     Camera camera = Camera();
+    camera.transform.rotation = glm::vec3(50, 120, 20);
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -133,6 +134,7 @@ int main(int argc, char* argv[])
     Transform transform = Transform();
     transform.position = glm::vec3(0.5, 2.0f, -20.0f);
     transform.scale = glm::vec3(10, 10, 0);
+    transform.rotation = glm::vec3(50, 0, 90);
 
     unsigned int indicies[]{ 0,1,2,0,2,3 };
 

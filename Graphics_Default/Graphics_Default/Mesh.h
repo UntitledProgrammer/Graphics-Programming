@@ -1,4 +1,7 @@
 #pragma once
+#ifndef MESH_H
+#define MESH_H
+
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 #include<glew.h>
@@ -8,7 +11,6 @@
 class Mesh
 {
 private:
-
 	//Attributes:
 	GLuint vertexBuffer[2];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
@@ -24,8 +26,8 @@ public:
 
 	//Deconstructor:
 	~Mesh();
-
+	
 	//Methods:
 	void draw();
 };
-
+#endif // !MESH_H

@@ -1,4 +1,7 @@
 #pragma once
+#ifndef VERTEX_H
+#define VERTEX_H
+
 #include<glm.hpp>
 #include<vector>
 
@@ -39,6 +42,5 @@ struct Primitives
 
 		return verticies;
 	}
-
-
 };
+#endif // !VERTEX_H

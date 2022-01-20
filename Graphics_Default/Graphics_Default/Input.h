@@ -1,4 +1,7 @@
 #pragma once
+#ifndef INPUT_H
+#define INPUT_H
+
 #include<SDL.h>
 #include<iostream>
 class Input
@@ -17,4 +20,4 @@ public:
 	void update();
 	static bool GetKey(SDL_Keycode key);
 };
-
+#endif // !INPUT_H

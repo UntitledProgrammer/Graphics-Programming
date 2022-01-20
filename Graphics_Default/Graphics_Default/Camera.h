@@ -1,4 +1,7 @@
 #pragma once
+#ifndef CAMERA_H
+#define CAMERA_H
+
 #include "Transform.h"
 #include"Constants.h"
 
@@ -26,4 +29,4 @@ public:
 	Camera();
 	~Camera();
 };
-
+#endif // !CAMERA_H
