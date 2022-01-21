@@ -1,7 +1,10 @@
 #version 450
+
+uniform sampler2D texture_diffuse;
+in vec2 fragTextureCoordinates;
 out vec4 colour;
 
 void main()
 {
-	colour = vec4( vec3(1.0,0.0,0.0), 1.0);
+	colour = vec4( texture2D(texture_diffuse, fragTextureCoordinates).rgb, 1);
 }

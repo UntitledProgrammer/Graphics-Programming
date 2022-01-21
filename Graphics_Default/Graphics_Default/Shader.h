@@ -33,6 +33,7 @@ public:
 	//Methods:
 	void update(Transform& transform);
 	void bind();
+	GLuint& getProgram() { return program; }
 
 	//Static methods:
 	static GLuint CreateShader(const std::string& source, GLenum type);

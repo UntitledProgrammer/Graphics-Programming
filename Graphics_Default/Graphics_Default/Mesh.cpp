@@ -3,7 +3,7 @@
 
 Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount)
 {
-	NumVerts = verticiesCount;
+	NumVerts = indiciesCount;
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> coordinates;
 
@@ -25,7 +25,7 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 
 	//Texture Coordinates:
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TEXTCOORD_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(coordinates[0]), &coordinates[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, indiciesCount * sizeof(coordinates[0]), &coordinates[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(TEXTCOORD_VB, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(TEXTCOORD_VB);
 

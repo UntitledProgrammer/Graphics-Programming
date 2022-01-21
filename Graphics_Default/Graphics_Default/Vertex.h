@@ -37,10 +37,10 @@ struct Primitives
 	{
 		std::vector<Vertex> verticies;
 
-		verticies.push_back(Vertex(-0.5f, 0.5f, -1.0f));
-		verticies.push_back(Vertex(0.5f, 0.5f, -1.0f));
-		verticies.push_back(Vertex(0.5, -0.5f, -1.0f));
-		verticies.push_back(Vertex(-0.5f, -0.5f, -1.0f));
+		verticies.push_back(Vertex( glm::vec3(-0.5f, 0.5f, 1.0f), glm::vec2(0,0) ));
+		verticies.push_back(Vertex(glm::vec3(0.5f, 0.5f, 1.0f), glm::vec2(1, 0)));
+		verticies.push_back(Vertex(glm::vec3(0.5f, -0.5f, 1.0f), glm::vec2(1, 1)));
+		verticies.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 1.0f), glm::vec2(0, 1)));
 
 		return verticies;
 	}

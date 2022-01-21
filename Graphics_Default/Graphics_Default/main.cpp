@@ -12,6 +12,37 @@
 #include"Shader.h"
 #include"Mesh.h"
 #include"Input.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include"stb_image.h"
+
+GLuint textureID;
+
+void LoadTexture(std::string location)
+{
+    int width, height, numComponents;
+    unsigned char* imageData = stbi_load(location.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
+
+    if (imageData == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;
+
+    GLenum format;
+    if (numComponents == 1) format = GL_RED;
+    if (numComponents == 3) format = GL_RGB;
+    if (numComponents == 4) format = GL_RGBA;
+
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    stbi_image_free(imageData);
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -47,10 +78,13 @@ int main(int argc, char* argv[])
 
 
 
+    //Load some textures:
+    LoadTexture("brickwall.jpg");
+
+
 
     //Camera:
     Camera camera = Camera();
-    camera.transform.rotation = glm::vec3(70, 90, 180);
 
     //Add shader:
     Shader* basic = new Shader("Shaders/Basic", camera);
@@ -59,10 +93,10 @@ int main(int argc, char* argv[])
     glViewport(0, 0, 800, 600);
     unsigned int indicies[]{ 0,1,2,0,2,3 };
 
-    Mesh tri = Mesh(&Primitives::Triangle()[0], Primitives::Triangle().size(), &indicies[0], 6);
-    tri.transform.position = glm::vec3(0.5, 2.0f, -20.0f);
-    tri.transform.scale = glm::vec3(30, 30, 0);
-    tri.transform.rotation = glm::vec3(90, 0, 170);
+    Mesh tri = Mesh(&Primitives::Square()[0], Primitives::Square().size(), &indicies[0], 6);
+    tri.transform.position = glm::vec3(0, 0, -20.0f);
+    tri.transform.scale = glm::vec3(10, 10, 0);
+    tri.transform.rotation = glm::vec3(90, 0, 0);
 
     camera.Recalculate();
     //Main window loop:
@@ -75,6 +109,11 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         basic->bind();
+        glActiveTexture(GL_TEXTURE0);
+        GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
+        glUniform1i(textureLoc, 0);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+
         basic->update(tri.transform);
 
         tri.draw();
