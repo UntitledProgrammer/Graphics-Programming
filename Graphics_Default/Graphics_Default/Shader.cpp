@@ -95,7 +95,7 @@ std::string Shader::LoadShader(const std::string& filename)
     {
         while (file.good())
         {
-            getline(file, line);
+            getline(file, line); 
             output.append(line + "\n");
         }
     }

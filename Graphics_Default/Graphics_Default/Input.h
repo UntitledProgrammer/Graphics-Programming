@@ -19,5 +19,6 @@ public:
 	//Methods:
 	void update();
 	static bool GetKey(SDL_Keycode key);
+
 };
 #endif // !INPUT_H

@@ -11,7 +11,7 @@
 
 #include"Shader.h"
 #include"Mesh.h"
-#include"Input.h"
+#include"AdvancedInput.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include"stb_image.h"
 
@@ -24,7 +24,7 @@ void LoadTexture(std::string location)
 
     if (imageData == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;
 
-    GLenum format;
+    GLenum format=1;
     if (numComponents == 1) format = GL_RED;
     if (numComponents == 3) format = GL_RGB;
     if (numComponents == 4) format = GL_RGBA;
@@ -96,15 +96,24 @@ int main(int argc, char* argv[])
     Mesh tri = Mesh(&Primitives::Square()[0], Primitives::Square().size(), &indicies[0], 6);
     tri.transform.position = glm::vec3(0, 0, -20.0f);
     tri.transform.scale = glm::vec3(10, 10, 0);
-    tri.transform.rotation = glm::vec3(90, 0, 0);
 
     camera.Recalculate();
     //Main window loop:
     while (true)
     {
+        AdvancedInput::Instance()->update();
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
-        if (Input::GetKey(SDLK_ESCAPE)) break;
+        if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
+        std::cout << camera.transform.position.x << std::endl;
+        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
+        camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
+        camera.Recalculate();
+
+        //camera.transform.position
+
+
+
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
