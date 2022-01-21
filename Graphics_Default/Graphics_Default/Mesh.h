@@ -18,13 +18,13 @@ private:
 	GLuint vertexBuffer[NUM_BUFFERS];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
 	GLuint verticies = 0;
+	GLuint NumVerts =0 ;
 
 public: 
 	//Attributes:
 	Transform transform;
 
 	//Constructor:
-	Mesh(const float* verts, unsigned int count);
 	Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount);
 
 	//Deconstructor:

@@ -50,23 +50,19 @@ int main(int argc, char* argv[])
 
     //Camera:
     Camera camera = Camera();
+    camera.transform.rotation = glm::vec3(70, 90, 180);
 
     //Add shader:
     Shader* basic = new Shader("Shaders/Basic", camera);
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
-
-    Transform transform = Transform();
-    transform.position = glm::vec3(0.5, 2.0f, -20.0f);
-    transform.scale = glm::vec3(10, 10, 0);
-    transform.rotation = glm::vec3(50, 0, 90);
-
     unsigned int indicies[]{ 0,1,2,0,2,3 };
 
     Mesh tri = Mesh(&Primitives::Triangle()[0], Primitives::Triangle().size(), &indicies[0], 6);
     tri.transform.position = glm::vec3(0.5, 2.0f, -20.0f);
-    tri.transform.scale = glm::vec3(10, 10, 0);
+    tri.transform.scale = glm::vec3(30, 30, 0);
+    tri.transform.rotation = glm::vec3(90, 0, 170);
 
     camera.Recalculate();
     //Main window loop:
@@ -76,13 +72,15 @@ int main(int argc, char* argv[])
         SDL_PollEvent(&sdlEvent);
         if (Input::GetKey(SDLK_ESCAPE)) break;
 
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         basic->bind();
         basic->update(tri.transform);
 
         tri.draw();
 
         //Otherwise, render the window.
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
 
         SDL_Delay(16);
 
