@@ -11,8 +11,11 @@
 class Mesh
 {
 private:
+	//Enum:
+	enum VertexBuffer { POSITION_VB, TEXTCOORD_VB, INDEX_VB, NUM_BUFFERS };
+
 	//Attributes:
-	GLuint vertexBuffer[2];
+	GLuint vertexBuffer[NUM_BUFFERS];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
 	GLuint verticies = 0;
 

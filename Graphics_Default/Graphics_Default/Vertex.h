@@ -9,14 +9,27 @@ struct Vertex
 {
 	//Attributes:
 	glm::vec3 position;
+	/// <summary>Holds the UV coordinates.</summary>
+	glm::vec2 uv;
 
 	//Constructor:
 	Vertex(glm::vec3 position);
 	Vertex(float x, float y, float z);
+	Vertex(glm::vec3 pos, glm::vec2 coordinates);
 
 	//Deconstructor:
 	~Vertex();
 };
+
+
+
+
+
+
+
+
+
+
 
 struct Primitives
 {
