@@ -146,6 +146,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -155,9 +156,14 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Basic.frag" />
+    <None Include="Shaders\Basic.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

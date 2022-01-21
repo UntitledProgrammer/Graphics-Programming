@@ -41,7 +41,7 @@ Shader::~Shader()
 
 void Shader::update(Transform& transform)
 {
-    glUniformMatrix4fv(uniforms[MODEL_U], 1, GL_FALSE, &camera->matrix()[0][0]);
+    glUniformMatrix4fv(uniforms[MODEL_U], 1, GL_FALSE, &transform.matrix()[0][0]);
     glUniformMatrix4fv(uniforms[PROJECTION_U], 1, GL_FALSE, &camera->perspective[0][0]);
     glUniformMatrix4fv(uniforms[VIEW_U], 1, GL_FALSE, &camera->view[0][0]);
 }
