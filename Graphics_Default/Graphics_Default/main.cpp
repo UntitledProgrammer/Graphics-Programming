@@ -9,12 +9,9 @@
 #include<iostream>
 #include<string>
 
-#include"Shader.h"
-#include"Mesh.h"
 #include"AdvancedInput.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include"Texture.h"
-
+#include"Shape.h"
 /*
 GLuint textureID;
 
@@ -87,6 +84,7 @@ int main(int argc, char* argv[])
 
     //Camera:
     Camera camera = Camera();
+    Shape shape = Shape(&camera);
 
     //Add shader:
     Shader* basic = new Shader("Shaders/Basic", camera);
@@ -124,11 +122,12 @@ int main(int argc, char* argv[])
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
         //glBindTexture(GL_TEXTURE_2D, textureID);
-        texture.update();
+        //texture.update();
 
-        basic->update(tri.transform);
+        //basic->update(tri.transform);
 
-        tri.draw();
+        //tri.draw();
+        shape.draw();
 
         //Otherwise, render the window.
         

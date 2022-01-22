@@ -23,7 +23,7 @@ public:
 
 	//Methods:
 	glm::mat4 matrix();
-	void Recalculate();
+	void recalculate();
 
 	//Constructor:
 	Camera();

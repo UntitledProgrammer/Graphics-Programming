@@ -1,7 +1,10 @@
 #pragma once
 #ifndef SHAPE_H
 #define SHAPE_H
-
+#include"Shader.h"
+#include"Texture.h"
+#include"Mesh.h"
+#include"Camera.h"
 
 
 
@@ -13,16 +16,20 @@
 /// </summary>
 class Shape
 {
+public:
 	//Attributes:
-
+	Mesh* mesh;
+	Shader* shader;
+	Texture* texture;
+	Camera* camera;
 
 	//Constructor:
-	Shape();
+	Shape(Camera* camera);
 
 	//Deconstructor:
 	~Shape();
 
 	//Methods:
-
+	void draw();
 };
 #endif // !SHAPE_H
