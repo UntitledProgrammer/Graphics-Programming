@@ -13,8 +13,9 @@
 #include"Mesh.h"
 #include"AdvancedInput.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include"stb_image.h"
+#include"Texture.h"
 
+/*
 GLuint textureID;
 
 void LoadTexture(std::string location)
@@ -42,7 +43,7 @@ void LoadTexture(std::string location)
 
     stbi_image_free(imageData);
 }
-
+*/
 
 int main(int argc, char* argv[])
 {
@@ -79,8 +80,9 @@ int main(int argc, char* argv[])
 
 
     //Load some textures:
-    LoadTexture("brickwall.jpg");
-
+    //LoadTexture("brickwall.jpg");
+    Texture texture;
+    texture.load("brickwall.jpg");
 
 
     //Camera:
@@ -97,7 +99,7 @@ int main(int argc, char* argv[])
     tri.transform.position = glm::vec3(0, 0, -20.0f);
     tri.transform.scale = glm::vec3(10, 10, 0);
 
-    camera.Recalculate();
+    camera.recalculate();
     //Main window loop:
     while (true)
     {
@@ -108,7 +110,7 @@ int main(int argc, char* argv[])
         std::cout << camera.transform.position.x << std::endl;
         camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
         camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
-        camera.Recalculate();
+        camera.recalculate();
 
         //camera.transform.position
 
@@ -121,7 +123,8 @@ int main(int argc, char* argv[])
         glActiveTexture(GL_TEXTURE0);
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
-        glBindTexture(GL_TEXTURE_2D, textureID);
+        //glBindTexture(GL_TEXTURE_2D, textureID);
+        texture.update();
 
         basic->update(tri.transform);
 
