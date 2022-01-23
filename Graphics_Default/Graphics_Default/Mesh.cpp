@@ -12,6 +12,27 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 		coordinates.push_back(verticies[i].uv);
 	}
 
+	//Lighting:
+	std::vector<glm::vec3> normals;
+	normals.resize(verticiesCount);
+	for (int i = 0; i < indiciesCount; i+=3)
+	{
+		glm::vec3 a = positions[indicies[i]];
+		glm::vec3 b = positions[indicies[i+1]];
+		glm::vec3 c = positions[indicies[i]+2];
+
+		glm::vec3 normal = glm::triangleNormal(a, b, c);
+		normals[indicies[i]] += normal;
+		normals[indicies[i+1]] += normal;
+		normals[indicies[i+2]] += normal;
+	}
+
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
+	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(NORMAL_VB);
+	//Lighting:
+
 	glGenVertexArrays(1, &this->verticies);
 	glBindVertexArray(this->verticies);
 	glGenBuffers(NUM_BUFFERS, vertexBuffer);

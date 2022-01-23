@@ -5,6 +5,7 @@
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 #include<glew.h>
+#include<gtx/normal.hpp>
 #include"Transform.h"
 #include"Vertex.h"
 
@@ -12,7 +13,7 @@ class Mesh
 {
 private:
 	//Enum:
-	enum VertexBuffer { POSITION_VB, TEXTCOORD_VB, INDEX_VB, NUM_BUFFERS };
+	enum VertexBuffer { POSITION_VB, TEXTCOORD_VB, INDEX_VB, NORMAL_VB, NUM_BUFFERS };
 
 	//Attributes:
 	GLuint vertexBuffer[NUM_BUFFERS];

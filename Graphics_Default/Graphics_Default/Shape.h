@@ -30,7 +30,7 @@ public:
 	~Shape();
 
 	//Methods:
-	void draw();
+	void draw(Light& light);
 	void setPrimitive(Primitives& verticies);
 };
 #endif // !SHAPE_H

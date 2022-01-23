@@ -50,15 +50,17 @@ int main(int argc, char* argv[])
 
     //Lighting:
     Light* light = new Light();
+    light->transform.position.x += 5;
 
 
 
     //Camera:
     Camera camera = Camera();
     Shape shape = Shape(&camera);
+    shape.mesh->transform.position.z -= 0.5;
 
     //Add shader:
-    Shader* basic = new Shader("Shaders/Basic", camera);
+    Shader* basic = new Shader("Shaders/LitShader", camera);
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -93,7 +95,7 @@ int main(int argc, char* argv[])
         //basic->update(tri.transform);
 
         //tri.draw();
-        shape.draw();
+        shape.draw(*light);
         light->draw(&camera);
 
         //Otherwise, render the window.
