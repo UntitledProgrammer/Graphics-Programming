@@ -72,6 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\Graphics_Default\imgui-master;$(SolutionDir)\Graphics_Default\imgui_sdl-master;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -144,7 +145,16 @@
   <ItemGroup>
     <ClCompile Include="AdvancedInput.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DisplayWindow.cpp" />
+    <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
+    <ClCompile Include="imgui-master\imgui.cpp" />
+    <ClCompile Include="imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="imgui_sdl-master\imgui_sdl.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -158,7 +168,13 @@
     <ClInclude Include="AdvancedInput.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="DisplayWindow.h" />
+    <ClInclude Include="imgui-master\backends\imgui_impl_sdl.h" />
+    <ClInclude Include="imgui-master\imgui.h" />
+    <ClInclude Include="imgui-master\imgui_internal.h" />
+    <ClInclude Include="imgui_sdl-master\imgui_sdl.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LightBase.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />

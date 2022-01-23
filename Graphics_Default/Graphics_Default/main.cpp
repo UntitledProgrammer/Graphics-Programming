@@ -12,35 +12,9 @@
 #include"AdvancedInput.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include"Shape.h"
-/*
-GLuint textureID;
+#include"LightBase.h"
+#include"DisplayWindow.h"
 
-void LoadTexture(std::string location)
-{
-    int width, height, numComponents;
-    unsigned char* imageData = stbi_load(location.c_str(), &width, &height, &numComponents, STBI_rgb_alpha);
-
-    if (imageData == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;
-
-    GLenum format=1;
-    if (numComponents == 1) format = GL_RED;
-    if (numComponents == 3) format = GL_RGB;
-    if (numComponents == 4) format = GL_RGBA;
-
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    stbi_image_free(imageData);
-}
-*/
 
 int main(int argc, char* argv[])
 {
@@ -74,12 +48,9 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
+    //Lighting:
+    Light* light = new Light();
 
-
-    //Load some textures:
-    //LoadTexture("brickwall.jpg");
-    Texture texture;
-    texture.load("brickwall.jpg");
 
 
     //Camera:
@@ -91,13 +62,8 @@ int main(int argc, char* argv[])
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
-    unsigned int indicies[]{ 0,1,2,0,2,3 };
-
-    Mesh tri = Mesh(&Primitives::Square()[0], Primitives::Square().size(), &indicies[0], 6);
-    tri.transform.position = glm::vec3(0, 0, -20.0f);
-    tri.transform.scale = glm::vec3(10, 10, 0);
-
     camera.recalculate();
+
     //Main window loop:
     while (true)
     {
@@ -128,9 +94,9 @@ int main(int argc, char* argv[])
 
         //tri.draw();
         shape.draw();
+        light->draw(&camera);
 
         //Otherwise, render the window.
-        
 
         SDL_Delay(16);
 

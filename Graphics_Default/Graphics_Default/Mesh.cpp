@@ -1,6 +1,5 @@
 #include "Mesh.h"
 
-
 Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount)
 {
 	NumVerts = indiciesCount;

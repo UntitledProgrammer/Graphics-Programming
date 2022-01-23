@@ -26,13 +26,11 @@ struct Vertex
 
 
 
-
-
-
-
-
 struct Primitives
 {
+	std::vector<Vertex> verticies;
+	std::vector<unsigned int> indices;
+
 	static std::vector<Vertex> Square()
 	{
 		std::vector<Vertex> verticies;

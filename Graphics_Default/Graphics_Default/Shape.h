@@ -31,5 +31,6 @@ public:
 
 	//Methods:
 	void draw();
+	void setPrimitive(Primitives& verticies);
 };
 #endif // !SHAPE_H
