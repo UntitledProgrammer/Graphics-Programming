@@ -13,6 +13,7 @@ class Light
 public:
 	//Attributes:
 	Transform transform;
+	glm::vec3 colour;
 
 	//Constructor:
 	Light();

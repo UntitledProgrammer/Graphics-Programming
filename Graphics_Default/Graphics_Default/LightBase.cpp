@@ -2,7 +2,7 @@
 
 Light::Light()
 {
-
+	colour = glm::vec3(1, 1, 1);
 }
 
 Light::~Light()

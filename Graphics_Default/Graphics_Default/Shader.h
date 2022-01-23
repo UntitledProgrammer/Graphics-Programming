@@ -7,13 +7,14 @@
 #include<fstream>
 #include"Transform.h"
 #include"Camera.h"
+#include"LightBase.h"
 
 class Shader
 {
 public:
 	//Enum:
 	enum Types{VERTEX, FRAGMENT, NUM_SHADER_TYPES};
-	enum UniformNames{MODEL_U, PROJECTION_U, VIEW_U, NUM_UNIFORMS };
+	enum UniformNames{MODEL_U, PROJECTION_U, VIEW_U, FRAG_LIGHTCOLOUR, FRAG_LIGHTPOS, FRAG_CAMERAPOS, NUM_UNIFORMS };
 
 private:
 	//Attributes:
@@ -32,6 +33,7 @@ public:
 
 	//Methods:
 	void update(Transform& transform);
+	void litUpdate(Transform& transform, Light& light);
 	void bind();
 	GLuint& getProgram() { return program; }
 
