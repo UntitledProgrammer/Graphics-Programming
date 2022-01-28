@@ -6,6 +6,8 @@ Shape::Shape(Camera* camera) : camera(camera)
 	unsigned int indicies[]{ 0,1,2,0,2,3 };
 	mesh = new Mesh(&Primitives::Square()[0], Primitives::Square().size(), &indicies[0], 6);
 	texture = new Texture();
+	normalTexture = new Texture();
+	normalTexture->load("brickwall_normal.jpg");
 	texture->load("brickwall.jpg");
 }
 

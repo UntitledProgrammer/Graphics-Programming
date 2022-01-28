@@ -20,7 +20,7 @@ public:
 	//Attributes:
 	Mesh* mesh;
 	Shader* shader;
-	Texture* texture;
+	Texture* texture, *normalTexture;
 	Camera* camera;
 
 	//Constructor:

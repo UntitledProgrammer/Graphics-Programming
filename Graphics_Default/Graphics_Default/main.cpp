@@ -48,10 +48,6 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
-    //Lighting:
-    Light* light = new Light();
-    light->transform.position.x += 5;
-
 
 
     //Camera:
@@ -59,8 +55,15 @@ int main(int argc, char* argv[])
     Shape shape = Shape(&camera);
     shape.mesh->transform.position.z -= 0.5;
 
+
+    //Lighting:
+    Light* light = new Light();
+    light->transform = shape.mesh->transform;
+    light->transform.position.z += 3;
+
     //Add shader:
     Shader* basic = new Shader("Shaders/LitShader", camera);
+    GLuint DiffuseID = Texture::getTexture("brickwall_normal.jpg");
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -89,6 +92,10 @@ int main(int argc, char* argv[])
         glActiveTexture(GL_TEXTURE0);
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
+
+        glActiveTexture(GL_TEXTURE0);
+        textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
+        glUniform1i(textureLoc, 1);
         //glBindTexture(GL_TEXTURE_2D, textureID);
         //texture.update();
 
