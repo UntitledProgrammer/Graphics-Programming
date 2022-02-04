@@ -13,7 +13,7 @@ class Mesh
 {
 private:
 	//Enum:
-	enum VertexBuffer { POSITION_VB, TEXTCOORD_VB, NORMAL_VB, TANGENT_VB, BITANGENT_VB, INDEX_VB, NUM_BUFFERS };
+	enum VertexBuffer { POSITION_VB, TEXTCOORD_VB, INDEX_VB, NORMAL_VB, NUM_BUFFERS };
 
 	//Attributes:
 	GLuint vertexBuffer[NUM_BUFFERS];
@@ -33,6 +33,5 @@ public:
 	
 	//Methods:
 	void draw();
-	void calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
 };
 #endif // !MESH_H

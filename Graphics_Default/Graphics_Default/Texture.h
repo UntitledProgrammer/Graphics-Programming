@@ -23,7 +23,6 @@ public:
 
 	//Methods:
 	bool load(std::string location);
-	static GLuint getTexture(std::string location);
 	void update();
 };
 #endif // !TEXTURE_H

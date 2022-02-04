@@ -10,46 +10,9 @@ Texture::~Texture()
 
 }
 
-GLuint Texture::getTexture(std::string location)
-{
-    GLuint textureID;
-    int width, height, componentsMagnitude = 0;
-
-    unsigned char* data = stbi_load(location.c_str(), &width, &height, &componentsMagnitude, STBI_rgb_alpha);
-
-    if (data == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;
-    GLenum format;
-    switch (componentsMagnitude)
-    {
-    case 1:
-        format = GL_RED;
-    case 3:
-        format = GL_RGB;
-    case 4:
-        format = GL_RGBA;
-    }
-
-    glGenTextures(1, &textureID);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    stbi_image_free(data);
-
-    return textureID;
-}
-
-
 bool Texture::load(std::string location)
 {
     int componentsMagnitude = 0;
-
     data = stbi_load(location.c_str(), &width, &height, &componentsMagnitude, STBI_rgb_alpha);
 
     if (data == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;

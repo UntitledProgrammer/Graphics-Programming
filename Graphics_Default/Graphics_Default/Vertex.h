@@ -8,7 +8,7 @@
 struct Vertex
 {
 	//Attributes:
-	glm::vec3 position, tangent, biTangent;
+	glm::vec3 position;
 	/// <summary>Holds the UV coordinates.</summary>
 	glm::vec2 uv;
 

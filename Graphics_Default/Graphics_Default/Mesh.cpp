@@ -5,17 +5,11 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 	NumVerts = indiciesCount;
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec2> coordinates;
-	std::vector<glm::vec3> tangents;
-	std::vector<glm::vec3> biTangents;
-
-	calculateTangents(verticies, verticiesCount, indicies, indiciesCount);
 
 	for (unsigned int i = 0; i < verticiesCount; i++)
 	{
 		positions.push_back(verticies[i].position);
 		coordinates.push_back(verticies[i].uv);
-		tangents.push_back(verticies[i].tangent);
-		biTangents.push_back(verticies[i].biTangent);
 	}
 
 	//Lighting:
@@ -33,18 +27,6 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 		normals[indicies[i+2]] += normal;
 	}
 
-	//Tangents & Bitangents:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(tangents[0]), &tangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(TANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(TANGENT_VB);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[BITANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(biTangents[0]), &biTangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(BITANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(BITANGENT_VB);
-
-	//Normals:
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -85,55 +67,4 @@ void Mesh::draw()
 	glBindVertexArray(verticies);
 	glDrawElements(GL_TRIANGLES, NumVerts, GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
-}
-
-void Mesh::calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies)
-{
-	//Calculate tangent and bitangent:
-	for (unsigned int i = 0; i < numIndicies; i += 3)
-	{
-		Vertex v0 = verticies[indicies[i]];
-		Vertex v1 = verticies[indicies[i+1]];
-		Vertex v2 = verticies[indicies[i+2]];
-
-		glm::vec3 edge1 = v1.position - v0.position;
-		glm::vec3 edge2 = v2.position - v0.position;
-
-		GLfloat deltaU1 = v1.uv.x - v0.uv.x;
-		GLfloat deltaV1 = v1.uv.y - v0.uv.y;
-		GLfloat deltaU2 = v2.uv.x - v0.uv.x;
-		GLfloat deltaV2 = v2.uv.y - v0.uv.y;
-
-		GLfloat f = 1.0f / (deltaU1 * deltaV1 - deltaU2 * deltaV1);
-
-		glm::vec3 tangent;
-		glm::vec3 bitangent;
-
-		tangent.x = f * (deltaV2 * edge1.x - deltaV1 * edge2.x);
-		tangent.y = f * (deltaV2 * edge1.y - deltaV1 * edge2.y);
-		tangent.z = f * (deltaV2 * edge1.z - deltaV1 * edge2.y);
-
-		bitangent.x = f * (-deltaU2 * edge1.x + deltaU1 * edge2.x);
-		bitangent.y = f * (-deltaU2 * edge1.y + deltaU1 * edge2.y);
-		bitangent.z = f * (-deltaU2 * edge1.z + deltaU1 * edge2.z);
-
-		v0.tangent += tangent;
-		v1.tangent += tangent;
-		v2.tangent += tangent;
-
-		v0.biTangent += bitangent;
-		v1.biTangent += bitangent;
-		v2.biTangent += bitangent;
-
-		verticies[indicies[i]] = v0;
-		verticies[indicies[i+1]] = v1;
-		verticies[indicies[i+2]] = v2;
-	}
-
-	for (unsigned int i = 0; i < vertCount; i++)
-	{
-		verticies[i].tangent = glm::normalize(verticies[i].tangent);
-		verticies[i].biTangent = glm::normalize(verticies[i].biTangent);
-	}
-
 }
