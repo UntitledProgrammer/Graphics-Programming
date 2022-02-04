@@ -27,16 +27,15 @@ public:
 	{
 		//Convert transform components to matricies:
 		glm::mat4 posMatrix = glm::translate(position);
-		glm::mat4 scaleMatrix = glm::scale(scale);
 
 		//Calculate a matrix for each component of the three vector rotation.
 		glm::mat4 rotXMatrix = glm::rotate(rotation.x, glm::vec3(1, 0, 0));
 		glm::mat4 rotYMatrix = glm::rotate(rotation.y, glm::vec3(0, 1, 0));
 		glm::mat4 rotZMatrix = glm::rotate(rotation.z, glm::vec3(0, 0, 1));
+		glm::mat4 scaleMatrix = glm::scale(scale);
 
 		//Return a matrix using the result of each vectors matrix.
 		return posMatrix * (rotZMatrix * rotYMatrix * rotXMatrix) * scaleMatrix;
 	}
 };
-
 #endif //!TRANSFORM_H

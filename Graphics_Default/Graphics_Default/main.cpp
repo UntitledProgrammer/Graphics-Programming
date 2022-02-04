@@ -15,6 +15,14 @@
 #include"LightBase.h"
 #include"DisplayWindow.h"
 
+//ImGui:
+#include<imgui.h>
+#include<backends/imgui_impl_sdl.h>
+#include<imgui_sdl.h>
+#include<imgui_internal.h>
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
+#include<examples/imgui_impl_opengl3.h>
+#include<examples/imgui_impl_glfw.h>
 
 int main(int argc, char* argv[])
 {
@@ -36,9 +44,17 @@ int main(int argc, char* argv[])
     SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
 
+    //Setup ImGui context:
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_CreateContext(window));
+    ImGui::StyleColorsDark();
+
+
     //Glew status:
     glewExperimental = GL_TRUE;
-    GLenum status = glewInit(); // Initialise status.
+    GLenum status = glewInit(); // IEnitialise status.
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -81,12 +97,12 @@ int main(int argc, char* argv[])
         camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera.recalculate();
 
-        //camera.transform.position
-
-
-
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        //ImGui:
+        ImGui::NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+
 
         basic->bind();
         glActiveTexture(GL_TEXTURE0);
@@ -105,9 +121,23 @@ int main(int argc, char* argv[])
         shape.draw(*light);
         light->draw(&camera);
 
+        //ImGui::Begin("Demo Window");
+        //ImGui::Button("Hello!");
+        //ImGui::End();
+
+
+        //ImGui::Render();
+        //ImGuiSDL::Render(ImGui::GetDrawData());
+        //SDL_RenderPresent(nullptr);
+
         //Otherwise, render the window.
 
+        //ImGui::Render();
+
+
         SDL_Delay(16);
+
+        ImGui::Render();
 
         SDL_GL_SwapWindow(window);
     }
