@@ -143,9 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AdvancedInput.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="DisplayWindow.cpp" />
+    <ClCompile Include="Components\Mesh.cpp" />
+    <ClCompile Include="Components\Shape.cpp" />
+    <ClCompile Include="Components\Texture.cpp" />
     <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
@@ -155,22 +155,21 @@
     <ClCompile Include="imgui-master\imgui_tables.cpp" />
     <ClCompile Include="imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="imgui_sdl-master\imgui_sdl.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="LightBase.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Transform.cpp" />
-    <ClCompile Include="Vertex.cpp" />
+    <ClCompile Include="Management\AdvancedInput.cpp" />
+    <ClCompile Include="Management\Input.cpp" />
+    <ClCompile Include="Math\Transform.cpp" />
+    <ClCompile Include="Math\Vertex.cpp" />
+    <ClCompile Include="Shaders\Shader.cpp" />
+    <ClCompile Include="Simulated\Camera.cpp" />
+    <ClCompile Include="Simulated\LightBase.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AdvancedInput.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Components\Mesh.h" />
+    <ClInclude Include="Components\Shape.h" />
+    <ClInclude Include="Components\Texture.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="DisplayWindow.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3_loader.h" />
@@ -178,15 +177,14 @@
     <ClInclude Include="imgui-master\imgui.h" />
     <ClInclude Include="imgui-master\imgui_internal.h" />
     <ClInclude Include="imgui_sdl-master\imgui_sdl.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="LightBase.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Management\AdvancedInput.h" />
+    <ClInclude Include="Management\Input.h" />
+    <ClInclude Include="Math\Transform.h" />
+    <ClInclude Include="Math\Vertex.h" />
+    <ClInclude Include="Shaders\Shader.h" />
+    <ClInclude Include="Simulated\Camera.h" />
+    <ClInclude Include="Simulated\LightBase.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

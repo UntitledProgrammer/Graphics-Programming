@@ -19,7 +19,7 @@ void Light::draw(Camera* camera)
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf((const GLfloat*)&camera->perspective); //In the perspective matrix above load the camera's current perspective.
 	glMatrixMode(GL_MODELVIEW);
-	glm::mat4 MV = camera->view * transform.matrix();
+	glm::mat4 MV = camera->view * transform.GetMatrix();
 	glLoadMatrixf((const GLfloat*)&MV[0]);
 
 	//Draw:

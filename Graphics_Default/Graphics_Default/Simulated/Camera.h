@@ -2,8 +2,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "Transform.h"
-#include"Constants.h"
+#include "../Math/Transform.h"
+#include"../Constants.h"
 
 //Referenced from: https://brightspace.uos.ac.uk/d2l/le/content/43985/viewContent/598599/View.
 //Referenced from: https://cpp.hotexamples.com/examples/-/glm/perspective/cpp-glm-perspective-method-examples.html.
@@ -22,7 +22,7 @@ public:
 	glm::vec3 forward, up, right;
 
 	//Methods:
-	glm::mat4 matrix();
+	glm::mat4 GetMatrix();
 	void recalculate();
 
 	//Constructor:

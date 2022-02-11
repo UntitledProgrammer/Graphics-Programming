@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-glm::mat4 Camera::matrix()
+glm::mat4 Camera::GetMatrix()
 {
     recalculate();
 

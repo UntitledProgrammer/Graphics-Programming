@@ -4,7 +4,7 @@
 #include<glew.h>
 #include<string>
 #include<iostream>
-#include"stb_image.h"
+#include"../stb_image.h"
 
 class Texture
 {

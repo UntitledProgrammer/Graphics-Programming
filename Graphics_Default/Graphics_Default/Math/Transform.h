@@ -23,7 +23,7 @@ public:
 
 	//Methods:
 	/// <summary>Returns a matrix using the context of each component.</summary>
-	inline glm::mat4 matrix() const
+	inline glm::mat4 GetMatrix() const
 	{
 		//Convert transform components to matricies:
 		glm::mat4 posMatrix = glm::translate(position);
@@ -34,8 +34,10 @@ public:
 		glm::mat4 rotZMatrix = glm::rotate(rotation.z, glm::vec3(0, 0, 1));
 		glm::mat4 scaleMatrix = glm::scale(scale);
 
+		glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
+
 		//Return a matrix using the result of each vectors matrix.
-		return posMatrix * (rotZMatrix * rotYMatrix * rotXMatrix) * scaleMatrix;
+		return posMatrix * rotMatrix * scaleMatrix;
 	}
 };
 #endif //!TRANSFORM_H

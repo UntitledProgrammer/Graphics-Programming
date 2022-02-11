@@ -9,11 +9,10 @@
 #include<iostream>
 #include<string>
 
-#include"AdvancedInput.h"
+#include"Management/AdvancedInput.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include"Shape.h"
-#include"LightBase.h"
-#include"DisplayWindow.h"
+#include"Components/Shape.h"
+#include"Simulated/LightBase.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -92,8 +91,8 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        std::cout << camera.transform.rotation.x << std::endl;
-        camera.transform.scale += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
+        std::cout << camera.transform.position.x << std::endl;
+        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
         camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera.recalculate();
 
@@ -125,8 +124,9 @@ int main(int argc, char* argv[])
         shape.draw(*light);
         light->draw(&camera);
 
-        ImGui::Begin("TEST WINDOW");
-        ImGui::Text("PLEASE WORK!");
+        ImGui::Begin("Camera Information");
+        ImGui::Text("Camera Transform");
+        ImGui::DragFloat("Position", &camera.transform.position.x);
         ImGui::End();
 
 

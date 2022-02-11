@@ -1,10 +1,10 @@
 #pragma once
 #ifndef SHAPE_H
 #define SHAPE_H
-#include"Shader.h"
+#include"../Shaders/Shader.h"
 #include"Texture.h"
 #include"Mesh.h"
-#include"Camera.h"
+#include"../Simulated/Camera.h"
 
 
 

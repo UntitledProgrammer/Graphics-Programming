@@ -5,9 +5,9 @@
 #include<glew.h>
 #include<string>
 #include<fstream>
-#include"Transform.h"
-#include"Camera.h"
-#include"LightBase.h"
+#include"../Math/Transform.h"
+#include"../Simulated/Camera.h"
+#include"../Simulated/LightBase.h"
 
 class Shader
 {

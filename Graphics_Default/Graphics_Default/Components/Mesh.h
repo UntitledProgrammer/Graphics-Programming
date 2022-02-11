@@ -6,8 +6,8 @@
 #include<gtx/transform.hpp>
 #include<glew.h>
 #include<gtx/normal.hpp>
-#include"Transform.h"
-#include"Vertex.h"
+#include"../Math/Transform.h"
+#include"../Math/Vertex.h"
 
 class Mesh
 {
