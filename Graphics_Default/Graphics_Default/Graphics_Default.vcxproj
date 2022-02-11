@@ -146,6 +146,8 @@
     <ClCompile Include="AdvancedInput.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DisplayWindow.cpp" />
+    <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
     <ClCompile Include="imgui-master\imgui.cpp" />
     <ClCompile Include="imgui-master\imgui_demo.cpp" />
@@ -169,6 +171,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="DisplayWindow.h" />
+    <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="imgui-master\backends\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_sdl.h" />
     <ClInclude Include="imgui-master\imgui.h" />
     <ClInclude Include="imgui-master\imgui_internal.h" />

@@ -16,13 +16,10 @@
 #include"DisplayWindow.h"
 
 //ImGui:
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<imgui.h>
 #include<backends/imgui_impl_sdl.h>
-#include<imgui_sdl.h>
-#include<imgui_internal.h>
-#define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<examples/imgui_impl_opengl3.h>
-#include<examples/imgui_impl_glfw.h>
 
 int main(int argc, char* argv[])
 {
@@ -56,6 +53,16 @@ int main(int argc, char* argv[])
     if (status != GLEW_OK) std::cout << "GLEW failed initialisation." << std::endl;
 
     SDL_Event sdlEvent;
+
+    //ImGui:
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplSDL2_InitForOpenGL(window, glContext);
+    ImGui_ImplOpenGL3_Init();
+
 
 
 
@@ -100,6 +107,15 @@ int main(int argc, char* argv[])
         glActiveTexture(GL_TEXTURE0);
         textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
         glUniform1i(textureLoc, 1);
+
+        //ImGui:
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL2_NewFrame(window);
+        ImGui::NewFrame();
+
+
+
         //glBindTexture(GL_TEXTURE_2D, textureID);
         //texture.update();
 
@@ -109,23 +125,20 @@ int main(int argc, char* argv[])
         shape.draw(*light);
         light->draw(&camera);
 
-        //ImGui::Begin("Demo Window");
-        //ImGui::Button("Hello!");
-        //ImGui::End();
+        ImGui::Begin("TEST WINDOW");
+        ImGui::Text("PLEASE WORK!");
+        ImGui::End();
 
 
-        //ImGui::Render();
-        //ImGuiSDL::Render(ImGui::GetDrawData());
-        //SDL_RenderPresent(nullptr);
 
         //Otherwise, render the window.
 
         //ImGui::Render();
 
-
-        SDL_Delay(16);
-
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
+        SDL_Delay(16);
     }
 
 
