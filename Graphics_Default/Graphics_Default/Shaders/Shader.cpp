@@ -27,6 +27,7 @@ Shader::Shader(const std::string location, Camera& camera) : camera(&camera), na
     uniforms[FRAG_CAMERAPOS] = glGetUniformLocation(program, "fragCamPos");
     uniforms[FRAG_LIGHTCOLOUR] = glGetUniformLocation(program, "fragLightColour");
     uniforms[FRAG_LIGHTPOS] = glGetUniformLocation(program, "fragLightPos");
+    uniforms[CAMERA_POS] = glGetUniformLocation(program, "vp");
     //Lighting:
     
     for (GLuint i = 0; i < NUM_UNIFORMS; i++)
@@ -61,6 +62,7 @@ void Shader::litUpdate(Transform& transform, Light& light)
     glUniform3f(uniforms[FRAG_CAMERAPOS], camera->transform.position.x, camera->transform.position.y, camera->transform.position.z);
     glUniform3f(uniforms[FRAG_LIGHTCOLOUR], light.colour.x, light.colour.y, light.colour.z);
     glUniform3f(uniforms[FRAG_LIGHTPOS], light.transform.position.x, light.transform.position.y, light.transform.position.z);
+    glUniform3f(uniforms[CAMERA_POS], camera->transform.position.z, camera->transform.position.y, camera->transform.position.z + 5.0f);
 }
 
 void Shader::bind()

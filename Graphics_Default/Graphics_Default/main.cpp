@@ -110,19 +110,11 @@ int main(int argc, char* argv[])
         glUniform1i(textureLoc, 1);
 
         //ImGui:
-
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
 
 
-
-        //glBindTexture(GL_TEXTURE_2D, textureID);
-        //texture.update();
-
-        //basic->update(tri.transform);
-
-        //tri.draw();
         shape.draw(*light);
         light->draw(&camera);
 

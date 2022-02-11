@@ -1,0 +1,26 @@
+Inspired by Unity's layout...
+
+Data structures to implement:
+
+Mesh Renderer:
+{
+	Ref Material;
+	Ref Mesh;
+}
+
+
+Material:
+{
+	Ref Shader;
+	Ref Texture;
+	Ref Normal Map;
+	float Metallic;
+	float Smoothness;
+}
+
+ResourceManager
+{
+	Ref Textures;
+	Ref Shaders;
+	Ref OBJ Files;
+}
