@@ -41,15 +41,8 @@ int main(int argc, char* argv[])
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
 
     //Create a window and context for openGL to render too.
-    SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+    SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
-
-    //Setup ImGui context:
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO();
-    ImGui_ImplSDL2_InitForOpenGL(window, SDL_GL_CreateContext(window));
-    ImGui::StyleColorsDark();
 
 
     //Glew status:
@@ -92,17 +85,12 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        std::cout << camera.transform.position.x << std::endl;
-        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
+        std::cout << camera.transform.rotation.x << std::endl;
+        camera.transform.scale += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
         camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera.recalculate();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        //ImGui:
-        ImGui::NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-
 
         basic->bind();
         glActiveTexture(GL_TEXTURE0);
@@ -136,8 +124,6 @@ int main(int argc, char* argv[])
 
 
         SDL_Delay(16);
-
-        ImGui::Render();
 
         SDL_GL_SwapWindow(window);
     }
