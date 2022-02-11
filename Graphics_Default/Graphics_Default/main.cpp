@@ -78,7 +78,8 @@ int main(int argc, char* argv[])
 
     //Add shader:
     Shader* basic = new Shader("Shaders/LitShader", camera);
-    GLuint DiffuseID = Texture::getTexture("brickwall_normal.jpg");
+    GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
+    GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -91,8 +92,7 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        std::cout << camera.transform.position.x << std::endl;
-        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, 0);
+        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, AdvancedInput::Instance()->getAxis(SDLK_q, SDLK_e) * -0.2f);
         camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera.recalculate();
 
@@ -102,9 +102,11 @@ int main(int argc, char* argv[])
         glActiveTexture(GL_TEXTURE0);
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
+        glBindTexture(GL_TEXTURE_2D, DiffuseID);
 
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE1);
         textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
+        glBindTexture(GL_TEXTURE_2D, NormalID);
         glUniform1i(textureLoc, 1);
 
         //ImGui:

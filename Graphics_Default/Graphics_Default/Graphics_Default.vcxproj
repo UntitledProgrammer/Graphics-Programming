@@ -160,6 +160,7 @@
     <ClCompile Include="Management\Input.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Math\Vertex.cpp" />
+    <ClCompile Include="Management\ResourceManager.cpp" />
     <ClCompile Include="Shaders\Shader.cpp" />
     <ClCompile Include="Simulated\Camera.cpp" />
     <ClCompile Include="Simulated\LightBase.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Management\Input.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vertex.h" />
+    <ClInclude Include="Management\ResourceManager.h" />
     <ClInclude Include="Shaders\Shader.h" />
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
