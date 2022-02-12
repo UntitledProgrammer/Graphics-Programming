@@ -1,4 +1,4 @@
-#version 450
+#version 460
 
 uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
@@ -35,8 +35,6 @@ void main()
 	vec3 reflectDir = reflect(-lightDir, normal);
 	float spec = pow(max(dot(normal, reflectDir), 0.0), 64.0);
 	vec3 specular = vec3(specularStrength * spec);
-
-
 
 	vec4 result = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * (ambient + diffuse + spec), 1);
 	colour = result;

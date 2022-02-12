@@ -27,8 +27,8 @@ Shader::Shader(const std::string location) : name(location)
     uniforms[FRAG_CAMERAPOS] = glGetUniformLocation(program, "fragCamPos");
     uniforms[FRAG_LIGHTCOLOUR] = glGetUniformLocation(program, "fragLightColour");
     uniforms[FRAG_LIGHTPOS] = glGetUniformLocation(program, "fragLightPos");
+
     //Lighting:
-    
     for (GLuint i = 0; i < NUM_UNIFORMS; i++)
     {
         if (uniforms[i] == GL_INVALID_INDEX) std::cout << "Shader " << name << " uniform invalid index: " << static_cast<UniformNames>(i) << " (Might be optimized out if not used)" << std::endl;
@@ -63,8 +63,18 @@ void Shader::litUpdate(Transform& transform, Light& light)
     glUniform3f(uniforms[FRAG_LIGHTPOS], light.transform.position.x, light.transform.position.y, light.transform.position.z);
 }
 
-void Shader::bind()
+void Shader::Bind(Texture* base, Texture* normal)
 {
+    glActiveTexture(GL_TEXTURE0);
+    GLuint textureLoc = glGetUniformLocation(getProgram(), "texture_diffuse");
+    glUniform1i(textureLoc, 0);
+    glBindTexture(GL_TEXTURE_2D, base->id);
+
+    glActiveTexture(GL_TEXTURE1);
+    textureLoc = glGetUniformLocation(getProgram(), "texture_normal");
+    glBindTexture(GL_TEXTURE_2D, normal->id);
+    glUniform1i(textureLoc, 1);
+
     glUseProgram(program);
 }
 

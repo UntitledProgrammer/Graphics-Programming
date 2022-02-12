@@ -14,6 +14,7 @@
 #include"Components/Shape.h"
 #include"Simulated/LightBase.h"
 #include"Management/ResourceManager.h"
+#include"Components/MeshRenderer.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -73,10 +74,14 @@ int main(int argc, char* argv[])
     shape.mesh->transform.position.z -= 0.5;
 
     //Add shader:
-    Shader* basic = new Shader("Shaders/Basic");
-
-    //Test:
-    ResourceManager::Instance()->GetShader("Shaders/Basic");
+    Shader* basic = new Shader("Shaders/LitShader");
+    MeshRenderer* meshRenderer = new MeshRenderer();
+    Material* material = new Material();
+    material->SetBase(shape.texture);
+    material->SetNormal(shape.normalTexture);
+    material->SetShader(basic);
+    meshRenderer->ApplyMesh(shape.mesh);
+    meshRenderer->ApplyMaterial(material);
 
     //GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
     //GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
@@ -97,16 +102,24 @@ int main(int argc, char* argv[])
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        basic->bind();
+        meshRenderer->Render();
+
+
+        //SHADER:
+        /*
         glActiveTexture(GL_TEXTURE0);
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
-        //glBindTexture(GL_TEXTURE_2D, DiffuseID);
+        glBindTexture(GL_TEXTURE_2D, DiffuseID);
 
-        //glActiveTexture(GL_TEXTURE1);
-        //textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
-        //glBindTexture(GL_TEXTURE_2D, NormalID);
-        //glUniform1i(textureLoc, 1);
+        glActiveTexture(GL_TEXTURE1);
+        textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
+        glBindTexture(GL_TEXTURE_2D, NormalID);
+        glUniform1i(textureLoc, 1);
+        //SHADER:
+        */
+
+        //basic->Bind();
 
         //ImGui:
         ImGui_ImplOpenGL3_NewFrame();
@@ -114,7 +127,8 @@ int main(int argc, char* argv[])
         ImGui::NewFrame();
 
 
-        shape.draw(*light);
+        //shape.draw(*light);
+
         light->draw();
 
         ImGui::Begin("Camera Information");

@@ -1,5 +1,13 @@
 #include "LightBase.h"
 
+Light* Light::defaultInstance = 0;
+
+Light* Light::Instance()
+{
+	if (!defaultInstance) defaultInstance = new Light();
+	return defaultInstance;
+}
+
 Light::Light()
 {
 	colour = glm::vec3(1, 1, 1);

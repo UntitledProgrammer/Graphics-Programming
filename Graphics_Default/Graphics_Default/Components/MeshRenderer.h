@@ -13,6 +13,7 @@ private:
 	//Attributes:
 	Mesh* mesh;
 	Material* material;
+	Transform* transform;
 public:
 	//Constructor:
 	MeshRenderer();
@@ -25,5 +26,6 @@ public:
 	bool LoadMaterial(std::string location);
 	void ApplyMaterial(Material* material);
 	void ApplyMesh(Mesh* mesh);
+	void Render();
 };
 #endif //!MESH_RENDERER_H

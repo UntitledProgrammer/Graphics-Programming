@@ -8,6 +8,7 @@
 #include"../Math/Transform.h"
 #include"../Simulated/Camera.h"
 #include"../Simulated/LightBase.h"
+#include"../Components/Texture.h"
 
 class Shader
 {
@@ -33,7 +34,7 @@ public:
 	//Methods:
 	void update(Transform& transform);
 	void litUpdate(Transform& transform, Light& light);
-	void bind();
+	void Bind(Texture* base, Texture* normal);
 	GLuint& getProgram() { return program; }
 
 	//Static methods:

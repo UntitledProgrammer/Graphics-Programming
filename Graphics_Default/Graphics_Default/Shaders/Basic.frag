@@ -1,4 +1,4 @@
-#version 450
+#version 460
 
 uniform sampler2D texture_diffuse;
 in vec2 fragTextureCoordinates;

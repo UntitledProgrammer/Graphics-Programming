@@ -10,6 +10,9 @@
 
 class Light : public Simulated
 {
+private:
+	//Attributes:
+	static Light* defaultInstance;
 public:
 	//Attributes:
 	glm::vec3 colour;
@@ -23,5 +26,8 @@ public:
 	//Methods:
 	void draw();
 	void Update();
+
+	//Static methods:
+	static Light* Instance();
 };
 #endif // !LIGHT_H
