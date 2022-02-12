@@ -89,12 +89,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.18\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\tomja\Documents\Programming for Graphics\Graphics-Programming-Stable\Graphics_Default\Graphics_Default\Third Parties\SDL2-2.0.20\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.18\lib\x86;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\tomja\Documents\Programming for Graphics\Graphics-Programming-Stable\Graphics_Default\Graphics_Default\Third Parties\SDL2-2.0.20\lib\x86;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -158,10 +158,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Management\AdvancedInput.cpp" />
     <ClCompile Include="Management\Input.cpp" />
+    <ClCompile Include="Components\MeshRenderer.cpp" />
+    <ClCompile Include="Shaders\Material.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Math\Vertex.cpp" />
     <ClCompile Include="Management\ResourceManager.cpp" />
     <ClCompile Include="Shaders\Shader.cpp" />
+    <ClCompile Include="Simulated\Simulated.cpp" />
     <ClCompile Include="Simulated\Camera.cpp" />
     <ClCompile Include="Simulated\LightBase.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -180,10 +183,13 @@
     <ClInclude Include="imgui_sdl-master\imgui_sdl.h" />
     <ClInclude Include="Management\AdvancedInput.h" />
     <ClInclude Include="Management\Input.h" />
+    <ClInclude Include="Components\MeshRenderer.h" />
+    <ClInclude Include="Shaders\Material.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="Management\ResourceManager.h" />
     <ClInclude Include="Shaders\Shader.h" />
+    <ClInclude Include="Simulated\Simulated.h" />
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
     <ClInclude Include="stb_image.h" />
@@ -192,6 +198,8 @@
   <ItemGroup>
     <None Include="Shaders\Basic.frag" />
     <None Include="Shaders\Basic.vert" />
+    <None Include="Shaders\LitShader.frag" />
+    <None Include="Shaders\LitShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

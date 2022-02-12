@@ -46,7 +46,7 @@ GLuint Texture::getTexture(std::string location)
 }
 
 
-bool Texture::load(std::string location)
+bool Texture::Load(std::string location)
 {
     int componentsMagnitude = 0;
 
@@ -80,7 +80,7 @@ bool Texture::load(std::string location)
     return false;
 }
 
-void Texture::update()
+void Texture::Update()
 {
     glBindTexture(GL_TEXTURE_2D, id);
 }

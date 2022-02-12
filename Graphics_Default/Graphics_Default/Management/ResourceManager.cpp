@@ -1,8 +1,16 @@
 #include "ResourceManager.h"
+ResourceManager* ResourceManager::defaultInstance = 0;
+
 
 ResourceManager::ResourceManager() {};
 
 ResourceManager::~ResourceManager() {};
+
+ResourceManager* ResourceManager::Instance()
+{
+	if (!defaultInstance) defaultInstance = new ResourceManager();
+	return defaultInstance;
+}
 
 std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::string filename, std::string ambiant, std::string diffuse, std::string spec, std::string normal, std::vector<glm::uint>& indicies)
 {
@@ -79,4 +87,24 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 
 
 	return std::vector<Vertex>();
+}
+
+Shader* ResourceManager::GetShader(std::string location)
+{
+	//Add additional check to make sure shader was loaded correctly.
+
+	if (!Exists<std::string, Shader*>(&shaders, location)) { shaders.emplace(std::make_pair(location, new Shader(location))); }
+	return shaders[location];
+}
+
+Texture* ResourceManager::GetTexture(std::string location)
+{
+	if (!Exists<std::string, Shader*>(&shaders, location))
+	{
+		Texture* texture = new Texture();
+		if (texture->Load(location)) { textures.emplace(std::make_pair(location, texture)); }
+		else std::cerr << "Unable to load texture: " << location.c_str() << std::endl;
+	}
+
+	return textures[location];
 }

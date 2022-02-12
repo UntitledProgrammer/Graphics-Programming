@@ -30,11 +30,11 @@ void main()
 	vec3 diffuse = diff * fragLightColour;
 
 	//Specular:
-float specularStrength = 3f;
-vec3 viewDir = normalize(fragCamPos - fragPos);
-vec3 reflectDir = reflect(-lightDir, normal);
-float spec = pow(max(dot(normal, reflectDir), 0.0), 64.0);
-vec3 specular = vec3(specularStrength * spec);
+	float specularStrength = 3.0f;
+	vec3 viewDir = normalize(fragCamPos - fragPos);
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(normal, reflectDir), 0.0), 64.0);
+	vec3 specular = vec3(specularStrength * spec);
 
 
 

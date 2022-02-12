@@ -14,19 +14,18 @@ class Shader
 public:
 	//Enum:
 	enum Types{VERTEX, FRAGMENT, NUM_SHADER_TYPES};
-	enum UniformNames{MODEL_U, PROJECTION_U, VIEW_U, FRAG_LIGHTCOLOUR, FRAG_LIGHTPOS, FRAG_CAMERAPOS, CAMERA_POS, NUM_UNIFORMS };
+	enum UniformNames{MODEL_U, PROJECTION_U, VIEW_U, FRAG_LIGHTCOLOUR, FRAG_LIGHTPOS, FRAG_CAMERAPOS, NUM_UNIFORMS };
 
 private:
 	//Attributes:
 	std::string name;
 	GLuint program;
-	Camera* camera;
 	GLuint shaders[NUM_SHADER_TYPES];
 	GLuint uniforms[NUM_UNIFORMS];
 
 public:
 	//Constructor:
-	Shader(const std::string location, Camera& camera);
+	Shader(const std::string location);
 
 	//Deconstructor:
 	~Shader();

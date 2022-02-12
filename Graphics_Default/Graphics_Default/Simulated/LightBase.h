@@ -8,11 +8,10 @@
 #include<SDL.h>
 #include"Camera.h"
 
-class Light
+class Light : public Simulated
 {
 public:
 	//Attributes:
-	Transform transform;
 	glm::vec3 colour;
 
 	//Constructor:
@@ -22,6 +21,7 @@ public:
 	~Light();
 
 	//Methods:
-	void draw(Camera* camera);
+	void draw();
+	void Update();
 };
 #endif // !LIGHT_H

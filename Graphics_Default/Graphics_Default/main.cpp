@@ -13,12 +13,13 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include"Components/Shape.h"
 #include"Simulated/LightBase.h"
+#include"Management/ResourceManager.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<imgui.h>
 #include<backends/imgui_impl_sdl.h>
-#include<examples/imgui_impl_opengl3.h>
+#include<backends/imgui_impl_opengl3.h>
 
 int main(int argc, char* argv[])
 {
@@ -39,8 +40,7 @@ int main(int argc, char* argv[])
     //Create a window and context for openGL to render too.
     SDL_Window* window = SDL_CreateWindow("Default Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
-
-
+    
     //Glew status:
     glewExperimental = GL_TRUE;
     GLenum status = glewInit(); // IEnitialise status.
@@ -62,28 +62,27 @@ int main(int argc, char* argv[])
     ImGui_ImplSDL2_InitForOpenGL(window, glContext);
     ImGui_ImplOpenGL3_Init();
 
-
+    //Lighting:
+    Light* light = new Light();
+    light->transform.position.z += 1;
 
 
     //Camera:
-    Camera camera = Camera();
-    Shape shape = Shape(&camera);
+    Camera* camera = Camera::Instance();
+    Shape shape = Shape(camera);
     shape.mesh->transform.position.z -= 0.5;
 
-
-    //Lighting:
-    Light* light = new Light();
-    light->transform = shape.mesh->transform;
-    light->transform.position.z += 3;
-
     //Add shader:
-    Shader* basic = new Shader("Shaders/LitShader", camera);
-    GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
-    GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
+    Shader* basic = new Shader("Shaders/Basic");
+
+    //Test:
+    ResourceManager::Instance()->GetShader("Shaders/Basic");
+
+    //GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
+    //GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
-    camera.recalculate();
 
     //Main window loop:
     while (true)
@@ -92,9 +91,9 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        camera.transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, AdvancedInput::Instance()->getAxis(SDLK_q, SDLK_e) * -0.2f);
-        camera.aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
-        camera.recalculate();
+        camera->transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, AdvancedInput::Instance()->getAxis(SDLK_q, SDLK_e) * -0.2f);
+        camera->aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
+        camera->Update();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -102,12 +101,12 @@ int main(int argc, char* argv[])
         glActiveTexture(GL_TEXTURE0);
         GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
         glUniform1i(textureLoc, 0);
-        glBindTexture(GL_TEXTURE_2D, DiffuseID);
+        //glBindTexture(GL_TEXTURE_2D, DiffuseID);
 
-        glActiveTexture(GL_TEXTURE1);
-        textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
-        glBindTexture(GL_TEXTURE_2D, NormalID);
-        glUniform1i(textureLoc, 1);
+        //glActiveTexture(GL_TEXTURE1);
+        //textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
+        //glBindTexture(GL_TEXTURE_2D, NormalID);
+        //glUniform1i(textureLoc, 1);
 
         //ImGui:
         ImGui_ImplOpenGL3_NewFrame();
@@ -116,11 +115,11 @@ int main(int argc, char* argv[])
 
 
         shape.draw(*light);
-        light->draw(&camera);
+        light->draw();
 
         ImGui::Begin("Camera Information");
         ImGui::Text("Camera Transform");
-        ImGui::DragFloat("Position", &camera.transform.position.x);
+        ImGui::DragFloat("Position", &camera->transform.position.x);
         ImGui::End();
 
 

@@ -22,8 +22,8 @@ public:
 	~Texture();
 
 	//Methods:
-	bool load(std::string location);
+	bool Load(std::string location);
 	static GLuint getTexture(std::string location);
-	void update();
+	void Update();
 };
 #endif // !TEXTURE_H
