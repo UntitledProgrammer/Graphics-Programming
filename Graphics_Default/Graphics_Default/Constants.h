@@ -2,8 +2,8 @@
 #include<string>
 #include<SDL.h>
 
-const int WINDOW_HEIGHT = 600;
-const int WINDOW_WIDTH = 880;
+const int WINDOW_HEIGHT = 720;
+const int WINDOW_WIDTH = 1280;
 
 //Triangle:
 //float vertices[]{ 0.0f, 0.0f, 0.0f, 0.1f, -0.2f, 0.0f, -0.1f, -0.2f, 0.0f };

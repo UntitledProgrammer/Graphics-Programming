@@ -146,6 +146,7 @@
     <ClCompile Include="Components\Mesh.cpp" />
     <ClCompile Include="Components\Shape.cpp" />
     <ClCompile Include="Components\Texture.cpp" />
+    <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Simulated\Simulated.cpp" />
     <ClCompile Include="Simulated\Camera.cpp" />
     <ClCompile Include="Simulated\LightBase.cpp" />
+    <ClCompile Include="Editor\Toolbar.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +176,8 @@
     <ClInclude Include="Components\Shape.h" />
     <ClInclude Include="Components\Texture.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Editor\Windows.h" />
+    <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3_loader.h" />
@@ -193,6 +197,7 @@
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Editor\Toolbar.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

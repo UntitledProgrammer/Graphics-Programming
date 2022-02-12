@@ -15,12 +15,14 @@
 #include"Simulated/LightBase.h"
 #include"Management/ResourceManager.h"
 #include"Components/MeshRenderer.h"
-
+#include"Editor/Toolbar.h"
+/*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<imgui.h>
 #include<backends/imgui_impl_sdl.h>
 #include<backends/imgui_impl_opengl3.h>
+*/
 
 int main(int argc, char* argv[])
 {
@@ -55,6 +57,7 @@ int main(int argc, char* argv[])
     SDL_Event sdlEvent;
 
     //ImGui:
+    /*
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -62,11 +65,13 @@ int main(int argc, char* argv[])
 
     ImGui_ImplSDL2_InitForOpenGL(window, glContext);
     ImGui_ImplOpenGL3_Init();
-
+    */
     //Lighting:
     Light* light = new Light();
     light->transform.position.z += 1;
 
+    Toolbar toolbar = Toolbar(window, &glContext);
+    toolbar.LoadDefault();
 
     //Camera:
     Camera* camera = Camera::Instance();
@@ -122,28 +127,28 @@ int main(int argc, char* argv[])
         //basic->Bind();
 
         //ImGui:
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplSDL2_NewFrame(window);
-        ImGui::NewFrame();
+       // ImGui_ImplOpenGL3_NewFrame();
+       // ImGui_ImplSDL2_NewFrame(window);
+        //ImGui::NewFrame();
 
 
         //shape.draw(*light);
 
         light->draw();
 
-        ImGui::Begin("Camera Information");
-        ImGui::Text("Camera Transform");
-        ImGui::DragFloat("Position", &camera->transform.position.x);
-        ImGui::End();
+        //ImGui::Begin("Camera Information");
+        //ImGui::Text("Camera Transform");
+        //ImGui::DragFloat("Position", &camera->transform.position.x);
+        //ImGui::End();
 
-
+        toolbar.Update();
 
         //Otherwise, render the window.
 
         //ImGui::Render();
 
-        ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        //ImGui::Render();
+        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
         SDL_Delay(16);
     }
