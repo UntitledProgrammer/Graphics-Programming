@@ -13,6 +13,7 @@ private:
 	//Attributes:
 	Mesh* mesh;
 	Material* material;
+public://Change to private, at later date.
 	Transform* transform;
 public:
 	//Constructor:

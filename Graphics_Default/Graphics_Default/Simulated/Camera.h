@@ -5,6 +5,13 @@
 #include"Simulated.h"
 #include"../Constants.h"
 
+//Testing:
+#include<glew.h>
+#include<glm.hpp>
+#include<SDL_opengl.h>
+#include<gtc/type_ptr.hpp>
+#include<SDL.h>
+
 //Referenced from: https://brightspace.uos.ac.uk/d2l/le/content/43985/viewContent/598599/View.
 //Referenced from: https://cpp.hotexamples.com/examples/-/glm/perspective/cpp-glm-perspective-method-examples.html.
 

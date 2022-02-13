@@ -76,18 +76,18 @@ int main(int argc, char* argv[])
     //Camera:
     Camera* camera = Camera::Instance();
     Shape shape = Shape(camera);
-    shape.mesh->transform.position.z -= 0.5;
 
     //Add shader:
-    Shader* basic = new Shader("Shaders/LitShader");
+    Shader* basic = new Shader("Shaders/Basic");
     MeshRenderer* meshRenderer = new MeshRenderer();
+    meshRenderer->transform->position = light->transform.position;
     Material* material = new Material();
     material->SetBase(shape.texture);
     material->SetNormal(shape.normalTexture);
     material->SetShader(basic);
     meshRenderer->ApplyMesh(shape.mesh);
     meshRenderer->ApplyMaterial(material);
-
+    Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     //GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
     //GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
 
@@ -101,7 +101,8 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        camera->transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * -0.2f,  AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * -0.2f, AdvancedInput::Instance()->getAxis(SDLK_q, SDLK_e) * -0.2f);
+        camera->transform.position += glm::vec3(0,0,AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * 0.2f);
+        camera->transform.rotation += glm::vec3(0, AdvancedInput::Instance()->getAxis(SDLK_a, SDLK_d) * 1.0f, AdvancedInput::Instance()->getAxis(SDLK_a, SDLK_d) * 1.0f);
         camera->aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera->Update();
 

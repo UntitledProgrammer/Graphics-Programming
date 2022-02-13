@@ -22,6 +22,7 @@ Shader::Shader(const std::string location) : name(location)
     uniforms[MODEL_U] = glGetUniformLocation(program, "model");
     uniforms[PROJECTION_U] = glGetUniformLocation(program, "projection");
     uniforms[VIEW_U] = glGetUniformLocation(program, "view");
+    uniforms[FORWARD] = glGetUniformLocation(program, "forward");
 
     //Lighting:
     uniforms[FRAG_CAMERAPOS] = glGetUniformLocation(program, "fragCamPos");
@@ -61,6 +62,7 @@ void Shader::litUpdate(Transform& transform, Light& light)
     glUniform3f(uniforms[FRAG_CAMERAPOS], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z);
     glUniform3f(uniforms[FRAG_LIGHTCOLOUR], light.colour.x, light.colour.y, light.colour.z);
     glUniform3f(uniforms[FRAG_LIGHTPOS], light.transform.position.x, light.transform.position.y, light.transform.position.z);
+    glUniform3f(uniforms[FORWARD], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z + 0.5f);
 }
 
 void Shader::Bind(Texture* base, Texture* normal)
