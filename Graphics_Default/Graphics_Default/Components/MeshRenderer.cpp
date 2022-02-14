@@ -16,15 +16,15 @@ bool MeshRenderer::LoadMesh(std::string location)
 
 bool MeshRenderer::LoadMaterial(std::string location)
 {
-	return false;
+	return material->Load(location);
 }
 
-void MeshRenderer::ApplyMaterial(Material* material) { this->material = material; }
+void MeshRenderer::ApplyMaterial(Substance* material) { this->material = material; }
 void MeshRenderer::ApplyMesh(Mesh* mesh) { this->mesh = mesh; }
 
 void MeshRenderer::Render()
 {
-	material->shader->Bind(material->base, material->normal);
-	material->shader->litUpdate(*transform, *Light::Instance());
+	material->Bind();
+	material->Update(*transform, *Light::Instance());
 	mesh->draw();
 }

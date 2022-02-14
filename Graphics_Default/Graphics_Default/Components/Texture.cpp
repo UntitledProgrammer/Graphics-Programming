@@ -84,3 +84,11 @@ void Texture::Update()
 {
     glBindTexture(GL_TEXTURE_2D, id);
 }
+
+void Texture::Bind(std::string name, GLuint program, int index)
+{
+    //glActiveTexture(GL_TEXTURE0);
+    GLuint textureLoc = glGetUniformLocation(program, name.c_str());
+    glUniform1i(textureLoc, 0);
+    glBindTexture(GL_TEXTURE_2D, id);
+}

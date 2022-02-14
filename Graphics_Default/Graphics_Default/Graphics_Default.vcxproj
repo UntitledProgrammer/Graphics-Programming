@@ -169,6 +169,8 @@
     <ClCompile Include="Simulated\Camera.cpp" />
     <ClCompile Include="Simulated\LightBase.cpp" />
     <ClCompile Include="Editor\Toolbar.cpp" />
+    <ClCompile Include="Shaders\SmartMaterial.cpp" />
+    <ClCompile Include="Materials\SurfaceMaterial.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,8 +198,10 @@
     <ClInclude Include="Simulated\Simulated.h" />
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
+    <ClInclude Include="Shaders\SmartMaterial.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Editor\Toolbar.h" />
+    <ClInclude Include="Materials\SurfaceMaterial.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

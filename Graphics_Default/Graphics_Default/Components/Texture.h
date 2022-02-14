@@ -25,5 +25,6 @@ public:
 	bool Load(std::string location);
 	static GLuint getTexture(std::string location);
 	void Update();
+	void Bind(std::string name, GLuint program, int index = 0);
 };
 #endif // !TEXTURE_H

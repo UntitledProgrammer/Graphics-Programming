@@ -6,13 +6,14 @@
 #include"Mesh.h"
 #include"../Shaders/Material.h"
 #include"../Management/ResourceManager.h"
+#include"../Shaders/SmartMaterial.h"
 
 class MeshRenderer
 {
 private:
 	//Attributes:
 	Mesh* mesh;
-	Material* material;
+	Substance* material;
 public://Change to private, at later date.
 	Transform* transform;
 public:
@@ -25,7 +26,7 @@ public:
 	//Methods:
 	bool LoadMesh(std::string location);
 	bool LoadMaterial(std::string location);
-	void ApplyMaterial(Material* material);
+	void ApplyMaterial(Substance* material);
 	void ApplyMesh(Mesh* mesh);
 	void Render();
 };

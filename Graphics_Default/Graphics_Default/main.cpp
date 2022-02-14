@@ -16,6 +16,7 @@
 #include"Management/ResourceManager.h"
 #include"Components/MeshRenderer.h"
 #include"Editor/Toolbar.h"
+#include"Materials/SurfaceMaterial.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -78,15 +79,14 @@ int main(int argc, char* argv[])
     Shape shape = Shape(camera);
 
     //Add shader:
-    Shader* basic = new Shader("Shaders/Basic");
     MeshRenderer* meshRenderer = new MeshRenderer();
     meshRenderer->transform->position = light->transform.position;
-    Material* material = new Material();
-    material->SetBase(shape.texture);
-    material->SetNormal(shape.normalTexture);
-    material->SetShader(basic);
+    SurfaceMaterial surface = SurfaceMaterial();
+    surface.base = shape.texture;
+    surface.normal = shape.normalTexture;
+    surface.Load("Shaders/Basic");
     meshRenderer->ApplyMesh(shape.mesh);
-    meshRenderer->ApplyMaterial(material);
+    meshRenderer->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     //GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
     //GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
