@@ -101,8 +101,8 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        camera->transform.position += glm::vec3(0,0,AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * 0.2f);
-        camera->transform.rotation += glm::vec3(0, AdvancedInput::Instance()->getAxis(SDLK_a, SDLK_d) * 1.0f, AdvancedInput::Instance()->getAxis(SDLK_a, SDLK_d) * 1.0f);
+        camera->transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * 0.2f,0,AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * 0.2f);
+        camera->transform.rotation += glm::vec3(0, AdvancedInput::Instance()->MouseDelta().x * -0.1f, AdvancedInput::Instance()->MouseDelta().y * -0.1f);
         camera->aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera->Update();
 

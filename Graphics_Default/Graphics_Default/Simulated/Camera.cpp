@@ -42,6 +42,7 @@ void Camera::Update()
     up = glm::cross(glm::normalize(target - transform.position), glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward)));
     view = glm::lookAt(transform.position, target, up);
     view = glm::rotate(view, glm::radians(transform.rotation.y), -up);
+    view = glm::rotate(view, glm::radians(transform.rotation.z), right);
 }
 
 Camera* Camera::Instance()

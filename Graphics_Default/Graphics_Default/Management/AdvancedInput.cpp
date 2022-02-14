@@ -1,7 +1,8 @@
 #include "AdvancedInput.h"
+#include<iostream>
 AdvancedInput* AdvancedInput::defaultInstance = 0;
 
-AdvancedInput::AdvancedInput()
+AdvancedInput::AdvancedInput() : mousePosition(glm::vec3(0)), deltaMousePosition(glm::vec3(0)), previousMousePosition(glm::vec3(0))
 {
 	currentState = SDL_GetKeyboardState(NULL);
 	previousState = currentState;
@@ -38,6 +39,7 @@ bool AdvancedInput::keyReleased(SDL_Keycode key)
 
 void AdvancedInput::update()
 {
+	SDL_GetMouseState(&previousMousePosition.x, &previousMousePosition.y);
 	previousState = currentState;
 	currentState = SDL_GetKeyboardState(NULL);
 }
@@ -51,4 +53,12 @@ AdvancedInput* AdvancedInput::Instance()
 {
 	if (!defaultInstance) defaultInstance = new AdvancedInput();
 	return defaultInstance;
+}
+
+glm::ivec3 AdvancedInput::MouseDelta()
+{
+	glm::ivec3 current = glm::ivec3(0);
+	SDL_GetMouseState(&current.x, &current.y);
+	std::cout << "Current: "<<current.x << ", Delta: " << (current.x - previousMousePosition).y << std::endl;
+	return current - previousMousePosition;
 }

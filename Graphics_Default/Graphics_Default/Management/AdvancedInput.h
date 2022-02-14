@@ -2,6 +2,7 @@
 #ifndef ADVANCED_INPUT
 #define ADVANCED_INPUT
 #include<SDL.h>
+#include<glm.hpp>
 
 class AdvancedInput
 {
@@ -10,8 +11,13 @@ private:
 	const Uint8* currentState;
 	const Uint8* previousState;
 	static AdvancedInput* defaultInstance;
+	glm::ivec3 previousMousePosition;
 
 public:
+	//Attribute:
+	glm::ivec3 mousePosition;
+	glm::ivec3 deltaMousePosition;
+
 	//Constructor:
 	AdvancedInput();
 
@@ -29,7 +35,7 @@ public:
 	bool keyReleased(SDL_Keycode key);
 	/// <summary>The update method allows an instance of 'Input' to update the current keyboard state / environment.</summary>
 	void update();
-
+	glm::ivec3 MouseDelta();
 	int getAxis(SDL_Keycode positive, SDL_Keycode negative);
 
 	//Static methods:
