@@ -1,0 +1,50 @@
+\hypertarget{_shader_8h_source}{}\doxysection{Shader.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef SHADER\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define SHADER\_H}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include<glew.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include<string>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include<fstream>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include"{}../Math/Transform.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include"{}../Simulated/Camera.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include"{}../Simulated/LightBase.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include"{}../Components/Texture.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_shader}{Shader}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     \textcolor{comment}{//Enum:}}
+\DoxyCodeLine{17     \textcolor{keyword}{enum} Types\{VERTEX, FRAGMENT, NUM\_SHADER\_TYPES\};}
+\DoxyCodeLine{18     \textcolor{keyword}{enum} UniformNames\{MODEL\_U, PROJECTION\_U, VIEW\_U, FRAG\_LIGHTCOLOUR, FRAG\_LIGHTPOS, FRAG\_CAMERAPOS, FORWARD, NUM\_UNIFORMS \};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{private}:}
+\DoxyCodeLine{21     \textcolor{comment}{//Attributes:}}
+\DoxyCodeLine{22     std::string name;}
+\DoxyCodeLine{23     GLuint program;}
+\DoxyCodeLine{24     GLuint shaders[NUM\_SHADER\_TYPES];}
+\DoxyCodeLine{25     GLuint uniforms[NUM\_UNIFORMS];}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28     \textcolor{comment}{//Constructor:}}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_shader}{Shader}}(\textcolor{keyword}{const} std::string location);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{comment}{//Deconstructor:}}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_shader}{\string~Shader}}();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{comment}{//Methods:}}
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} update(Transform\& transform);}
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} litUpdate(Transform\& transform, Light\& light);}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} Bind(Texture* base, Texture* normal);}
+\DoxyCodeLine{38     GLuint\& getProgram() \{ \textcolor{keywordflow}{return} program; \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{comment}{//Static methods:}}
+\DoxyCodeLine{41     \textcolor{keyword}{static} GLuint CreateShader(\textcolor{keyword}{const} std::string\& source, GLenum type);}
+\DoxyCodeLine{42     \textcolor{keyword}{static} \textcolor{keywordtype}{void} CheckShaderError(GLuint shader, GLuint flag, \textcolor{keywordtype}{bool} isProgram, \textcolor{keyword}{const} std::string\& errorMessage);}
+\DoxyCodeLine{43     \textcolor{keyword}{static} std::string LoadShader(\textcolor{keyword}{const} std::string\& filename);}
+\DoxyCodeLine{44 \};}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SHADER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,47 @@
+\hypertarget{_smart_material_8h_source}{}\doxysection{Smart\+Material.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef SMART\_MATERIAL\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define SMART\_MATERIAL\_H}}
+\DoxyCodeLine{4 \textcolor{comment}{//Includes:}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include<string>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include<glew.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include<glm.hpp>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include<fstream>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include"{}../Components/Texture.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include"{}../Math/Transform.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include"{}../Simulated/Camera.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include"{}../Simulated/LightBase.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{class_substance}{Substance}}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{24     \textcolor{comment}{//Attributes:}}
+\DoxyCodeLine{25     \textcolor{keyword}{enum} Types \{ VERTEX, FRAGMENT, SHADER\_TYPES \};}
+\DoxyCodeLine{26     std::string name;}
+\DoxyCodeLine{27     GLuint program;}
+\DoxyCodeLine{28     GLuint shaders[SHADER\_TYPES];}
+\DoxyCodeLine{29 \textcolor{keyword}{public}:}
+\DoxyCodeLine{30     \textcolor{comment}{//Attributes:}}
+\DoxyCodeLine{31     glm::vec4 colour;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{comment}{//Abstract methods:}}
+\DoxyCodeLine{35 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_substance_acb2bb399ebaa181e04f29e9c4b72693e}{Load}}(\textcolor{keyword}{const} std::string location) = 0;}
+\DoxyCodeLine{37     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_substance_a21cf94bed78e6b6c45855bd093776e63}{Update}}(Transform\& transform) = 0;}
+\DoxyCodeLine{39     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_substance_a4859c4ec6c1311bc38daa690e6fdbac7}{Bind}}() = 0;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{comment}{//Virtual methods:}}
+\DoxyCodeLine{42     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} Delete();}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{comment}{//Static methods:}}
+\DoxyCodeLine{45     \textcolor{keyword}{static} GLuint CreateShader(\textcolor{keyword}{const} std::string\& source, GLenum type);}
+\DoxyCodeLine{46     \textcolor{keyword}{static} \textcolor{keywordtype}{void} CheckShaderError(GLuint shader, GLuint flag, \textcolor{keywordtype}{bool} isProgram, \textcolor{keyword}{const} std::string\& errorMessage);}
+\DoxyCodeLine{47     \textcolor{keyword}{static} std::string LoadShader(\textcolor{keyword}{const} std::string\& filename);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// !SMART\_MATERIAL\_H}}
+
+\end{DoxyCode}

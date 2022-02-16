@@ -1,0 +1,74 @@
+\hypertarget{class_substance}{}\doxysection{Substance Class Reference}
+\label{class_substance}\index{Substance@{Substance}}
+
+
+The substance class is a type of interface (base class) that provides the basic necessary functionality for using Open\+GL shaders. The class is designed to be expandable so that you can override certain methods and functionality to better fit the requirments of any custom written shaders. An instance of the \textquotesingle{}\mbox{\hyperlink{class_substance}{Substance}}\textquotesingle{} class can be attached to a \textquotesingle{}Mesh-\/\+Renderer\textquotesingle{} where the shader can be \textquotesingle{}loaded\textquotesingle{}, \textquotesingle{}binded\textquotesingle{} and excuted during runtime.  
+
+
+
+
+{\ttfamily \#include $<$Smart\+Material.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_substance_acb2bb399ebaa181e04f29e9c4b72693e}\label{class_substance_acb2bb399ebaa181e04f29e9c4b72693e}} 
+virtual bool {\bfseries Load} (const std\+::string location)=0
+\begin{DoxyCompactList}\small\item\em This is where the files for any shaders you want to use should be loaded.\end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_substance_a21cf94bed78e6b6c45855bd093776e63}\label{class_substance_a21cf94bed78e6b6c45855bd093776e63}} 
+virtual void {\bfseries Update} (Transform \&transform)=0
+\begin{DoxyCompactList}\small\item\em Any process that needs to occur within the cycle of each frame should be written here.\end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_substance_a4859c4ec6c1311bc38daa690e6fdbac7}\label{class_substance_a4859c4ec6c1311bc38daa690e6fdbac7}} 
+virtual void {\bfseries Bind} ()=0
+\begin{DoxyCompactList}\small\item\em Any binding of attributes such as textures should occur here.\end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_substance_a11ae9b5c5cbdf4e2cb9b1e8cc389d289}\label{class_substance_a11ae9b5c5cbdf4e2cb9b1e8cc389d289}} 
+virtual void {\bfseries Delete} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_substance_aa83eb4be0ad247fb50576e39a90c5d78}\label{class_substance_aa83eb4be0ad247fb50576e39a90c5d78}} 
+static GLuint {\bfseries Create\+Shader} (const std\+::string \&source, GLenum type)
+\item 
+\mbox{\Hypertarget{class_substance_a2847fd5a3c7a0e7f2f493f9818c72c86}\label{class_substance_a2847fd5a3c7a0e7f2f493f9818c72c86}} 
+static void {\bfseries Check\+Shader\+Error} (GLuint shader, GLuint flag, bool is\+Program, const std\+::string \&error\+Message)
+\item 
+\mbox{\Hypertarget{class_substance_abd3e0da5e9b3b5c3931599df49f8d962}\label{class_substance_abd3e0da5e9b3b5c3931599df49f8d962}} 
+static std\+::string {\bfseries Load\+Shader} (const std\+::string \&filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_substance_a18fc5d16703de3ca236ddbd51f0cd9ef}\label{class_substance_a18fc5d16703de3ca236ddbd51f0cd9ef}} 
+glm\+::vec4 {\bfseries colour}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_substance_abaa069ab640e0cc4d0bc6a824940820a}\label{class_substance_abaa069ab640e0cc4d0bc6a824940820a}} 
+enum {\bfseries Types} \{ {\bfseries VERTEX}
+, {\bfseries FRAGMENT}
+, {\bfseries SHADER\+\_\+\+TYPES}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_substance_ac770cd8ef95c8d8760abddf49390f265}\label{class_substance_ac770cd8ef95c8d8760abddf49390f265}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{class_substance_a2b343d1afed8d5dba819f4d6930e104e}\label{class_substance_a2b343d1afed8d5dba819f4d6930e104e}} 
+GLuint {\bfseries program}
+\item 
+\mbox{\Hypertarget{class_substance_a8e5cd332c1423c01eebaafa287665aaf}\label{class_substance_a8e5cd332c1423c01eebaafa287665aaf}} 
+GLuint {\bfseries shaders} \mbox{[}SHADER\+\_\+\+TYPES\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The substance class is a type of interface (base class) that provides the basic necessary functionality for using Open\+GL shaders. The class is designed to be expandable so that you can override certain methods and functionality to better fit the requirments of any custom written shaders. An instance of the \textquotesingle{}\mbox{\hyperlink{class_substance}{Substance}}\textquotesingle{} class can be attached to a \textquotesingle{}Mesh-\/\+Renderer\textquotesingle{} where the shader can be \textquotesingle{}loaded\textquotesingle{}, \textquotesingle{}binded\textquotesingle{} and excuted during runtime. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Smart\+Material.\+h\item 
+Smart\+Material.\+cpp\end{DoxyCompactItemize}

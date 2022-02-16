@@ -25,6 +25,6 @@ void MeshRenderer::ApplyMesh(Mesh* mesh) { this->mesh = mesh; }
 void MeshRenderer::Render()
 {
 	material->Bind();
-	material->Update(*transform, *Light::Instance());
+	material->Update(*transform);
 	mesh->draw();
 }

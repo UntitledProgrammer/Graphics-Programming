@@ -57,16 +57,6 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
-    //ImGui:
-    /*
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    ImGui::StyleColorsDark();
-
-    ImGui_ImplSDL2_InitForOpenGL(window, glContext);
-    ImGui_ImplOpenGL3_Init();
-    */
     //Lighting:
     Light* light = new Light();
     light->transform.position.z += 1;
@@ -88,8 +78,6 @@ int main(int argc, char* argv[])
     meshRenderer->ApplyMesh(shape.mesh);
     meshRenderer->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
-    //GLuint DiffuseID = Texture::getTexture("brickwall.jpg");
-    //GLuint NormalID = Texture::getTexture("brickwall_normal.jpg");
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -110,46 +98,10 @@ int main(int argc, char* argv[])
 
         meshRenderer->Render();
 
-
-        //SHADER:
-        /*
-        glActiveTexture(GL_TEXTURE0);
-        GLuint textureLoc = glGetUniformLocation(basic->getProgram(), "texture_diffuse");
-        glUniform1i(textureLoc, 0);
-        glBindTexture(GL_TEXTURE_2D, DiffuseID);
-
-        glActiveTexture(GL_TEXTURE1);
-        textureLoc = glGetUniformLocation(basic->getProgram(), "texture_normal");
-        glBindTexture(GL_TEXTURE_2D, NormalID);
-        glUniform1i(textureLoc, 1);
-        //SHADER:
-        */
-
-        //basic->Bind();
-
-        //ImGui:
-       // ImGui_ImplOpenGL3_NewFrame();
-       // ImGui_ImplSDL2_NewFrame(window);
-        //ImGui::NewFrame();
-
-
-        //shape.draw(*light);
-
         light->draw();
-
-        //ImGui::Begin("Camera Information");
-        //ImGui::Text("Camera Transform");
-        //ImGui::DragFloat("Position", &camera->transform.position.x);
-        //ImGui::End();
 
         toolbar.Update();
 
-        //Otherwise, render the window.
-
-        //ImGui::Render();
-
-        //ImGui::Render();
-        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
         SDL_Delay(16);
     }

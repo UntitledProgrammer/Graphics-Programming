@@ -1,0 +1,60 @@
+\hypertarget{class_shader}{}\doxysection{Shader Class Reference}
+\label{class_shader}\index{Shader@{Shader}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shader_a54dd59a4dd8e09abe9a75780b1a4f9e8}\label{class_shader_a54dd59a4dd8e09abe9a75780b1a4f9e8}} 
+enum {\bfseries Types} \{ {\bfseries VERTEX}
+, {\bfseries FRAGMENT}
+, {\bfseries NUM\+\_\+\+SHADER\+\_\+\+TYPES}
+ \}
+\item 
+\mbox{\Hypertarget{class_shader_a63a26556377ab7d934fc17c62bf6dcac}\label{class_shader_a63a26556377ab7d934fc17c62bf6dcac}} 
+enum {\bfseries Uniform\+Names} \{ \newline
+{\bfseries MODEL\+\_\+U}
+, {\bfseries PROJECTION\+\_\+U}
+, {\bfseries VIEW\+\_\+U}
+, {\bfseries FRAG\+\_\+\+LIGHTCOLOUR}
+, \newline
+{\bfseries FRAG\+\_\+\+LIGHTPOS}
+, {\bfseries FRAG\+\_\+\+CAMERAPOS}
+, {\bfseries FORWARD}
+, {\bfseries NUM\+\_\+\+UNIFORMS}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shader_a901968efced0c1e2052e36e11efd32d8}\label{class_shader_a901968efced0c1e2052e36e11efd32d8}} 
+{\bfseries Shader} (const std\+::string location)
+\item 
+\mbox{\Hypertarget{class_shader_a0dea646f9bf3f97865ff63fc5b49dd17}\label{class_shader_a0dea646f9bf3f97865ff63fc5b49dd17}} 
+void {\bfseries update} (Transform \&transform)
+\item 
+\mbox{\Hypertarget{class_shader_abfb92f1d13c13e64a6a7f9efebb04a10}\label{class_shader_abfb92f1d13c13e64a6a7f9efebb04a10}} 
+void {\bfseries lit\+Update} (Transform \&transform, Light \&light)
+\item 
+\mbox{\Hypertarget{class_shader_a5b20c595c54fe37cf45d08bcde913d8d}\label{class_shader_a5b20c595c54fe37cf45d08bcde913d8d}} 
+void {\bfseries Bind} (Texture $\ast$base, Texture $\ast$normal)
+\item 
+\mbox{\Hypertarget{class_shader_ad4a1ba0690d14caee7c260780961c9aa}\label{class_shader_ad4a1ba0690d14caee7c260780961c9aa}} 
+GLuint \& {\bfseries get\+Program} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shader_a9f4a098e7cc85cc936a3b0946441236b}\label{class_shader_a9f4a098e7cc85cc936a3b0946441236b}} 
+static GLuint {\bfseries Create\+Shader} (const std\+::string \&source, GLenum type)
+\item 
+\mbox{\Hypertarget{class_shader_a3b579170f5f0aa086cdafda0a65052f1}\label{class_shader_a3b579170f5f0aa086cdafda0a65052f1}} 
+static void {\bfseries Check\+Shader\+Error} (GLuint shader, GLuint flag, bool is\+Program, const std\+::string \&error\+Message)
+\item 
+\mbox{\Hypertarget{class_shader_a5e1880406eacf895b6bb08b0a2df94b0}\label{class_shader_a5e1880406eacf895b6bb08b0a2df94b0}} 
+static std\+::string {\bfseries Load\+Shader} (const std\+::string \&filename)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Shader.\+h\item 
+Shader.\+cpp\end{DoxyCompactItemize}

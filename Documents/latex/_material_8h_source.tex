@@ -1,0 +1,38 @@
+\hypertarget{_material_8h_source}{}\doxysection{Material.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef MATERIAL\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define MATERIAL\_H}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{//Includes:}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include"{}Shader.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include"{}../Components/Texture.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_material}{Material}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{private}:}
+\DoxyCodeLine{12     \textcolor{comment}{//Attributes:}}
+\DoxyCodeLine{13     glm::vec4 colour;}
+\DoxyCodeLine{14     \mbox{\hyperlink{class_shader}{Shader}}* shader;}
+\DoxyCodeLine{15     Texture* base;}
+\DoxyCodeLine{16     Texture* normal;}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \textcolor{comment}{//Constructor:}}
+\DoxyCodeLine{19     \mbox{\hyperlink{class_material}{Material}}();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{comment}{//Destructor:}}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_material}{\string~Material}}();}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{comment}{//Methods:}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} SetBase(Texture* texture);}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} SetNormal(Texture* texture);}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} SetShader(\mbox{\hyperlink{class_shader}{Shader}}* shader);}
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} Update();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{//Friends:}}
+\DoxyCodeLine{31     \textcolor{keyword}{friend} \textcolor{keyword}{class }MeshRenderer;}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// !MATERIAL\_H}}
+
+\end{DoxyCode}

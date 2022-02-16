@@ -77,8 +77,8 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 					);
 
 				vertsInFace[0].position = positions[TmpPosition[0] - 1];
-				vertsInFace[0].position = positions[TmpPosition[0] - 1];
-				vertsInFace[0].position = positions[TmpPosition[0] - 1];
+				//vertsInFace[0]. = coordinates[TmpTexCoords[0] - 1];
+				//vertsInFace[0].n= normals[TmpNormals[0] - 1];
 
 			}
 		}

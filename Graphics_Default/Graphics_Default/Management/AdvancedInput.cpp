@@ -59,6 +59,5 @@ glm::ivec3 AdvancedInput::MouseDelta()
 {
 	glm::ivec3 current = glm::ivec3(0);
 	SDL_GetMouseState(&current.x, &current.y);
-	std::cout << "Current: "<<current.x << ", Delta: " << (current.x - previousMousePosition).y << std::endl;
 	return current - previousMousePosition;
 }

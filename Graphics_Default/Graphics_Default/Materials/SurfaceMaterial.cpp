@@ -46,15 +46,15 @@ bool SurfaceMaterial::Load(const std::string location)
 	return false;
 }
 
-void SurfaceMaterial::Update(Transform& transform, Light& light)
+void SurfaceMaterial::Update(Transform& transform)
 {
     glUniformMatrix4fv(uniforms[MODEL_U], 1, GL_FALSE, &transform.GetMatrix()[0][0]);
     glUniformMatrix4fv(uniforms[PROJECTION_U], 1, GL_FALSE, &Camera::Instance()->perspective[0][0]);
     glUniformMatrix4fv(uniforms[VIEW_U], 1, GL_FALSE, &Camera::Instance()->view[0][0]);
 
     glUniform3f(uniforms[FRAG_CAMERAPOS], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z);
-    glUniform3f(uniforms[FRAG_LIGHTCOLOUR], light.colour.x, light.colour.y, light.colour.z);
-    glUniform3f(uniforms[FRAG_LIGHTPOS], light.transform.position.x, light.transform.position.y, light.transform.position.z);
+    glUniform3f(uniforms[FRAG_LIGHTCOLOUR], Light::Instance()->colour.x, Light::Instance()->colour.y, Light::Instance()->colour.z);
+    glUniform3f(uniforms[FRAG_LIGHTPOS], Light::Instance()->transform.position.x, Light::Instance()->transform.position.y, Light::Instance()->transform.position.z);
     glUniform3f(uniforms[FORWARD], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z + 0.5f);
 }
 
