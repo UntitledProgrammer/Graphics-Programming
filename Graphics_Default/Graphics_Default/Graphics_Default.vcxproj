@@ -171,6 +171,8 @@
     <ClCompile Include="Editor\Toolbar.cpp" />
     <ClCompile Include="Shaders\SmartMaterial.cpp" />
     <ClCompile Include="Materials\SurfaceMaterial.cpp" />
+    <ClCompile Include="Materials\SolidMaterial.cpp" />
+    <ClCompile Include="Materials\Skybox.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +201,8 @@
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
     <ClInclude Include="Shaders\SmartMaterial.h" />
+    <ClInclude Include="Materials\SolidMaterial.h" />
+    <ClInclude Include="Materials\Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Editor\Toolbar.h" />
     <ClInclude Include="Materials\SurfaceMaterial.h" />
@@ -209,6 +213,10 @@
     <None Include="Shaders\Basic.vert" />
     <None Include="Shaders\LitShader.frag" />
     <None Include="Shaders\LitShader.vert" />
+    <None Include="Shaders\Skybox.frag" />
+    <None Include="Shaders\Skybox.vert" />
+    <None Include="Shaders\Solid.frag" />
+    <None Include="Shaders\Solid.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

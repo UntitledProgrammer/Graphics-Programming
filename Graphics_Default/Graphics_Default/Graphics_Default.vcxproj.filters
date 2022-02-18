@@ -138,6 +138,12 @@
     <ClCompile Include="Materials\SurfaceMaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Materials\SolidMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Materials\Skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -227,11 +233,21 @@
     <ClInclude Include="Materials\SurfaceMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Materials\SolidMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Materials\Skybox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Basic.frag" />
     <None Include="Shaders\Basic.vert" />
     <None Include="Shaders\LitShader.frag" />
     <None Include="Shaders\LitShader.vert" />
+    <None Include="Shaders\Solid.frag" />
+    <None Include="Shaders\Solid.vert" />
+    <None Include="Shaders\Skybox.frag" />
+    <None Include="Shaders\Skybox.vert" />
   </ItemGroup>
 </Project>

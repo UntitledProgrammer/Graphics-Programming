@@ -38,5 +38,6 @@ public:
 	//Static methods:
 	static ResourceManager* Instance();
 	static std::vector<Vertex> LoadOBJ(std::string folderLocation, std::string filename, std::string ambiant, std::string diffuse, std::string spec, std::string normal, std::vector<glm::uint>& indicies);
+	static void LoadMaterial(const std::string& MatLibLoc, std::string& ambiantLoc, std::string& diffLoc, std::string& specLoc, std::string& normalLoc);
 };
 #endif //!RESOURCE_MANAGER_H

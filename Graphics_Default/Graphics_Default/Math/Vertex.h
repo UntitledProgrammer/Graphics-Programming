@@ -8,12 +8,12 @@
 struct Vertex
 {
 	//Attributes:
-	glm::vec3 position, tangent, biTangent;
+	glm::vec3 position, tangent, biTangent, normal;
 	/// <summary>Holds the UV coordinates.</summary>
 	glm::vec2 uv;
 
 	//Constructor:
-	Vertex() : position(glm::vec3(0)), tangent(glm::vec3(0)), biTangent(glm::vec3(0)), uv(glm::vec2(0)) {};
+	Vertex() : position(glm::vec3(0)), tangent(glm::vec3(0)), biTangent(glm::vec3(0)), uv(glm::vec2(0)), normal(glm::vec3(0)) {};
 	Vertex(glm::vec3 position);
 	Vertex(float x, float y, float z);
 	Vertex(glm::vec3 pos, glm::vec2 coordinates);

@@ -10,6 +10,8 @@ Texture::~Texture()
 
 }
 
+
+
 GLuint Texture::getTexture(std::string location)
 {
     GLuint textureID;
@@ -78,6 +80,34 @@ bool Texture::Load(std::string location)
     stbi_image_free(data);
 
     return false;
+}
+
+void Texture::LoadCubemap(std::vector<std::string> faces)
+{
+    glGenTextures(1, &id);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+
+    int width, height, channels;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char* texture = stbi_load(faces[i].c_str(), &width, &height, &channels, 0);
+        if (texture) //If texture is not null / loaded.
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X +i, 0, GL_RGB, width, height, 0, GL_RGB,  GL_UNSIGNED_BYTE, texture);
+            stbi_image_free(texture);
+        }
+        else
+        {
+            std::cerr << "Error: Failed to load cubemap textures at path: " << faces[i] << std::endl;
+            stbi_image_free(texture);
+        }
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 }
 
 void Texture::Update()

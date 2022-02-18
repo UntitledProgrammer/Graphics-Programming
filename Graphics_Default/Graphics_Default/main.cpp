@@ -16,7 +16,9 @@
 #include"Management/ResourceManager.h"
 #include"Components/MeshRenderer.h"
 #include"Editor/Toolbar.h"
+#include"Materials/SolidMaterial.h"
 #include"Materials/SurfaceMaterial.h"
+#include"Materials/Skybox.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -69,14 +71,30 @@ int main(int argc, char* argv[])
     Shape shape = Shape(camera);
 
     //Add shader:
+    std::vector<glm::uint> indecies;
+    std::vector<Vertex> verticies;
+
+    verticies = ResourceManager::LoadOBJ("Resources", "blocks_01.obj", "", "", "", "", indecies);
+
+
+    Mesh* mesh = new Mesh(verticies.data(), verticies.size(), indecies.data(), indecies.size());
+
     MeshRenderer* meshRenderer = new MeshRenderer();
+    meshRenderer->ApplyMesh(mesh);
+    mesh->transform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
+    meshRenderer->transform->scale = glm::vec3(0.1f, 0.1f, 0.1f);
     meshRenderer->transform->position = light->transform.position;
-    SurfaceMaterial surface = SurfaceMaterial();
-    surface.base = shape.texture;
-    surface.normal = shape.normalTexture;
-    surface.Load("Shaders/Basic");
-    meshRenderer->ApplyMesh(shape.mesh);
-    meshRenderer->ApplyMaterial(&surface);
+    Skybox skybox = Skybox();
+    Texture texture = Texture();
+    std::vector<std::string> files = { "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg" };
+    texture.LoadCubemap(files);
+    skybox.cubemap = &texture;
+    meshRenderer->ApplyMaterial(&skybox);
+
+
+
+
+    //meshRenderer->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
 
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
@@ -93,7 +111,7 @@ int main(int argc, char* argv[])
         camera->transform.rotation += glm::vec3(0, AdvancedInput::Instance()->MouseDelta().x * -0.1f, AdvancedInput::Instance()->MouseDelta().y * -0.1f);
         camera->aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
         camera->Update();
-
+        meshRenderer->transform->position = camera->transform.position;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         meshRenderer->Render();

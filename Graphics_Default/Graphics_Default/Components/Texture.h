@@ -3,6 +3,7 @@
 #define TEXTURE_H
 #include<glew.h>
 #include<string>
+#include<vector>
 #include<iostream>
 #include"../stb_image.h"
 
@@ -23,6 +24,7 @@ public:
 
 	//Methods:
 	bool Load(std::string location);
+	void LoadCubemap(std::vector<std::string> faces);
 	static GLuint getTexture(std::string location);
 	void Update();
 	void Bind(std::string name, GLuint program, int index = 0);

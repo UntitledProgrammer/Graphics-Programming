@@ -71,22 +71,81 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 				Vertex vertsInFace[3];
 				unsigned int TmpPosition[3], TmpTexCoords[3], TmpNormals[3];
 
-				sscanf_s(values.c_str(), " %d/%d/%d %d/d/%d %d/%d/%d", &TmpPosition[0], &TmpTexCoords[0], &TmpNormals[0],
+				sscanf_s(values.c_str(), " %d/%d/%d %d/%d/%d %d/%d/%d", &TmpPosition[0], &TmpTexCoords[0], &TmpNormals[0],
 					&TmpPosition[1], &TmpTexCoords[1], &TmpNormals[1],
 					&TmpPosition[2], &TmpTexCoords[2], &TmpNormals[2]
 					);
 
 				vertsInFace[0].position = positions[TmpPosition[0] - 1];
-				//vertsInFace[0]. = coordinates[TmpTexCoords[0] - 1];
-				//vertsInFace[0].n= normals[TmpNormals[0] - 1];
+				vertsInFace[0].uv = coordinates[TmpTexCoords[0] - 1];
+				//vertsInFace[0].normal = normals[TmpNormals[0] - 1];
 
+				vertsInFace[1].position = positions[TmpPosition[1] - 1];
+				vertsInFace[1].uv = coordinates[TmpTexCoords[1] - 1];
+				//vertsInFace[1].normal = normals[TmpNormals[1] - 1];
+
+				vertsInFace[2].position = positions[TmpPosition[2] - 1];
+				vertsInFace[2].uv = coordinates[TmpTexCoords[2] - 1];
+				//vertsInFace[2].normal = normals[TmpNormals[2] - 1];
+
+				verticies.push_back(vertsInFace[0]);
+				verticies.push_back(vertsInFace[1]);
+				verticies.push_back(vertsInFace[2]);
 			}
+
 		}
+		for (int i = 0; i < verticies.size(); i++)
+		{
+			indicies.push_back(i);
+		}
+		return verticies;
 	}
 	else std::cerr << "Unable to load text file: " << location.c_str() << std::endl;
 
 
 	return std::vector<Vertex>();
+}
+
+void ResourceManager::LoadMaterial(const std::string& MatLibLoc, std::string& ambiantLoc, std::string& diffLoc, std::string& specLoc, std::string& normalLoc)
+{
+	std::ifstream file;
+	const char* fileNameChar = MatLibLoc.c_str();
+	file.open(fileNameChar, std::ifstream::in);
+	std::string line;
+	std::string MatName;
+
+	if (file.is_open())
+	{
+		while (file.good())
+		{
+			std::getline(file, line);
+			if (line[0] != '#')
+			{
+				std::string firstWord = line.substr(0, line.find(' '));
+				if (std::strstr(firstWord.c_str(), "newmtl")) //Material.
+				{
+					MatName = line.substr(line.find(' ') + 1, line.find('\n'));
+				}
+				else if (std::strstr(firstWord.c_str(), "map_Ka"))
+				{
+					ambiantLoc = line.substr(line.find(' ') + 1, line.find('\n'));
+				}
+				else if (std::strstr(firstWord.c_str(), "map_Ks"))
+				{
+					specLoc = line.substr(line.find(' ') + 1, line.find('\n'));
+				}
+				else if (std::strstr(firstWord.c_str(), "map_bump"))
+				{
+					normalLoc = line.substr(line.find(' ') + 1, line.find('\n'));
+				}
+			}
+		}
+	}
+	else
+	{
+		std::cerr << "Unable to load text file: " << MatLibLoc << std::endl;
+	}
+	file.close();
 }
 
 Shader* ResourceManager::GetShader(std::string location)
