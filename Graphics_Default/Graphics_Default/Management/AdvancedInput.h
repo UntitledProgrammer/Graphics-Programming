@@ -1,6 +1,11 @@
 #pragma once
 #ifndef ADVANCED_INPUT
+
+//Defines:
 #define ADVANCED_INPUT
+#define INPUT AdvancedInput::Instance()
+
+//Includes:
 #include<SDL.h>
 #include<glm.hpp>
 

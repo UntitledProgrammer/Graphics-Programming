@@ -192,6 +192,7 @@
     <ClInclude Include="Management\AdvancedInput.h" />
     <ClInclude Include="Management\Input.h" />
     <ClInclude Include="Components\MeshRenderer.h" />
+    <ClInclude Include="Simulated\Extension.h" />
     <ClInclude Include="Shaders\Material.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vertex.h" />

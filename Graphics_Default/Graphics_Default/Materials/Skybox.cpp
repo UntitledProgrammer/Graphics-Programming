@@ -43,8 +43,10 @@ void Skybox::Update(Transform& transform)
 
 void Skybox::Bind()
 {
-    glDepthMask(GL_FALSE);
     glUseProgram(program);
+
+    glDepthMask(GL_FALSE);
+    glActiveTexture(GL_TEXTURE0);
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap->id);
     glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -67,6 +67,7 @@ void Shader::litUpdate(Transform& transform, Light& light)
 
 void Shader::Bind(Texture* base, Texture* normal)
 {
+
     glActiveTexture(GL_TEXTURE0);
     GLuint textureLoc = glGetUniformLocation(getProgram(), "texture_diffuse");
     glUniform1i(textureLoc, 0);
