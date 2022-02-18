@@ -1,6 +1,7 @@
 #pragma once
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
+#define Resources ResourceManager::Instance()
 
 //Includes:
 #include<string>
@@ -24,6 +25,9 @@ private:
 	static ResourceManager* defaultInstance;
 
 public:
+	//Attributes:
+	std::vector<Simulated*> simulatedBodies;
+
 	//Constructor:
 	ResourceManager();
 
@@ -31,6 +35,7 @@ public:
 	~ResourceManager();
 
 	//Methods:
+	void AddBody(Simulated* body) { simulatedBodies.push_back(body); }
 	Shader* GetShader(std::string location);
 	Texture* GetTexture(std::string location);
 	template<typename Key, typename Type> bool Exists(std::map<Key, Type>* map, Key key) { return map->find(key) != map->end() ? true : false; }

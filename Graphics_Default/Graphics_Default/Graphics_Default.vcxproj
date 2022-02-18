@@ -198,6 +198,7 @@
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="Management\ResourceManager.h" />
     <ClInclude Include="Shaders\Shader.h" />
+    <ClInclude Include="Simulated\PlayerController.h" />
     <ClInclude Include="Simulated\Simulated.h" />
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />

@@ -19,6 +19,7 @@
 #include"Materials/SolidMaterial.h"
 #include"Materials/SurfaceMaterial.h"
 #include"Materials/Skybox.h"
+#include"Simulated/PlayerController.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -68,6 +69,7 @@ int main(int argc, char* argv[])
 
     //Camera:
     Camera* camera = Camera::Instance();
+    camera->ApplyExtension<PlayerController>();
     Shape shape = Shape(camera);
 
     //Add shader:
@@ -107,9 +109,7 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
-        camera->transform.position += glm::vec3(AdvancedInput::Instance()->getAxis(SDLK_d, SDLK_a) * 0.2f,0,AdvancedInput::Instance()->getAxis(SDLK_w, SDLK_s) * 0.2f);
-        camera->transform.rotation += glm::vec3(0, AdvancedInput::Instance()->MouseDelta().x * -0.1f, AdvancedInput::Instance()->MouseDelta().y * -0.1f);
-        camera->aspect += AdvancedInput::Instance()->keyDown(SDLK_SPACE) * 0.1;
+        camera->UpdateExtensions();
         camera->Update();
         meshRenderer->transform->position = camera->transform.position;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

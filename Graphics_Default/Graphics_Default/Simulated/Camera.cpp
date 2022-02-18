@@ -15,8 +15,6 @@ Camera::Camera() : perspective(glm::mat4(1))
     perspective = glm::perspective(fov, aspect, 1.0f, 100.0f);
     transform.position = glm::vec3(0.0f, 0.0f, 2.0f);
     recalculate();
-
-    simulatedBodies.push_back(this);
 };
 
 Camera::~Camera()

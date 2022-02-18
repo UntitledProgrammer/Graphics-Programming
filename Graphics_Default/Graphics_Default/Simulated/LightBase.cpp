@@ -11,7 +11,6 @@ Light* Light::Instance()
 Light::Light()
 {
 	colour = glm::vec3(1, 1, 1);
-	simulatedBodies.push_back(this);
 }
 
 Light::~Light()
