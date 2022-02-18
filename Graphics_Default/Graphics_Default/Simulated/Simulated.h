@@ -38,5 +38,6 @@ public:
 		extension->body = this;
 		extensions.push_back(extension);
 	}
+
 };
 #endif SIMULATED_H //!SIMULATED_H

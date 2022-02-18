@@ -13,11 +13,15 @@ public:
 	//Attributes:
 	/// <summary>Represents the physical body of the object this extention is applied to.</summary>
 	Simulated* body = nullptr;
+	bool active = true;
 
 	//Methods:
 	/// <summary>Any logic that needs to be updated per frame should be implemented in the scope of the update method.</summary>
 	virtual void Update() = 0;
 	/// <summary>Any logic that needs to happen once during the start of the program should be processed here.</summary>
 	virtual void Initialise() = 0;
+
+	//Friends:
+	friend class Simulated;
 }; 
 #endif // EXTENTION_H
