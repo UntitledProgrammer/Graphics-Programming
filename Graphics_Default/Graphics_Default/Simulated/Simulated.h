@@ -31,7 +31,7 @@ public:
 		//If extension type does not inherit extension as a base class return.
 		if (!std::is_base_of<Extension, ExtensionType>::value)
 		{
-			std::cout << "Error: " << typeid(ExtensionType).name << ", does not inherit extension as a base class." << std::endl;
+			std::cout << "Error: " << typeid(ExtensionType).name() << ", does not inherit extension as a base class." << std::endl;
 			return;
 		}
 		std::shared_ptr extension = std::make_shared<ExtensionType>();

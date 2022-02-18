@@ -90,6 +90,8 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\tomja\Documents\Programming for Graphics\Graphics-Programming-Stable\Graphics_Default\Graphics_Default\Third Parties\SDL2-2.0.20\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
