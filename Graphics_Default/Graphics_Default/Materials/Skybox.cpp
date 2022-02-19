@@ -45,12 +45,13 @@ void Skybox::Bind()
 {
     glUseProgram(program);
 
-    glDepthMask(GL_FALSE);
-    glActiveTexture(GL_TEXTURE0);
+    //glDepthMask(GL_FALSE);
+    //glActiveTexture(GL_TEXTURE0);
 
+    glActiveTexture(cubemap->id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap->id);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthMask(GL_TRUE);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDepthMask(GL_TRUE);
 }
 
 void Skybox::SetFace(CubeFace position, std::string location)

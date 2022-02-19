@@ -20,6 +20,7 @@
 #include"Materials/SurfaceMaterial.h"
 #include"Materials/Skybox.h"
 #include"Simulated/PlayerController.h"
+#include"Components/Cubemap.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -87,9 +88,9 @@ int main(int argc, char* argv[])
     meshRenderer->transform->scale = glm::vec3(0.1f, 0.1f, 0.1f);
     meshRenderer->transform->position = light->transform.position;
     Skybox skybox = Skybox();
-    Texture texture = Texture();
+    Cubemap texture = Cubemap();
     std::vector<std::string> files = { "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg" };
-    texture.LoadCubemap(files);
+    texture.LoadMap(files);
     skybox.cubemap = &texture;
     meshRenderer->ApplyMaterial(&skybox);
 

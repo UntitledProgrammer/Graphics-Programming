@@ -23,10 +23,10 @@ public:
 	~Texture();
 
 	//Methods:
-	bool Load(std::string location);
+	virtual bool Load(std::string location);
 	void LoadCubemap(std::vector<std::string> faces);
 	static GLuint getTexture(std::string location);
-	void Update();
-	void Bind(std::string name, GLuint program, int index = 0);
+	virtual void Update();
+	virtual void Bind(std::string name, GLuint program, int index = 0);
 };
 #endif // !TEXTURE_H

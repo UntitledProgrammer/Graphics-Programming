@@ -148,6 +148,7 @@
     <ClCompile Include="Components\Mesh.cpp" />
     <ClCompile Include="Components\Shape.cpp" />
     <ClCompile Include="Components\Texture.cpp" />
+    <ClCompile Include="Components\Cubemap.cpp" />
     <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="Components\Shape.h" />
     <ClInclude Include="Components\Texture.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Components\Cubemap.h" />
     <ClInclude Include="Editor\Windows.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
