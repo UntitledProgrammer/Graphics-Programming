@@ -20,5 +20,5 @@ void Shape::draw(Light& light)
 {
 	texture->Update();
 	shader->litUpdate(mesh->transform, light); //Mesh Renderer.
-	mesh->draw(); //Mesh renderer.
+	mesh->Draw(); //Mesh renderer.
 }

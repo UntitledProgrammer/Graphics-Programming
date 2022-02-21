@@ -9,7 +9,7 @@ struct Vertex
 {
 	//Attributes:
 	glm::vec3 position, tangent, biTangent, normal;
-	/// <summary>Holds the UV coordinates.</summary>
+	/// <summary>Hold's the texture coordinates.</summary>
 	glm::vec2 uv;
 
 	//Constructor:
@@ -20,6 +20,9 @@ struct Vertex
 
 	//Deconstructor:
 	~Vertex();
+
+	//Static methods:
+	static std::vector<Vertex*> ArrayToVertex(float vertz[]);
 };
 
 
@@ -42,6 +45,12 @@ struct Primitives
 		verticies.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 1.0f), glm::vec2(0, 1)));
 
 		return verticies;
+	}
+
+	static std::vector<unsigned int> SqaureIndices()
+	{
+		std::vector<unsigned int> indices = { 0,1,2,0,2,3 };
+		return indices;
 	}
 
 	static std::vector<Vertex> Triangle()

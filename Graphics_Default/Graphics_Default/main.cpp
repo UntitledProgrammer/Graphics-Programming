@@ -29,6 +29,51 @@
 #include<backends/imgui_impl_opengl3.h>
 */
 
+float skybox_vertz[] = {
+    // positions          
+    -1.0f,  1.0f, -1.0f,
+    -1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f,
+    -1.0f, -1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f, -1.0f,
+    -1.0f,  1.0f,  1.0f,
+    -1.0f, -1.0f,  1.0f,
+
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+
+    -1.0f, -1.0f,  1.0f,
+    -1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f, -1.0f,  1.0f,
+    -1.0f, -1.0f,  1.0f,
+
+    -1.0f,  1.0f, -1.0f,
+     1.0f,  1.0f, -1.0f,
+     1.0f,  1.0f,  1.0f,
+     1.0f,  1.0f,  1.0f,
+    -1.0f,  1.0f,  1.0f,
+    -1.0f,  1.0f, -1.0f,
+
+    -1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f,  1.0f,
+     1.0f, -1.0f, -1.0f,
+     1.0f, -1.0f, -1.0f,
+    -1.0f, -1.0f,  1.0f,
+     1.0f, -1.0f,  1.0f
+};
+
 int main(int argc, char* argv[])
 {
 
@@ -71,28 +116,19 @@ int main(int argc, char* argv[])
     //Camera:
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<PlayerController>();
-    Shape shape = Shape(camera);
-
-    //Add shader:
-    std::vector<glm::uint> indecies;
-    std::vector<Vertex> verticies;
-
-    verticies = ResourceManager::LoadOBJ("Resources", "blocks_01.obj", "", "", "", "", indecies);
 
 
-    Mesh* mesh = new Mesh(verticies.data(), verticies.size(), indecies.data(), indecies.size());
 
+
+    Mesh mesh = Mesh(Primitives::Square(), Primitives::SqaureIndices());
     MeshRenderer* meshRenderer = new MeshRenderer();
-    meshRenderer->ApplyMesh(mesh);
-    mesh->transform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
-    meshRenderer->transform->scale = glm::vec3(0.1f, 0.1f, 0.1f);
-    meshRenderer->transform->position = light->transform.position;
-    Skybox skybox = Skybox();
-    Cubemap texture = Cubemap();
-    std::vector<std::string> files = { "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg" };
-    texture.LoadMap(files);
-    skybox.cubemap = &texture;
-    meshRenderer->ApplyMaterial(&skybox);
+    meshRenderer->ApplyMesh(&mesh);
+    //meshRenderer->transform->position = light->transform.position;
+    meshRenderer->transform->scale.x = 50;
+    SolidMaterial surface = SolidMaterial();
+    surface.Load("Shaders/Solid");
+    surface.colour = glm::vec4(0, 255, 0, 255);
+    meshRenderer->ApplyMaterial(&surface);
 
 
 
@@ -112,7 +148,6 @@ int main(int argc, char* argv[])
         if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
         camera->UpdateExtensions();
         camera->Update();
-        meshRenderer->transform->position = camera->transform.position;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         meshRenderer->Render();

@@ -47,8 +47,6 @@ void Skybox::Bind()
 
     //glDepthMask(GL_FALSE);
     //glActiveTexture(GL_TEXTURE0);
-
-    glActiveTexture(cubemap->id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemap->id);
     //glDrawArrays(GL_TRIANGLES, 0, 36);
     //glDepthMask(GL_TRUE);

@@ -22,3 +22,14 @@ Vertex::~Vertex()
 {
 
 }
+
+std::vector<Vertex*> Vertex::ArrayToVertex(float vertz[])
+{
+	std::vector<Vertex*> verticies;
+	for (int i = 0; vertz[i] != NULL; i+=3)
+	{
+		if (vertz[i] == NULL) return verticies;
+		verticies.push_back(new Vertex(glm::vec3(vertz[i], vertz[i + 1], vertz[i + 2])));
+	}
+	return verticies;
+}

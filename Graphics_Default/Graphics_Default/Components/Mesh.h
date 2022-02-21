@@ -21,18 +21,34 @@ private:
 	GLuint verticies = 0;
 	GLuint NumVerts =0 ;
 
+	//UPDATED
+	//Constructors:
+public:
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	Mesh(std::vector<Vertex> vertices);
+
+	//Attributes:
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices; //Unsigned since an indexing number should not be negative.
+	unsigned int VAO, VBO, EBO;
+
+	//Methods:
+	void DrawUpdated();
+	//!UPDATED
+
 public: 
 	//Attributes:
 	Transform transform;
 
 	//Constructor:
 	Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount);
+	Mesh(std::vector<float> verticies);
 
 	//Deconstructor:
 	~Mesh();
 	
 	//Methods:
-	void draw();
+	void Draw();
 	void calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
 };
 #endif // !MESH_H
