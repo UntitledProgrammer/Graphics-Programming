@@ -44,6 +44,12 @@ struct Primitives
 		return verticies;
 	}
 
+	static std::vector<unsigned int> SqaureIndices()
+	{
+		std::vector<unsigned int> indices = { 0, 1, 2, 0, 2, 3 };
+		return indices;
+	}
+
 	static std::vector<Vertex> Triangle()
 	{
 		std::vector<Vertex> verticies;

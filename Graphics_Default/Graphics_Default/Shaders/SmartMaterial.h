@@ -46,5 +46,11 @@ public:
 	static void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 	static std::string LoadShader(const std::string& filename);
 
+	//Properties:
+	void SetUniformInt(std::string key, int value);
+	void SetUniformFloat(std::string key, float value);
+	void SetUniformVec3(std::string key, glm::vec3 value);
+	void SetUniformMat4(std::string key, glm::mat4 value);
+
 };
 #endif // !SMART_MATERIAL_H

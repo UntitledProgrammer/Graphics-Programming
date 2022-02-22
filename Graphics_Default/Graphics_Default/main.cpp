@@ -61,8 +61,8 @@ int main(int argc, char* argv[])
     SDL_Event sdlEvent;
 
     //Lighting:
-    Light* light = new Light();
-    light->transform.position.z += 1;
+    Light* light = Light::Instance();
+    light->colour = glm::vec3(255, 255, 255);
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
@@ -72,46 +72,26 @@ int main(int argc, char* argv[])
     camera->ApplyExtension<PlayerController>();
     Shape shape = Shape(camera);
 
-    //Add shader:
-    std::vector<glm::uint> indecies;
-    std::vector<Vertex> verticies;
-
-    verticies = ResourceManager::LoadOBJ("Resources", "blocks_01.obj", "", "", "", "", indecies);
-
-
-    Mesh* mesh = new Mesh(verticies.data(), verticies.size(), indecies.data(), indecies.size());
 
     MeshRenderer* meshRenderer = new MeshRenderer();
-    meshRenderer->ApplyMesh(mesh);
-    mesh->transform.scale = glm::vec3(0.001f, 0.001f, 0.001f);
-    meshRenderer->transform->scale = glm::vec3(0.1f, 0.1f, 0.1f);
-    meshRenderer->transform->position = light->transform.position;
-    Skybox skybox = Skybox();
-    Texture texture = Texture();
-    std::vector<std::string> files = { "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg", "brickwall.jpg" };
-    texture.LoadCubemap(files);
-    skybox.cubemap = &texture;
-    meshRenderer->ApplyMaterial(&skybox);
-
-
-
-
-    //meshRenderer->ApplyMaterial(&surface);
+    meshRenderer->ApplyMesh( new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    SurfaceMaterial surface = SurfaceMaterial();
+    surface.base = shape.texture;
+    surface.normal = shape.normalTexture;
+    surface.Load("Shaders/LitShader");
+    meshRenderer->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
-
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
 
     //Main window loop:
-    while (true)
+    while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
     {
         AdvancedInput::Instance()->update();
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
-        if (AdvancedInput::Instance()->keyUp(SDLK_ESCAPE)) break;
         camera->UpdateExtensions();
         camera->Update();
-        meshRenderer->transform->position = camera->transform.position;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         meshRenderer->Render();

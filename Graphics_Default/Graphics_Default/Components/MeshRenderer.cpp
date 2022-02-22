@@ -26,5 +26,5 @@ void MeshRenderer::Render()
 {
 	material->Bind();
 	material->Update(*transform);
-	mesh->draw();
+	mesh->Draw();
 }

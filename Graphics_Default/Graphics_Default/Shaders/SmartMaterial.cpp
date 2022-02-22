@@ -65,3 +65,23 @@ std::string Substance::LoadShader(const std::string& filename)
 
     return output;
 }
+
+void Substance::SetUniformInt(std::string key, int value)
+{
+    glUniform1i(glGetUniformLocation(program, key.c_str()), value);
+}
+
+void Substance::SetUniformFloat(std::string key, float value)
+{
+    glUniform1f(glGetUniformLocation(program, key.c_str()), value);
+}
+
+void Substance::SetUniformVec3(std::string key, glm::vec3 value)
+{
+    glUniform3f(glGetUniformLocation(program, key.c_str()), value.x, value.y, value.z);
+}
+
+void Substance::SetUniformMat4(std::string key, glm::mat4 value)
+{
+    glUniformMatrix4fv(glGetUniformLocation(program, key.c_str()),1, GL_FALSE, &value[0][0]);
+}

@@ -27,12 +27,18 @@ public:
 
 	//Constructor:
 	Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount);
+	/// <summary>The reccomended method for constructing a mesh.</summary>
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	/// <summary>In the uncommon situaton where you don't have an indices use this method to construct a mesh that will simply use every vertex supplied.</summary>
+	Mesh(std::vector<Vertex> vertices);
 
 	//Deconstructor:
 	~Mesh();
 	
 	//Methods:
-	void draw();
+	void Draw();
 	void calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
+	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	//void 
 };
 #endif // !MESH_H

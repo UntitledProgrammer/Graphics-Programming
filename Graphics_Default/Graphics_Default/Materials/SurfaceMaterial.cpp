@@ -48,14 +48,17 @@ bool SurfaceMaterial::Load(const std::string location)
 
 void SurfaceMaterial::Update(Transform& transform)
 {
-    glUniformMatrix4fv(uniforms[MODEL_U], 1, GL_FALSE, &transform.GetMatrix()[0][0]);
-    glUniformMatrix4fv(uniforms[PROJECTION_U], 1, GL_FALSE, &Camera::Instance()->perspective[0][0]);
-    glUniformMatrix4fv(uniforms[VIEW_U], 1, GL_FALSE, &Camera::Instance()->view[0][0]);
+    //Mesh:
+    SetUniformMat4("model", transform.GetMatrix());
 
-    glUniform3f(uniforms[FRAG_CAMERAPOS], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z);
-    glUniform3f(uniforms[FRAG_LIGHTCOLOUR], Light::Instance()->colour.x, Light::Instance()->colour.y, Light::Instance()->colour.z);
-    glUniform3f(uniforms[FRAG_LIGHTPOS], Light::Instance()->transform.position.x, Light::Instance()->transform.position.y, Light::Instance()->transform.position.z);
-    glUniform3f(uniforms[FORWARD], Camera::Instance()->transform.position.x, Camera::Instance()->transform.position.y, Camera::Instance()->transform.position.z + 0.5f);
+    //Camera:
+    SetUniformMat4("projection", Camera::Instance()->perspective);
+    SetUniformMat4("view", Camera::Instance()->view);
+    SetUniformVec3("cameraPosition", Camera::Instance()->transform.position);
+
+    //Light:
+    SetUniformVec3("lightColour", Light::Instance()->colour);
+    SetUniformVec3("lightPosition", Light::Instance()->transform.position);
 }
 
 void SurfaceMaterial::Bind()
