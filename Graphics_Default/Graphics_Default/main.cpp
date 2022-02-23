@@ -139,6 +139,7 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         box2->Render();
+        box->transform.position.x += INPUT->getAxis(SDLK_LEFT, SDLK_RIGHT);
 
         Resources->UpdateSimulated();
         toolbar.Update();

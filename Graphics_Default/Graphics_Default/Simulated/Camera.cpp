@@ -37,7 +37,7 @@ void Camera::Update()
 {
     UpdateExtensions();
 
-    glm::vec3 target = glm::vec3(0, 0, 0.1) + transform.position;
+    glm::vec3 target = glm::vec3(0, 0, 0.01) + transform.position;
 
     up = glm::cross(glm::normalize(target - transform.position), glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward)));
     view = glm::lookAt(transform.position, target, up);

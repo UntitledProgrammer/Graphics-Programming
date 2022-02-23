@@ -10,7 +10,6 @@ class Entity : public Simulated
 {
 public:
 	//Attributes:
-	Transform transform;
 	MeshRenderer* meshRenderer;
 
 	//Constructor:

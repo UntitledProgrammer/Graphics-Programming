@@ -30,8 +30,12 @@ public:
 	}
 };
 
+#include"Hierarchy.h"
 struct Inspector : public Window
 {
+private:
+
+
 public:
 	//Constructor:
 	Inspector()
@@ -42,7 +46,16 @@ public:
 	//Methods:
 	void Render()
 	{
+		if (!Hierarchy::selected) return;
+
 		ImGui::Begin("Inspector");
+
+		ImGui::PushItemWidth(90);
+		ImGui::SliderFloat("X", &Hierarchy::selected->transform.position.x, 0, 100);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Y", &Hierarchy::selected->transform.position.y, 0, 100);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Z", &Hierarchy::selected->transform.position.z, 0, 100);
 		ImGui::End();
 	}
 };

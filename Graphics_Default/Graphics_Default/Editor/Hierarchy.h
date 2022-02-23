@@ -25,11 +25,11 @@ public:
 				selected = it->second;
 			}
 		}
-		ImGui::Text(typeid(*selected).name());
+		if(selected) ImGui::Text(typeid(*selected).name());
 		ImGui::End();
 	}
 
 	static Simulated* selected;
 };
-
+Simulated* Hierarchy::selected = 0;
 #endif // !HIERARCHY_H
