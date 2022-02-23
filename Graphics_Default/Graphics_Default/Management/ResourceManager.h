@@ -1,7 +1,11 @@
 #pragma once
 #ifndef RESOURCE_MANAGER_H
 #define RESOURCE_MANAGER_H
+
+//Defines:
 #define Resources ResourceManager::Instance()
+#define Simulatables ResourceManager::Instance()->simulatables
+#define Textures ResourceManager::Instance()->textures
 
 //Includes:
 #include<string>
@@ -10,24 +14,26 @@
 #include<vector>
 #include<glm.hpp>
 #include<map>
+
 #include"../Math/Vertex.h"
 #include"../Shaders/Shader.h"
 #include"../Components/Texture.h"
 #include"../Components/Mesh.h"
+#include"Resource.h"
 
 class ResourceManager
 {
 private:
 	//Attributes:
 	std::map<std::string, Shader*> shaders;
-	std::map<std::string, Texture*> textures;
 
 	//Static attributes:
 	static ResourceManager* defaultInstance;
 
 public:
 	//Attributes:
-	std::vector<Simulated*> simulatedBodies;
+	Resource<Simulated*> simulatables;
+	Resource<Texture*> textures;
 
 	//Constructor:
 	ResourceManager();
@@ -36,10 +42,9 @@ public:
 	~ResourceManager();
 
 	//Methods:
-	void AddBody(Simulated* body) { simulatedBodies.push_back(body); }
 	Shader* GetShader(std::string location);
-	Texture* GetTexture(std::string location);
 	template<typename Key, typename Type> bool Exists(std::map<Key, Type>* map, Key key) { return map->find(key) != map->end() ? true : false; }
+	void UpdateSimulated();
 
 	//Static methods:
 	static ResourceManager* Instance();

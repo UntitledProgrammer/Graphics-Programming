@@ -6,7 +6,7 @@
 #include"../Components/MeshRenderer.h"
 
 /// <summary>An entity is a simulated object that must always maintain the use of a mesh and mesh-renderer meaning it is visually simulated.</summary>
-class Entity : Simulated
+class Entity : public Simulated
 {
 public:
 	//Attributes:
@@ -23,5 +23,9 @@ public:
 	void Update();
 	/// <summary>Removes the object from the simulated environment.</summary>
 	void Dismantle();
+
+	//Properties:
+	void SetMesh(Mesh* mesh);
+	void SetMaterial(Substance* material);
 };
 #endif ENTITY_H

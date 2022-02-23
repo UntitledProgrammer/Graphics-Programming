@@ -22,6 +22,11 @@ bool MeshRenderer::LoadMaterial(std::string location)
 void MeshRenderer::ApplyMaterial(Substance* material) { this->material = material; }
 void MeshRenderer::ApplyMesh(Mesh* mesh) { this->mesh = mesh; }
 
+void MeshRenderer::SetTransform(Transform* transform)
+{
+	this->transform = transform;
+}
+
 void MeshRenderer::Render()
 {
 	material->Bind();

@@ -28,6 +28,7 @@ public:
 	bool LoadMaterial(std::string location);
 	void ApplyMaterial(Substance* material);
 	void ApplyMesh(Mesh* mesh);
+	void SetTransform(Transform* transform);
 	void Render();
 };
 #endif //!MESH_RENDERER_H

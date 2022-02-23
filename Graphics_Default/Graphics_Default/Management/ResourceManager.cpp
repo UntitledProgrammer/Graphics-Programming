@@ -167,14 +167,11 @@ Shader* ResourceManager::GetShader(std::string location)
 	return shaders[location];
 }
 
-Texture* ResourceManager::GetTexture(std::string location)
-{
-	if (!Exists<std::string, Shader*>(&shaders, location))
-	{
-		Texture* texture = new Texture();
-		if (texture->Load(location)) { textures.emplace(std::make_pair(location, texture)); }
-		else std::cerr << "Unable to load texture: " << location.c_str() << std::endl;
-	}
 
-	return textures[location];
+void ResourceManager::UpdateSimulated()
+{
+	for (std::map<std::string, Simulated*>::iterator it = Simulatables.resources.begin(); it != Simulatables.resources.end(); it++)
+	{
+		it->second->Update();
+	}
 }
