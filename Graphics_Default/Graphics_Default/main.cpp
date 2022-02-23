@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 
     //Lighting:
     Light* light = Light::Instance();
-    light->colour = glm::vec3(1, 1, 1);
+    light->colour = glm::vec3(2, 2, 2);
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
@@ -74,7 +74,13 @@ int main(int argc, char* argv[])
 
     MeshRenderer* box2 = new MeshRenderer();
     MeshRenderer* meshRenderer = new MeshRenderer();
-    meshRenderer->ApplyMesh( new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    Mesh* mesh = Resources->LoadMesh("Resources/blocks_01.obj", "","","","");
+    meshRenderer->ApplyMesh(mesh);
+    
+    
+    
+    
+    
     box2->ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
     box2->transform->scale = glm::vec3(10, 5, 10);
     box2->transform->position = glm::vec3(0,-9.5, 0);

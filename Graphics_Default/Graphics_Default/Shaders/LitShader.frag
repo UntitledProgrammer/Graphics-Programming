@@ -16,14 +16,14 @@ uniform vec3 cameraPosition;
 
 void main()
 {
-//Ambient:
+	//Ambient:
 	float ambientStrength = 0.5f;
 	vec3 ambient = ambientStrength * lightColour;
 
 	//Diffuse:
 	//vec3 normal = normalize(fragNormal);
 	vec3 normal = normalize(texture2D(texture_normal, fragTextureCoordinates).rgb);
-	normal = normalize(normal * 2.0-1.0);
+	normal = normalize((normal * 2.0)-1.0);
 	normal = normalize(TBN * normal);
 
 

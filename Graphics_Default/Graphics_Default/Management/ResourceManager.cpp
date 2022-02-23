@@ -12,7 +12,7 @@ ResourceManager* ResourceManager::Instance()
 	return defaultInstance;
 }
 
-std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::string filename, std::string ambiant, std::string diffuse, std::string spec, std::string normal, std::vector<glm::uint>& indicies)
+Mesh* ResourceManager::LoadMesh(std::string filelocation, std::string ambiant, std::string diffuse, std::string spec, std::string normal)
 {
 	//Defines:
 	std::string line;
@@ -22,12 +22,12 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 	std::vector<glm::vec3> positions;
 	std::vector<glm::vec3> normals;
 	std::vector<glm::vec3> coordinates;
-	std::vector<Vertex> verticies;
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
 
 	//Open the file:
 	std::ifstream file;
-	std::string location = folderLocation + "/" + filename;
-	file.open(location.c_str(), std::ifstream::in);
+	file.open(filelocation.c_str(), std::ifstream::in);
 
 	if (file.is_open())
 	{
@@ -58,8 +58,16 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 				std::string values = line.substr(line.find(' '), line.find('\n'));
 				glm::vec3 pos = glm::vec3(0);
 				sscanf_s(values.c_str(), "%f %f %f", &pos.x, &pos.y, &pos.z);
-				coordinates.push_back(pos);
+				normals.push_back(pos);
 			}
+			else if (FirstWord == "vt")
+			{
+				std::string values = line.substr(line.find(' '), line.find('\n'));
+				glm::vec3 normal;
+				sscanf_s(values.c_str(), "%f %f %f", &normal.x, &normal.y, &normal.z);
+				coordinates.push_back(normal);
+			}
+
 			else if (FirstWord == "usemtl") 
 			{
 				meshName = line.substr(line.find(' '), line.find('\n'));
@@ -78,32 +86,35 @@ std::vector<Vertex> ResourceManager::LoadOBJ(std::string folderLocation, std::st
 
 				vertsInFace[0].position = positions[TmpPosition[0] - 1];
 				vertsInFace[0].uv = coordinates[TmpTexCoords[0] - 1];
-				//vertsInFace[0].normal = normals[TmpNormals[0] - 1];
+				vertsInFace[0].normal = normals[TmpNormals[0] - 1];
 
 				vertsInFace[1].position = positions[TmpPosition[1] - 1];
 				vertsInFace[1].uv = coordinates[TmpTexCoords[1] - 1];
-				//vertsInFace[1].normal = normals[TmpNormals[1] - 1];
+				vertsInFace[1].normal = normals[TmpNormals[1] - 1];
 
 				vertsInFace[2].position = positions[TmpPosition[2] - 1];
 				vertsInFace[2].uv = coordinates[TmpTexCoords[2] - 1];
-				//vertsInFace[2].normal = normals[TmpNormals[2] - 1];
+				vertsInFace[2].normal = normals[TmpNormals[2] - 1];
 
-				verticies.push_back(vertsInFace[0]);
-				verticies.push_back(vertsInFace[1]);
-				verticies.push_back(vertsInFace[2]);
+				vertices.push_back(vertsInFace[0]);
+				vertices.push_back(vertsInFace[1]);
+				vertices.push_back(vertsInFace[2]);
 			}
 
 		}
-		for (int i = 0; i < verticies.size(); i++)
+		for (int i = 0; i < vertices.size(); i++)
 		{
-			indicies.push_back(i);
+			indices.push_back(i);
 		}
-		return verticies;
+
+		//Create new mesh:
+		Mesh* mesh = new Mesh(vertices, indices);
+		return mesh;
 	}
-	else std::cerr << "Unable to load text file: " << location.c_str() << std::endl;
+	else std::cerr << "Unable to load text file: " << filelocation.c_str() << std::endl;
 
 
-	return std::vector<Vertex>();
+	return nullptr;
 }
 
 void ResourceManager::LoadMaterial(const std::string& MatLibLoc, std::string& ambiantLoc, std::string& diffLoc, std::string& specLoc, std::string& normalLoc)
@@ -126,15 +137,15 @@ void ResourceManager::LoadMaterial(const std::string& MatLibLoc, std::string& am
 				{
 					MatName = line.substr(line.find(' ') + 1, line.find('\n'));
 				}
-				else if (std::strstr(firstWord.c_str(), "map_Ka"))
+				else if (std::strstr(firstWord.c_str(), "map_Ka")) //Ambient.
 				{
 					ambiantLoc = line.substr(line.find(' ') + 1, line.find('\n'));
 				}
-				else if (std::strstr(firstWord.c_str(), "map_Ks"))
+				else if (std::strstr(firstWord.c_str(), "map_Ks")) //Specular.
 				{
 					specLoc = line.substr(line.find(' ') + 1, line.find('\n'));
 				}
-				else if (std::strstr(firstWord.c_str(), "map_bump"))
+				else if (std::strstr(firstWord.c_str(), "map_bump")) //Normal map.
 				{
 					normalLoc = line.substr(line.find(' ') + 1, line.find('\n'));
 				}

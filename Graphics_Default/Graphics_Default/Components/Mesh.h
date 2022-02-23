@@ -39,6 +39,8 @@ public:
 	void Draw();
 	void calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
 	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
-	//void 
+	
+	//Friends:
+	friend class ResourceManager;
 };
 #endif // !MESH_H
