@@ -2,6 +2,7 @@
 #ifndef MESH_H
 #define MESH_H
 
+//Includes:
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 #include<glew.h>
@@ -9,6 +10,9 @@
 #include"../Math/Transform.h"
 #include"../Math/Vertex.h"
 
+/// <summary>A mesh can be thought of as being the skeleton of a shape. It is responsable for holding reference to each vertice in a shape as 
+//well as the data about it's indices, normals and tangents that define the geometrical structure of an shape. Because a mesh is a fairly heavy
+//structure it is reccomended that it is only loaded once and simply shared around for each simulated object that may need require it's information for drawing.</summary>
 class Mesh
 {
 private:
@@ -19,7 +23,10 @@ private:
 	GLuint vertexBuffer[NUM_BUFFERS];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
 	GLuint verticies = 0;
+
 	GLuint NumVerts =0 ;
+
+	//Update:
 
 public: 
 	//Attributes:
