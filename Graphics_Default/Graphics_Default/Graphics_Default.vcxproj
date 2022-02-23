@@ -182,6 +182,7 @@
     <ClInclude Include="Components\Shape.h" />
     <ClInclude Include="Components\Texture.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Editor\Hierarchy.h" />
     <ClInclude Include="Editor\Windows.h" />
     <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />

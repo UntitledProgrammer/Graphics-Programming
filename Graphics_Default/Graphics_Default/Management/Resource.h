@@ -34,5 +34,6 @@ public:
 
     //Friends:
     friend class ResourceManager;
+    friend class Hierarchy;
 };
 #endif // !RESOURCE_H
