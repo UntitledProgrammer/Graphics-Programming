@@ -23,10 +23,12 @@ private:
 	GLuint vertexBuffer[NUM_BUFFERS];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
 	GLuint verticies = 0;
-
 	GLuint NumVerts =0 ;
 
-	//Update:
+	//Updated attributes.
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+	//Updated attributes!
 
 public: 
 	//Attributes:

@@ -60,6 +60,10 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
+
+
+
+
     //Lighting:
     Light* light = Light::Instance();
     light->colour = glm::vec3(2, 2, 2);
@@ -79,11 +83,11 @@ int main(int argc, char* argv[])
     
     
     
-    
-    
+    meshRenderer->transform->position = glm::vec3(0, 14, 0);
+    meshRenderer->transform->scale = glm::vec3(0.1, 0.1, 0.1);
     box2->ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
-    box2->transform->scale = glm::vec3(10, 5, 10);
-    box2->transform->position = glm::vec3(0,-9.5, 0);
+    box2->transform->scale = glm::vec3(20, 10, 20);
+    box2->transform->position = glm::vec3(0,-1.5, 0);
     box2->transform->rotation = glm::vec3(glm::radians(-90.0f), 0, 0);
     SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = shape.normalTexture;

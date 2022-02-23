@@ -75,12 +75,12 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 	glBindVertexArray(0);
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices) : vertices(vertices), indices(indices)
 {
 	Reload(vertices, indices);
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices)
+Mesh::Mesh(std::vector<Vertex> vertices) : vertices(vertices), indices(indices)
 {
 	//Add indices:
 	std::vector<unsigned int> indices;
@@ -211,7 +211,7 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[POSITION_VB]);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(POSITION_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
+	
 	//Texture Coordinates:
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TEXTCOORD_VB]);
 	glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(coordinates[0]), &coordinates[0], GL_STATIC_DRAW);
