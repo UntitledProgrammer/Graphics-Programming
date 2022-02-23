@@ -175,9 +175,13 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	normals.resize(vertices.size());
 	for (int i = 0; i < indices.size(); i += 3)
 	{
-		normals[indices[i]] += glm::triangleNormal(positions[indices[i]], positions[indices[i + 1]], positions[indices[i + 2]]);
-		normals[indices[i + 1]] += glm::triangleNormal(positions[indices[i]], positions[indices[i + 1]], positions[indices[i + 2]]);
-		normals[indices[i + 2]] += glm::triangleNormal(positions[indices[i]], positions[indices[i + 1]], positions[indices[i + 2]]);
+		glm::vec3 v1 = positions[indices[i]];
+		glm::vec3 v2 = positions[indices[i + 1]];
+		glm::vec3 v3 = positions[indices[i + 2]];
+		glm::vec3 normal = glm::triangleNormal(v1, v2, v3);
+		normals[indices[i]] += normal;
+		normals[indices[i + 1]] += normal;
+		normals[indices[i + 2]] += normal;
 	}
 
 	//Tangents & Bitangents:
@@ -196,8 +200,8 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(NORMAL_VB);
-	//Lighting:
 
+	//Lighting:
 	glGenVertexArrays(1, &this->verticies);
 	glBindVertexArray(this->verticies);
 	glGenBuffers(NUM_BUFFERS, vertexBuffer);

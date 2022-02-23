@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 
     //Lighting:
     Light* light = Light::Instance();
-    light->colour = glm::vec3(255, 255, 255);
+    light->colour = glm::vec3(1, 1, 1);
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
@@ -72,17 +72,24 @@ int main(int argc, char* argv[])
     camera->ApplyExtension<PlayerController>();
     Shape shape = Shape(camera);
 
-
+    MeshRenderer* box2 = new MeshRenderer();
     MeshRenderer* meshRenderer = new MeshRenderer();
     meshRenderer->ApplyMesh( new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    box2->ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    box2->transform->scale = glm::vec3(10, 5, 10);
+    box2->transform->position = glm::vec3(0,-9.5, 0);
+    box2->transform->rotation = glm::vec3(glm::radians(-90.0f), 0, 0);
     SurfaceMaterial surface = SurfaceMaterial();
+    surface.normal = shape.normalTexture;
     surface.base = shape.texture;
     surface.normal = shape.normalTexture;
     surface.Load("Shaders/LitShader");
     meshRenderer->ApplyMaterial(&surface);
+    box2->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
+    Light::Instance()->transform.position.z += 2;
 
     //Main window loop:
     while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
@@ -95,6 +102,7 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         meshRenderer->Render();
+        box2->Render();
 
         light->draw();
 
