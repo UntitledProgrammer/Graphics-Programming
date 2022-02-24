@@ -4,7 +4,6 @@ struct Light
 {
 	vec3 position;
 	vec3 colour;
-	vec3 direction;
 };
 
 #define NUMBER_OF_LIGHTS 4
@@ -29,8 +28,10 @@ uniform vec3 cameraPosition;
 //Method:
 vec3 AddLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-	vec3 ambient = AMBIENT_STRENGTH * light.colour;
-	vec3 lightDir = normalize((lightPosition - fragPos));
+	float d = distance(light.position, fragPos);
+
+	vec3 ambient = min(vec3(light.colour.x / d, light.colour.y / d, light.colour.z / d)* AMBIENT_STRENGTH, 0);
+	vec3 lightDir = normalize((light.position - fragPos));
 	vec3 diffuse = max(dot(normal, lightDir), 0.0) * light.colour;
 
 	//Specular:
@@ -57,9 +58,6 @@ void main()
 	{
 		result += AddLight(lights[i], normal, fragPos, viewDir);
 	}
-
-
-
 
 	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);
 }

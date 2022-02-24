@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 
     //Lighting:
     Light* light = Light::Instance();
-    light->colour = glm::vec3(2, 2, 2);
+    light->colour = glm::vec3(0,0,5);
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
@@ -75,6 +75,10 @@ int main(int argc, char* argv[])
     //Camera:
     Simulatables.Add(Camera::Instance());
     Simulatables.Add(light);
+    Light* test = new Light();
+    test->colour = glm::vec3(5, 5, 5);
+    test->SetName("Test Light");
+    Simulatables.Add(test);
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<PlayerController>();
     Shape shape = Shape(camera);
@@ -95,7 +99,7 @@ int main(int argc, char* argv[])
     surface.normal = shape.normalTexture;
     surface.base = shape.texture;
     surface.normal = shape.normalTexture;
-    surface.Load("Shaders/LitShader");
+    surface.Load("Shaders/RealShader");
     box->SetMaterial(&surface);
     box2->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
@@ -127,13 +131,15 @@ int main(int argc, char* argv[])
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapID, 0);
     glDrawBuffer(GL_NONE);
     glReadBuffer(GL_NONE);
-    */
 
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) { std::cerr << "Error: Frame buffer is incomplete." << std::endl; }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    */
 
     //Main window loop:
     while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
     {
-        AdvancedInput::Instance()->update();
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -146,6 +152,7 @@ int main(int argc, char* argv[])
 
         SDL_GL_SwapWindow(window);
         SDL_Delay(16);
+        INPUT->update();
     }
 
 

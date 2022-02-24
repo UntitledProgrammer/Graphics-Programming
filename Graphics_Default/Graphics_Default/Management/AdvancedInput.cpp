@@ -5,7 +5,7 @@ AdvancedInput* AdvancedInput::defaultInstance = 0;
 AdvancedInput::AdvancedInput() : mousePosition(glm::vec3(0)), deltaMousePosition(glm::vec3(0)), previousMousePosition(glm::vec3(0))
 {
 	currentState = SDL_GetKeyboardState(NULL);
-	previousState = currentState;
+	previousState = new Uint8();
 }
 
 AdvancedInput::~AdvancedInput()
@@ -40,7 +40,7 @@ bool AdvancedInput::keyReleased(SDL_Keycode key)
 void AdvancedInput::update()
 {
 	SDL_GetMouseState(&previousMousePosition.x, &previousMousePosition.y);
-	previousState = currentState;
+	memcpy((void*)previousState, currentState, sizeof(currentState));
 	currentState = SDL_GetKeyboardState(NULL);
 }
 

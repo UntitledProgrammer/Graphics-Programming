@@ -6,6 +6,7 @@
 #include<map>
 #include<vector>
 #include<iostream>
+#include<string>
 #include"../Math/Transform.h"
 #include"Extension.h"
 
@@ -13,6 +14,7 @@ class Simulated
 {
 private:
 	std::vector<std::shared_ptr<Extension>> extensions;
+	std::string name = "DefaultSimulated";
 
 public:
 	//Attributes:
@@ -25,6 +27,9 @@ public:
 	virtual Simulated* Instantiate() { return nullptr; };
 	void UpdateExtensions();
 	void Initialise();
+	void SetName(std::string n){ name = n; }
+	std::string GetName() { return name; }
+	void DrawCentre(float scale = 1.0f);
 	
 	//Methods:
 	template<typename ExtensionType> void ApplyExtension()

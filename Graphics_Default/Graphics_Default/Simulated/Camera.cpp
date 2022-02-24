@@ -4,9 +4,7 @@ Camera* Camera::defaultInstance = 0;
 
 glm::mat4 Camera::GetMatrix()
 {
-    recalculate();
-
-    return glm::lookAt(transform.position, transform.position + glm::vec3(0,0,1), up);
+    return glm::lookAt(transform.position, transform.position + glm::vec3(0,0,0.01), up);
 }
 
 Camera::Camera() : perspective(glm::mat4(1)) 
@@ -15,6 +13,7 @@ Camera::Camera() : perspective(glm::mat4(1))
     perspective = glm::perspective(fov, aspect, 1.0f, 100.0f);
     transform.position = glm::vec3(0.0f, 0.0f, 2.0f);
     recalculate();
+    SetName("Camera");
 };
 
 Camera::~Camera()

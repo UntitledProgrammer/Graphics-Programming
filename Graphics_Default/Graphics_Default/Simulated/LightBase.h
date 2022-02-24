@@ -14,11 +14,11 @@ class Light : public Simulated
 private:
 	//Attributes:
 	static Light* defaultInstance;
-	static std::vector<Light*> lights;
 
 public:
 	//Attributes:
 	glm::vec3 colour;
+	static std::vector<Light*> lights;
 
 	//Constructor:
 	Light();
@@ -29,6 +29,13 @@ public:
 	//Methods:
 	void draw();
 	void Update();
+	Simulated* Instantiate()
+	{
+		Light* light = new Light();
+		light->colour = this->colour;
+		light->transform = transform;
+		return light;
+	}
 
 	//Static methods:
 	static Light* Instance();

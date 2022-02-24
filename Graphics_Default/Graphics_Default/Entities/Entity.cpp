@@ -5,6 +5,7 @@ Entity::Entity()
 	meshRenderer = new MeshRenderer();
 	transform = Transform();
 	meshRenderer->transform = &transform;
+	SetName("Entity");
 }
 
 Entity::~Entity()

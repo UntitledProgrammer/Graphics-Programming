@@ -18,7 +18,7 @@ public:
 	//Methods:
 	virtual void Update()
 	{
-		if (INPUT->keyDown(toggle)) { frozen = !frozen; std::cout << "KEY"; }
+		if (INPUT->keyPressed(toggle)) { frozen = !frozen;}
 		if (frozen) { return; }
 
 		//Adjust position according to any input.

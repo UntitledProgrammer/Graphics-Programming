@@ -11,6 +11,7 @@ Light* Light::Instance()
 
 Light::Light()
 {
+	SetName("Light");
 	lights.push_back(this);
 	colour = glm::vec3(1, 1, 1);
 }
