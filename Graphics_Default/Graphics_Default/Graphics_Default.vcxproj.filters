@@ -264,5 +264,7 @@
     <None Include="Shaders\Solid.vert" />
     <None Include="Shaders\Skybox.frag" />
     <None Include="Shaders\Skybox.vert" />
+    <None Include="Shaders\RealShader.frag" />
+    <None Include="Shaders\RealShader.vert" />
   </ItemGroup>
 </Project>
