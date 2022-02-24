@@ -185,6 +185,7 @@
     <ClInclude Include="Editor\Hierarchy.h" />
     <ClInclude Include="Editor\Windows.h" />
     <ClInclude Include="Entities\Entity.h" />
+    <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3_loader.h" />

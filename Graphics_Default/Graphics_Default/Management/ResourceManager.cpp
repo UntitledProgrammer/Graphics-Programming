@@ -170,8 +170,8 @@ Shader* ResourceManager::GetShader(std::string location)
 
 void ResourceManager::UpdateSimulated()
 {
-	for (std::map<std::string, Simulated*>::iterator it = Simulatables.resources.begin(); it != Simulatables.resources.end(); it++)
+	for (int i = 0; i < Simulatables.Size(); i++)
 	{
-		it->second->Update();
+		Simulatables.At(i)->Update();
 	}
 }

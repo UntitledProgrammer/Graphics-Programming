@@ -18,11 +18,20 @@ public:
 		ImGui::Begin(name.c_str());
 
 		//Draw a button for each simulatable:
-		for (std::map<std::string, Simulated*>::iterator it = Simulatables.resources.begin(); it != Simulatables.resources.end(); it++)
+		for (int i =0; i < Simulatables.Size(); i++)
 		{
-			if (ImGui::Button(it->first.c_str()))
+			if (ImGui::TreeNode(std::to_string(i).c_str()))
 			{
-				selected = it->second;
+				if (ImGui::Button("Duplicate"))
+				{
+					Simulatables.Add(Simulatables.At(i)->Instantiate());
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("Select"))
+				{
+					selected = Simulatables.At(i);
+				}
+				ImGui::TreePop();
 			}
 		}
 		if(selected) ImGui::Text(typeid(*selected).name());

@@ -73,13 +73,13 @@ int main(int argc, char* argv[])
     toolbar.LoadDefault();
 
     //Camera:
-    Simulatables.Insert("MainCamera", Camera::Instance());
-    Simulatables.Insert("MainLight", light);
+    Simulatables.Add(Camera::Instance());
+    Simulatables.Add(light);
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<PlayerController>();
     Shape shape = Shape(camera);
     Entity* box = new Entity();
-    Simulatables.Insert("Box",box);
+    Simulatables.Add(box);
     MeshRenderer* box2 = new MeshRenderer();
     box->SetMesh(Resources->LoadMesh("Resources/blocks_01.obj", "", "", "", ""));
     

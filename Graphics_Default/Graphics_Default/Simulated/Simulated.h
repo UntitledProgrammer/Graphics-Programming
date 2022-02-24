@@ -22,6 +22,7 @@ public:
 	//Abstract methods:
 	/// <summary>Update is called during every frame of runtime.</summary>
 	virtual void Update() = 0;
+	virtual Simulated* Instantiate() { return nullptr; };
 	void UpdateExtensions();
 	void Initialise();
 	

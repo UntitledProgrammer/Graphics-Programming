@@ -4,7 +4,7 @@
 
 //Defines:
 #define Resources ResourceManager::Instance()
-#define Simulatables ResourceManager::Instance()->simulatables
+#define Simulatables ResourceManager::Instance()->sims
 #define Textures ResourceManager::Instance()->textures
 
 //Includes:
@@ -20,6 +20,7 @@
 #include"../Components/Texture.h"
 #include"../Components/Mesh.h"
 #include"Resource.h"
+#include"../Entities/EntityManager.h"
 
 class ResourceManager
 {
@@ -33,6 +34,7 @@ private:
 public:
 	//Attributes:
 	Resource<Simulated*> simulatables;
+	SimulatedManager sims;
 	Resource<Texture*> textures;
 
 	//Constructor:

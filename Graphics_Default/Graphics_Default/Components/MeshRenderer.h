@@ -30,5 +30,8 @@ public:
 	void ApplyMesh(Mesh* mesh);
 	void SetTransform(Transform* transform);
 	void Render();
+
+	//Friends:
+	friend class Entity;
 };
 #endif //!MESH_RENDERER_H
