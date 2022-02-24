@@ -1,4 +1,5 @@
 #include "LightBase.h"
+std::vector<Light*> Light::lights = std::vector<Light*>();
 
 Light* Light::defaultInstance = 0;
 
@@ -10,6 +11,7 @@ Light* Light::Instance()
 
 Light::Light()
 {
+	lights.push_back(this);
 	colour = glm::vec3(1, 1, 1);
 }
 

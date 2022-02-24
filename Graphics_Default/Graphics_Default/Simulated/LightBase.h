@@ -6,6 +6,7 @@
 #include<SDL_opengl.h>
 #include<gtc/type_ptr.hpp>
 #include<SDL.h>
+#include<vector>
 #include"Camera.h"
 
 class Light : public Simulated
@@ -13,6 +14,8 @@ class Light : public Simulated
 private:
 	//Attributes:
 	static Light* defaultInstance;
+	static std::vector<Light*> lights;
+
 public:
 	//Attributes:
 	glm::vec3 colour;
