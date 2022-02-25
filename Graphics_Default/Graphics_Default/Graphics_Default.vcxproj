@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Materials\Animator.cpp" />
     <ClCompile Include="Components\Mesh.cpp" />
     <ClCompile Include="Components\Shape.cpp" />
     <ClCompile Include="Components\Texture.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Materials\Animator.h" />
     <ClInclude Include="Components\Mesh.h" />
     <ClInclude Include="Components\Shape.h" />
     <ClInclude Include="Components\Texture.h" />

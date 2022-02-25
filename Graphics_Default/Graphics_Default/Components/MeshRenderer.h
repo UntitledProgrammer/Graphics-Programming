@@ -33,5 +33,6 @@ public:
 
 	//Friends:
 	friend class Entity;
+	friend class Animator;
 };
 #endif //!MESH_RENDERER_H

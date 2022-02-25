@@ -21,6 +21,7 @@
 #include"Materials/Skybox.h"
 #include"Simulated/PlayerController.h"
 #include"Entities/Entity.h"
+#include"Materials/Animator.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -62,6 +63,17 @@ int main(int argc, char* argv[])
     SDL_Event sdlEvent;
 
 
+    //Testing animator:
+    Texture * zero = new Texture();
+    Texture* one = new Texture();
+    Texture* two = new Texture();
+    Texture* three = new Texture();
+    zero->Load("0.jpg");
+    one->Load("1.jpg");
+    two->Load("2.jpg");
+    three->Load("3.jpg");
+
+
 
 
 
@@ -95,12 +107,21 @@ int main(int argc, char* argv[])
     box2->transform->scale = glm::vec3(20, 10, 20);
     box2->transform->position = glm::vec3(0,-1.5, 0);
     box2->transform->rotation = glm::vec3(glm::radians(-90.0f), 0, 0);
+
+
     SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = shape.normalTexture;
-    surface.base = shape.texture;
+    surface.base = zero;
     surface.normal = shape.normalTexture;
     surface.Load("Shaders/RealShader");
     box->SetMaterial(&surface);
+    std::shared_ptr animator = box->ApplyExtension<Animator>();
+    animator->PushBack(zero);
+    animator->PushBack(one);
+    animator->PushBack(two);
+    animator->PushBack(three);
+    animator->Initialise();
+    //box->ApplyExtension
     box2->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
@@ -145,7 +166,6 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         box2->Render();
-        box->transform.position.x += INPUT->getAxis(SDLK_LEFT, SDLK_RIGHT);
 
         Resources->UpdateSimulated();
         toolbar.Update();
