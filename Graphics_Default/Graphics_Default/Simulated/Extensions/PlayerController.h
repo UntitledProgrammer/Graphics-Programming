@@ -3,7 +3,7 @@
 #define CONTROLLER_H
 
 //Includes:
-#include"Simulated.h"
+#include"../Simulated.h"
 #include"Extension.h"
 
 /// <summary>A first person controller is an extention that can be applied to a simulated object to affect it's position and rotation in a simulated world.</summary>

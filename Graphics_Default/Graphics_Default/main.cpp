@@ -16,12 +16,12 @@
 #include"Management/ResourceManager.h"
 #include"Components/MeshRenderer.h"
 #include"Editor/Toolbar.h"
-#include"Materials/SolidMaterial.h"
-#include"Materials/SurfaceMaterial.h"
-#include"Materials/Skybox.h"
-#include"Simulated/PlayerController.h"
-#include"Entities/Entity.h"
-#include"Materials/Animator.h"
+#include"Visuals/Substances/SolidMaterial.h"
+#include"Visuals/Substances/SurfaceMaterial.h"
+#include"Visuals/Skybox.h"
+#include"Simulated/Extensions/PlayerController.h"
+#include"Simulated/Entity.h"
+#include"Simulated/Extensions/Animator.h"
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
     Entity* box = new Entity();
     Simulatables.Add(box);
     MeshRenderer* box2 = new MeshRenderer();
-    box->SetMesh(Resources->LoadMesh("Resources/blocks_01.obj", "", "", "", ""));
+    box->SetMesh(Resources->LoadMesh("Resources/Objects/blocks_01.obj", "", "", "", ""));
     
     
     
@@ -113,7 +113,7 @@ int main(int argc, char* argv[])
     surface.normal = shape.normalTexture;
     surface.base = zero;
     surface.normal = shape.normalTexture;
-    surface.Load("Shaders/RealShader");
+    surface.Load("Visuals/Shaders/RealShader");
     box->SetMaterial(&surface);
     std::shared_ptr animator = box->ApplyExtension<Animator>();
     animator->PushBack(zero);

@@ -3,7 +3,7 @@
 #define SKYBOX_H
 
 //Includes:
-#include"../Shaders/SmartMaterial.h"
+#include"../Visuals/Substances/SmartMaterial.h"
 
 /// <summary>A skybox is a cube that uses all three dimensions of space to wrap six textures around the background of an environment.</summary>
 class Skybox : public Substance

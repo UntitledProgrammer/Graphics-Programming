@@ -4,9 +4,9 @@
 
 //Includes:
 #include"Mesh.h"
-#include"../Shaders/Material.h"
+#include"../Visuals/Substances/Material.h"
 #include"../Management/ResourceManager.h"
-#include"../Shaders/SmartMaterial.h"
+#include"../Visuals/Substances/SmartMaterial.h"
 
 class MeshRenderer
 {

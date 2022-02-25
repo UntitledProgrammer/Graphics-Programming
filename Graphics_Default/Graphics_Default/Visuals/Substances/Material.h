@@ -3,7 +3,7 @@
 #define MATERIAL_H
 
 //Includes:
-#include"Shader.h"
+#include"../Shader.h"
 #include"../Components/Texture.h"
 
 class Material

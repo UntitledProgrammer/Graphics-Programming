@@ -16,7 +16,7 @@
 #include<map>
 
 #include"../Math/Vertex.h"
-#include"../Shaders/Shader.h"
+#include"../Visuals/Shader.h"
 #include"../Components/Texture.h"
 #include"../Components/Mesh.h"
 #include"Resource.h"

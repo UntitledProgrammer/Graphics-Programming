@@ -145,11 +145,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Materials\Animator.cpp" />
     <ClCompile Include="Components\Mesh.cpp" />
     <ClCompile Include="Components\Shape.cpp" />
     <ClCompile Include="Components\Texture.cpp" />
-    <ClCompile Include="Entities\Entity.cpp" />
     <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
@@ -163,30 +161,30 @@
     <ClCompile Include="Management\AdvancedInput.cpp" />
     <ClCompile Include="Management\Input.cpp" />
     <ClCompile Include="Components\MeshRenderer.cpp" />
-    <ClCompile Include="Shaders\Material.cpp" />
     <ClCompile Include="Math\Transform.cpp" />
     <ClCompile Include="Math\Vertex.cpp" />
     <ClCompile Include="Management\ResourceManager.cpp" />
-    <ClCompile Include="Shaders\Shader.cpp" />
+    <ClCompile Include="Simulated\Entity.cpp" />
+    <ClCompile Include="Simulated\Extensions\Animator.cpp" />
     <ClCompile Include="Simulated\Simulated.cpp" />
     <ClCompile Include="Simulated\Camera.cpp" />
     <ClCompile Include="Simulated\LightBase.cpp" />
     <ClCompile Include="Editor\Toolbar.cpp" />
-    <ClCompile Include="Shaders\SmartMaterial.cpp" />
-    <ClCompile Include="Materials\SurfaceMaterial.cpp" />
-    <ClCompile Include="Materials\SolidMaterial.cpp" />
-    <ClCompile Include="Materials\Skybox.cpp" />
+    <ClCompile Include="Visuals\Shader.cpp" />
+    <ClCompile Include="Visuals\Skybox.cpp" />
+    <ClCompile Include="Visuals\Substances\Material.cpp" />
+    <ClCompile Include="Visuals\Substances\SmartMaterial.cpp" />
+    <ClCompile Include="Visuals\Substances\SolidMaterial.cpp" />
+    <ClCompile Include="Visuals\Substances\SurfaceMaterial.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Materials\Animator.h" />
     <ClInclude Include="Components\Mesh.h" />
     <ClInclude Include="Components\Shape.h" />
     <ClInclude Include="Components\Texture.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor\Hierarchy.h" />
     <ClInclude Include="Editor\Windows.h" />
-    <ClInclude Include="Entities\Entity.h" />
     <ClInclude Include="Entities\EntityManager.h" />
     <ClInclude Include="imgui-1.74\examples\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui-master\backends\imgui_impl_opengl3.h" />
@@ -199,22 +197,27 @@
     <ClInclude Include="Management\Input.h" />
     <ClInclude Include="Components\MeshRenderer.h" />
     <ClInclude Include="Management\Resource.h" />
-    <ClInclude Include="Simulated\Extension.h" />
-    <ClInclude Include="Shaders\Material.h" />
+    <ClInclude Include="Simulated\Entity.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="Management\ResourceManager.h" />
     <ClInclude Include="Shaders\Shader.h" />
-    <ClInclude Include="Simulated\PlayerController.h" />
+    <ClInclude Include="Simulated\Extensions\Animator.h" />
+    <ClInclude Include="Simulated\Extensions\Extension.h" />
+    <ClInclude Include="Simulated\Extensions\PlayerController.h" />
     <ClInclude Include="Simulated\Simulated.h" />
     <ClInclude Include="Simulated\Camera.h" />
     <ClInclude Include="Simulated\LightBase.h" />
     <ClInclude Include="Shaders\SmartMaterial.h" />
-    <ClInclude Include="Materials\SolidMaterial.h" />
-    <ClInclude Include="Materials\Skybox.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Editor\Toolbar.h" />
-    <ClInclude Include="Materials\SurfaceMaterial.h" />
+    <ClInclude Include="Visuals\Animator.h" />
+    <ClInclude Include="Visuals\Shader.h" />
+    <ClInclude Include="Visuals\Skybox.h" />
+    <ClInclude Include="Visuals\Substances\Material.h" />
+    <ClInclude Include="Visuals\Substances\SmartMaterial.h" />
+    <ClInclude Include="Visuals\Substances\SolidMaterial.h" />
+    <ClInclude Include="Visuals\Substances\SurfaceMaterial.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>

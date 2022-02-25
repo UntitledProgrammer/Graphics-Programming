@@ -6,9 +6,9 @@
 #include<vector>
 #include<SDL.h>
 #include"../Components/Texture.h"
-#include"../Simulated/Extension.h"
-#include"../Materials/SurfaceMaterial.h"
-#include"../Entities/Entity.h"
+#include"Extension.h"
+#include"../Visuals/Substances/SurfaceMaterial.h"
+#include"../Simulated/Entity.h"
 
 /// <summary>The animator class is designed to be attached to an entity where it will handle the changing of textures during runtime to simulate animation.</summary>
 class Animator : public Extension

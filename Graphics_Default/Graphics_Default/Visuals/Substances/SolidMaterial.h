@@ -3,7 +3,7 @@
 #define SOLID_MATERIAL_H
 
 //Includes:
-#include"../Shaders/SmartMaterial.h"
+#include"../Visuals/Substances/SmartMaterial.h"
 
 /// <summary>A solid material is a type of material providing a single, solid colour for visualising a mesh.</summary>
 class SolidMaterial : public Substance

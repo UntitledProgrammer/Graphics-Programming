@@ -4,7 +4,7 @@
 
 //Includes:
 #include"../Components/MeshRenderer.h"
-#include"../Shaders/SmartMaterial.h"
+#include"../Visuals/Substances/SmartMaterial.h"
 
 /// <summary>An entity is a simulated object that must always maintain the use of a mesh and mesh-renderer meaning it is visually simulated.</summary>
 class Entity : public Simulated

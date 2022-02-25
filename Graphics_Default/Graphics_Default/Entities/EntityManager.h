@@ -4,7 +4,7 @@
 
 //Includes:
 #include<vector>
-#include"Entity.h";
+#include"../Simulated/Entity.h";
 
 /// <summary>The entity manager class is a fairly lightweight resource manager with functionality designed specifically for use with the entity class.</summary>
 class SimulatedManager

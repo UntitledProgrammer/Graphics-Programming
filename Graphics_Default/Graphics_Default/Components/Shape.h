@@ -1,7 +1,7 @@
 #pragma once
 #ifndef SHAPE_H
 #define SHAPE_H
-#include"../Shaders/Shader.h"
+#include"../Visuals/Shader.h"
 #include"Texture.h"
 #include"Mesh.h"
 #include"../Simulated/Camera.h"

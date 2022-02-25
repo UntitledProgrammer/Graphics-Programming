@@ -1,5 +1,5 @@
 #pragma once
-#include"../Shaders/SmartMaterial.h"
+#include"../Visuals/Substances/SmartMaterial.h"
 class SurfaceMaterial : public Substance
 {
 private:
