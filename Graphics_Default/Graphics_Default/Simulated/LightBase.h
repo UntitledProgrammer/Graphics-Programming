@@ -27,7 +27,7 @@ public:
 	~Light();
 
 	//Methods:
-	void draw();
+	void Draw();
 	void Update();
 	Simulated* Instantiate()
 	{

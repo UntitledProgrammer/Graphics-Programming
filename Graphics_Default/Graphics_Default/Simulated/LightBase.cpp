@@ -21,7 +21,7 @@ Light::~Light()
 
 }
 
-void Light::draw()
+void Light::Draw()
 {
 	Camera* camera = Camera::Instance();
 	//Setup:
