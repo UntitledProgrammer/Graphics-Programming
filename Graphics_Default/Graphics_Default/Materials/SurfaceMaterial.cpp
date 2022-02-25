@@ -27,22 +27,6 @@ bool SurfaceMaterial::Load(const std::string location)
     glValidateProgram(program);
     CheckShaderError(program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-    uniforms[MODEL_U] = glGetUniformLocation(program, "model");
-    uniforms[PROJECTION_U] = glGetUniformLocation(program, "projection");
-    uniforms[VIEW_U] = glGetUniformLocation(program, "view");
-    uniforms[FORWARD] = glGetUniformLocation(program, "forward");
-
-    //Lighting:
-    uniforms[FRAG_CAMERAPOS] = glGetUniformLocation(program, "fragCamPos");
-    uniforms[FRAG_LIGHTCOLOUR] = glGetUniformLocation(program, "fragLightColour");
-    uniforms[FRAG_LIGHTPOS] = glGetUniformLocation(program, "fragLightPos");
-
-    //Lighting:
-    for (GLuint i = 0; i < NUM_UNIFORMS; i++)
-    {
-        if (uniforms[i] == GL_INVALID_INDEX) std::cout << "Shader " << name << " uniform invalid index: " << static_cast<UniformNames>(i) << " (Might be optimized out if not used)" << std::endl;
-    }
-
 	return false;
 }
 

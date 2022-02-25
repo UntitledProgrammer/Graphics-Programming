@@ -9,6 +9,17 @@
 #include<vector>
 #include"Camera.h"
 
+/// <summary>A category of light types that can be used to identify what type a light instance is as well as it's properties.</summary>
+enum class LightCategory
+{
+	Phong,
+	Directional,
+	Point,
+	Flat,
+	Size
+};
+
+/// <summary>This is the base light class that provides the basic attributes and methods for using lights in a simulated environment.</summary>
 class Light : public Simulated
 {
 private:
@@ -18,6 +29,7 @@ private:
 public:
 	//Attributes:
 	glm::vec3 colour;
+	LightCategory category = LightCategory::Phong;
 	static std::vector<Light*> lights;
 
 	//Constructor:
