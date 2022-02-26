@@ -63,6 +63,7 @@ void Light::Draw()
 
 void Light::Update()
 {
+	//Draw lines:
 	Camera* camera = Camera::Instance();
 	//Setup:
 	glUseProgram(0); //Do not use a current shader program.

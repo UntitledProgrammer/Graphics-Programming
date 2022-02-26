@@ -53,7 +53,7 @@ vec3 AddPhong(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 vec3 AddDirectional(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
 	//Ambient:
-	vec3 ambient = vec3(light.colour * AMBIENT_STRENGTH);
+	//vec3 ambient = vec3(light.colour * AMBIENT_STRENGTH);
 	vec3 direction = normalize(-light.direction);
 
 	//Diffuse:
@@ -64,7 +64,7 @@ vec3 AddDirectional(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
 	vec3 specular = vec3(SPECULAR_STRENGTH * spec);
 
-	return vec3(ambient + specular + diffuse);
+	return vec3(specular + diffuse);
 }
 
 void main()
@@ -81,7 +81,7 @@ void main()
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
 		if(lights[i].type == Directional) result += AddDirectional(lights[i], normal, fragPos, viewDir);
-		else if(lights[i].type == Phong) result += AddPhong(lights[i], normal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddDirectional(lights[i], normal, fragPos, viewDir);
 	}
 
 	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);

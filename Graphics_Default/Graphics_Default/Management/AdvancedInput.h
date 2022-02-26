@@ -17,6 +17,7 @@ private:
 	//Attributes:
 	const Uint8* currentState;
 	const Uint8* previousState;
+	Uint8 previous[SDL_NUM_SCANCODES];
 	static AdvancedInput* defaultInstance;
 	glm::ivec3 previousMousePosition;
 	std::map<SDL_Keycode, bool> keysdown;

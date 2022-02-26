@@ -39,6 +39,8 @@ public:
 
 	//Constructor:
 	Camera();
+
+	//Destructor:
 	~Camera();
 };
 #endif // !CAMERA_H

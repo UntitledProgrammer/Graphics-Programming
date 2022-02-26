@@ -53,7 +53,9 @@ public:
 
 		ImGui::PushItemWidth(90);
 		Vec3Slider(&Hierarchy::selected->transform.position,"position");
-		Vec3Slider(&Hierarchy::selected->transform.rotation,"rotation");
+		ImGui::PushID(Hierarchy::selected->GetName().c_str());
+		Hierarchy::selected->OnGui();
+		ImGui::PopID();
 		ImGui::End();
 	}
 

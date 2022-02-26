@@ -78,10 +78,10 @@ int main(int argc, char* argv[])
     //Camera:
     Simulatables.Add(Camera::Instance());
     Simulatables.Add(light);
-    Light* test = new Light();
-    test->colour = glm::vec3(0, 0, 0);
-    test->SetName("Test Light");
-    Simulatables.Add(test);
+    //Light* test = new Light();
+    //test->colour = glm::vec3(0, 0, 0);
+    //test->SetName("Test Light");
+    //Simulatables.Add(test);
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<CameraController>();
     Entity* box = new Entity();
@@ -155,8 +155,8 @@ int main(int argc, char* argv[])
         toolbar.Update();
 
         SDL_GL_SwapWindow(window);
-        SDL_Delay(16);
         INPUT->Update();
+        SDL_Delay(16);
     }
 
 

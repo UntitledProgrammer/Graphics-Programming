@@ -25,6 +25,7 @@ public:
 	/// <summary>Update is called during every frame of runtime.</summary>
 	virtual void Update() = 0;
 	virtual Simulated* Instantiate() { return nullptr; };
+	virtual void OnGui() {};
 	void UpdateExtensions();
 	void Initialise();
 	void SetName(std::string n){ name = n; }

@@ -8,6 +8,7 @@
 #include<SDL.h>
 #include<vector>
 #include"Camera.h"
+#include<imgui.h>
 
 /// <summary>A category of light types that can be used to identify what type a light instance is as well as it's properties.</summary>
 enum class LightCategory
@@ -28,7 +29,7 @@ private:
 
 public:
 	//Attributes:
-	glm::vec3 colour;
+	glm::vec3 colour, direction = glm::vec3(0.0f,1.0f, 0.0f);
 	LightCategory category = LightCategory::Phong;
 	static std::vector<Light*> lights;
 
@@ -41,6 +42,18 @@ public:
 	//Methods:
 	void Draw();
 	void Update();
+	void OnGui() override
+	{
+		if (category == LightCategory::Directional)
+		{
+			ImGui::Text("Direction");
+			ImGui::SliderFloat("X", &direction.x, -1.0f, 1.0f);
+			ImGui::SameLine();
+			ImGui::SliderFloat("Y", &direction.y, -1.0f, 1.0f);
+			ImGui::SameLine();
+			ImGui::SliderFloat("Z", &direction.z, -1.0f, 1.0f);
+		}
+	}
 	Simulated* Instantiate()
 	{
 		Light* light = new Light();

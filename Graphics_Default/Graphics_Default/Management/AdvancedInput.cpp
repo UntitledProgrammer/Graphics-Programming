@@ -24,7 +24,7 @@ bool AdvancedInput::keyDown(SDL_Keycode key)
 
 bool AdvancedInput::keyPressed(SDL_Keycode key)
 {
-	return currentState[SDL_GetScancodeFromKey(key)] && !previousState[SDL_GetScancodeFromKey(key)];
+	return currentState[SDL_GetScancodeFromKey(key)] && !previous[SDL_GetScancodeFromKey(key)];
 }
 
 bool AdvancedInput::keyUp(SDL_Keycode key)
@@ -40,10 +40,8 @@ bool AdvancedInput::keyReleased(SDL_Keycode key)
 void AdvancedInput::Update()
 {
 	SDL_GetMouseState(&previousMousePosition.x, &previousMousePosition.y);
-	memcpy((void*)previousState, currentState, sizeof(currentState));
-	SDL_Event SDLevent;
-	SDL_PollEvent(&SDLevent);
-	keysdown[SDLevent.key.keysym.sym] = true;
+
+	memcpy(previous, currentState, sizeof(Uint8) * SDL_NUM_SCANCODES);
 
 	currentState = SDL_GetKeyboardState(NULL);
 }
