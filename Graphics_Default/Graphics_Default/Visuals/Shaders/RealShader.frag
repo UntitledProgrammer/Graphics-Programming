@@ -4,11 +4,18 @@ struct Light
 {
 	vec3 position;
 	vec3 colour;
+	vec3 direction;
+	unsigned int type;
 };
 
+//Defines:
 #define NUMBER_OF_LIGHTS 4
 #define AMBIENT_STRENGTH 0.5f
 #define SPECULAR_STRENGTH 1
+//Light Enum: (Update at a later date).
+#define Phong 0
+#define Directional 1
+#define TYPES_OF_LIGHTS 2
 
 uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
@@ -26,7 +33,7 @@ uniform vec3 lightPosition;
 uniform vec3 cameraPosition;
 
 //Method:
-vec3 AddLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
+vec3 AddPhong(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
 	float d = distance(light.position, fragPos);
 
@@ -43,6 +50,23 @@ vec3 AddLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	return vec3 (ambient + diffuse + specular);
 }
 
+vec3 AddDirectional(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+	//Ambient:
+	vec3 ambient = vec3(light.colour * AMBIENT_STRENGTH);
+	vec3 direction = normalize(-light.direction);
+
+	//Diffuse:
+	vec3 diffuse = max(dot(normal, direction), 0.0) * light.colour;
+	vec3 reflectDir = reflect(-direction, normal);
+
+	//Specular:
+	float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
+	vec3 specular = vec3(SPECULAR_STRENGTH * spec);
+
+	return vec3(ambient + specular + diffuse);
+}
+
 void main()
 {
 	//Calculate view direction:
@@ -56,7 +80,8 @@ void main()
 	vec3 result;
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
-		result += AddLight(lights[i], normal, fragPos, viewDir);
+		if(lights[i].type == Directional) result += AddDirectional(lights[i], normal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddPhong(lights[i], normal, fragPos, viewDir);
 	}
 
 	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);

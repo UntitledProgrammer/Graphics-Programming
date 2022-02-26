@@ -12,7 +12,10 @@ Camera::Camera() : perspective(glm::mat4(1))
     transform = Transform();
     perspective = glm::perspective(fov, aspect, 1.0f, 100.0f);
     transform.position = glm::vec3(0.0f, 0.0f, 2.0f);
-    recalculate();
+
+    forward = glm::vec3(0.0f, 0.0f, -1.0f);
+    up = glm::vec3(0.0f, 1.0f, 0.0);
+
     SetName("Camera");
 };
 
@@ -25,8 +28,8 @@ void Camera::recalculate()
 {
     //Update the direction vectors first.
     forward = glm::normalize(glm::vec3(0) - transform.position);
-    right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward));
-    up = glm::cross(forward, right);
+    right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), Direction() ));
+    up = glm::cross(Direction(), right);
 
     //Calculate and update view matrix.
     view = glm::lookAt(transform.position, transform.rotation, up);
@@ -35,13 +38,13 @@ void Camera::recalculate()
 void Camera::Update()
 {
     UpdateExtensions();
+    //Update the direction vectors first.
+    //forward = glm::normalize(glm::vec3(0) - transform.position);
+    //right = glm::normalize(glm::cross(glm::vec3(0, 1, 0), Direction()));
+    //up = glm::cross(Direction(), right);
 
-    glm::vec3 target = glm::vec3(0, 0, 0.01) + transform.position;
-
-    up = glm::cross(glm::normalize(target - transform.position), glm::normalize(glm::cross(glm::vec3(0, 1, 0), forward)));
-    view = glm::lookAt(transform.position, target, up);
-    view = glm::rotate(view, glm::radians(transform.rotation.y), -up);
-    view = glm::rotate(view, glm::radians(transform.rotation.z), right);
+    //Calculate and update view matrix.
+    view = glm::lookAt(transform.position, transform.position + forward, -up);
 }
 
 Camera* Camera::Instance()

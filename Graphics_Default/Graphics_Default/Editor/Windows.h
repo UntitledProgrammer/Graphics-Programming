@@ -52,12 +52,21 @@ public:
 		ImGui::Begin("Inspector");
 
 		ImGui::PushItemWidth(90);
-		ImGui::SliderFloat("X", &Hierarchy::selected->transform.position.x, 0, 100);
-		ImGui::SameLine();
-		ImGui::SliderFloat("Y", &Hierarchy::selected->transform.position.y, 0, 100);
-		ImGui::SameLine();
-		ImGui::SliderFloat("Z", &Hierarchy::selected->transform.position.z, 0, 100);
+		Vec3Slider(&Hierarchy::selected->transform.position,"position");
+		Vec3Slider(&Hierarchy::selected->transform.rotation,"rotation");
 		ImGui::End();
+	}
+
+private:
+	void Vec3Slider(glm::vec3* vector, const char* ID)
+	{
+		ImGui::PushID(ID);
+		ImGui::SliderFloat("X", &vector->x, 0, 100);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Y", &vector->y, 0, 100);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Z", &vector->z, 0, 100);
+		ImGui::PopID();
 	}
 };
 

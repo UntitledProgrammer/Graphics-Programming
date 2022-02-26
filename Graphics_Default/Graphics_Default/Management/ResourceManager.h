@@ -47,6 +47,7 @@ public:
 	Shader* GetShader(std::string location);
 	template<typename Key, typename Type> bool Exists(std::map<Key, Type>* map, Key key) { return map->find(key) != map->end() ? true : false; }
 	void UpdateSimulated();
+	void InitaliseSimulated() { for (int i = 0; i < Simulatables.Size(); i++) { Simulatables.At(i)->Initialise(); } }
 
 	//Static methods:
 	static ResourceManager* Instance();

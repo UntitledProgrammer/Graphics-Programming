@@ -26,12 +26,13 @@ public:
 	static Camera* defaultInstance;
 
 	//View attributes:
-	glm::vec3 forward, up, right;
+	glm::vec3 forward, up, right, target;
 
 	//Methods:
 	glm::mat4 GetMatrix();
 	void recalculate();
 	void Update();
+	glm::vec3 Direction() { return glm::normalize(transform.position - target); }
 
 	//Static methods:
 	static Camera* Instance();

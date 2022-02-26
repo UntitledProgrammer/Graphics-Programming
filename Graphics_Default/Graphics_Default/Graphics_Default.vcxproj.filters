@@ -271,15 +271,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Basic.frag" />
-    <None Include="Shaders\Basic.vert" />
-    <None Include="Shaders\LitShader.frag" />
-    <None Include="Shaders\LitShader.vert" />
-    <None Include="Shaders\Solid.frag" />
-    <None Include="Shaders\Solid.vert" />
-    <None Include="Shaders\Skybox.frag" />
-    <None Include="Shaders\Skybox.vert" />
-    <None Include="Shaders\RealShader.frag" />
-    <None Include="Shaders\RealShader.vert" />
+    <None Include="Visuals\Shaders\RealShader.frag" />
+    <None Include="Visuals\Shaders\RealShader.vert" />
   </ItemGroup>
 </Project>

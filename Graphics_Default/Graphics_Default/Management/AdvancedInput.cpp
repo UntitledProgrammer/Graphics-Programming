@@ -37,10 +37,14 @@ bool AdvancedInput::keyReleased(SDL_Keycode key)
 	return !currentState[SDL_GetScancodeFromKey(key)] && previousState[SDL_GetScancodeFromKey(key)];
 }
 
-void AdvancedInput::update()
+void AdvancedInput::Update()
 {
 	SDL_GetMouseState(&previousMousePosition.x, &previousMousePosition.y);
 	memcpy((void*)previousState, currentState, sizeof(currentState));
+	SDL_Event SDLevent;
+	SDL_PollEvent(&SDLevent);
+	keysdown[SDLevent.key.keysym.sym] = true;
+
 	currentState = SDL_GetKeyboardState(NULL);
 }
 

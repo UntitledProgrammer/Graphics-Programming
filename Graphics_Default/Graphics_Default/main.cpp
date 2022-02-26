@@ -22,6 +22,7 @@
 #include"Simulated/Extensions/PlayerController.h"
 #include"Simulated/Entity.h"
 #include"Simulated/Extensions/Animator.h"
+
 /*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -62,38 +63,27 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
-
-    //Testing animator:
-    Texture * zero = new Texture();
-    Texture* one = new Texture();
-    Texture* two = new Texture();
-    Texture* three = new Texture();
-    zero->Load("0.jpg");
-    one->Load("1.jpg");
-    two->Load("2.jpg");
-    three->Load("3.jpg");
-
-
-
-
-
     //Lighting:
     Light* light = Light::Instance();
-    light->colour = glm::vec3(0,0,5);
+    light->colour = glm::vec3(10,0,0);
+    light->category = LightCategory::Directional;
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
+    Texture* base = new Texture();
+    base->Load("0.jpg");
+    Texture* normal = new Texture();
+    normal->Load("brickwall_normal.jpg");
 
     //Camera:
     Simulatables.Add(Camera::Instance());
     Simulatables.Add(light);
     Light* test = new Light();
-    test->colour = glm::vec3(5, 5, 5);
+    test->colour = glm::vec3(0, 0, 0);
     test->SetName("Test Light");
     Simulatables.Add(test);
     Camera* camera = Camera::Instance();
-    camera->ApplyExtension<PlayerController>();
-    Shape shape = Shape(camera);
+    camera->ApplyExtension<CameraController>();
     Entity* box = new Entity();
     Simulatables.Add(box);
     MeshRenderer* box2 = new MeshRenderer();
@@ -110,17 +100,10 @@ int main(int argc, char* argv[])
 
 
     SurfaceMaterial surface = SurfaceMaterial();
-    surface.normal = shape.normalTexture;
-    surface.base = zero;
-    surface.normal = shape.normalTexture;
+    surface.normal = normal;
+    surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
     box->SetMaterial(&surface);
-    std::shared_ptr animator = box->ApplyExtension<Animator>();
-    animator->PushBack(zero);
-    animator->PushBack(one);
-    animator->PushBack(two);
-    animator->PushBack(three);
-    animator->Initialise();
     //box->ApplyExtension
     box2->ApplyMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
@@ -159,6 +142,7 @@ int main(int argc, char* argv[])
     */
 
     //Main window loop:
+    Resources->InitaliseSimulated();
     while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
     {
         //Exit loop if any key is pressed.
@@ -172,7 +156,7 @@ int main(int argc, char* argv[])
 
         SDL_GL_SwapWindow(window);
         SDL_Delay(16);
-        INPUT->update();
+        INPUT->Update();
     }
 
 

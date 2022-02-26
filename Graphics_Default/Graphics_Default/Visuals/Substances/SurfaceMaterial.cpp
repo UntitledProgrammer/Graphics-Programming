@@ -49,6 +49,10 @@ void SurfaceMaterial::Update(Transform& transform)
         SetUniformVec3(buffer , Light::lights[i]->colour);
         sprintf_s(buffer, "lights[%i].position", i);
         SetUniformVec3(buffer, Light::lights[i]->transform.position);
+        sprintf_s(buffer, "lights[%i].direction", i);
+        SetUniformVec3(buffer, Light::lights[i]->transform.rotation);
+        sprintf_s(buffer, "lights[%i].type", i);
+        SetUniformInt(buffer, (int)Light::lights[i]->category);
     }
 
 

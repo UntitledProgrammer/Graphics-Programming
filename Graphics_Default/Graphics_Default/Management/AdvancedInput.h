@@ -8,6 +8,8 @@
 //Includes:
 #include<SDL.h>
 #include<glm.hpp>
+#include<vector>
+#include<map>
 
 class AdvancedInput
 {
@@ -17,6 +19,7 @@ private:
 	const Uint8* previousState;
 	static AdvancedInput* defaultInstance;
 	glm::ivec3 previousMousePosition;
+	std::map<SDL_Keycode, bool> keysdown;
 
 public:
 	//Attribute:
@@ -39,7 +42,7 @@ public:
 	/// <returns>True, if the 'key' parameter was down during the previous frame and up during the current frame</returns>
 	bool keyReleased(SDL_Keycode key);
 	/// <summary>The update method allows an instance of 'Input' to update the current keyboard state / environment.</summary>
-	void update();
+	void Update();
 	glm::ivec3 MouseDelta();
 	int getAxis(SDL_Keycode positive, SDL_Keycode negative);
 
