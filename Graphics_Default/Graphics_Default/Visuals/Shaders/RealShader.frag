@@ -73,9 +73,9 @@ vec3 AddSpotlight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	//Calcuate angle:
 	vec3 lightDirection = normalize(-light.direction);
 	vec3 fragDirection = normalize(light.position - fragPos);
-	//float angle = degrees(acos(dot(lightDirection, fragDirection) / (mag(lightDirection) * mag(fragDirection))));
+	float angle = degrees(acos(dot(light.position, fragPos) / (mag(light.position) * mag(fragPos))));
 
-	//if(angle == light.angle) return vec3(0,0,0);
+	if(angle >= light.angle) return vec3(0,0,0);
 
 	//Diffuse:
 	vec3 diffuse = max(dot(normal, lightDirection), 0.0) * light.colour;
