@@ -53,6 +53,8 @@ void SurfaceMaterial::Update(Transform& transform)
         SetUniformVec3(buffer, Light::lights[i]->direction);
         sprintf_s(buffer, "lights[%i].type", i);
         SetUniformInt(buffer, (int)Light::lights[i]->category);
+        sprintf_s(buffer, "lights[%i].angle", i);
+        SetUniformFloat(buffer, 20.0f);
     }
 
 

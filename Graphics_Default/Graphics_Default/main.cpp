@@ -31,8 +31,13 @@
 #include<backends/imgui_impl_opengl3.h>
 */
 
+float mag(glm::vec3 v) { return glm::sqrt( glm::pow(v.x, 2) + glm::pow(v.y, 2) + glm::pow(v.z, 2)); }
+
 int main(int argc, char* argv[])
 {
+    glm::vec3 a = glm::vec3(1, 6,0), b = glm::vec3(5, 2,0);
+    float angle = glm::degrees(glm::acos(dot(a, b) / (mag(a) * mag(b))));
+    std::cout << "Result: " << angle<<std::endl;
 
     SDL_Init(SDL_INIT_EVERYTHING); //Initialise all of SDL's systems.
 
