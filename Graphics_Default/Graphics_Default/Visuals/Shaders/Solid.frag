@@ -1,11 +1,13 @@
 #version 460
-out vec4 FragColour;
+out vec4 colour;
 
 //Added:
-uniform vec3 lightColour;
+uniform sampler2D texture_diffuse;
 uniform vec3 surfaceColour;
+
+in vec2 textureCoordinates;
 
 void main()
 {
-	FragColour = vec4(surfaceColour * lightColour, 1.0);
+	colour = vec4(surfaceColour * texture2D(texture_diffuse, textureCoordinates).rgb, 1.0);
 }

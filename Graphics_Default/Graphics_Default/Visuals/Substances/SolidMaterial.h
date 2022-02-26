@@ -12,6 +12,8 @@ class SolidMaterial : public Substance
 	enum UniformNames { MODEL_U, PROJECTION_U, VIEW_U, FRAG_LIGHTCOLOUR, FRAG_LIGHTPOS, FRAG_CAMERAPOS, FORWARD, SURFACE_COLOUR, NUM_UNIFORMS };
 	GLuint uniforms[NUM_UNIFORMS];
 public:
+	//Attributes:
+	Texture* base;
 	//Constructor:
 	SolidMaterial();
 

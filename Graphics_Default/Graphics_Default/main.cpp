@@ -100,12 +100,16 @@ int main(int argc, char* argv[])
 
 
     SurfaceMaterial surface = SurfaceMaterial();
+    SolidMaterial solid = SolidMaterial();
+    solid.Load("Visuals/Shaders/Solid");
+    solid.colour = glm::vec4(0, 1, 0, 0);
+    solid.base = base;
     surface.normal = normal;
     surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
     box->SetMaterial(&surface);
     //box->ApplyExtension
-    box2->ApplyMaterial(&surface);
+    box2->ApplyMaterial(&solid);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
