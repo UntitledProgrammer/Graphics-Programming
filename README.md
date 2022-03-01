@@ -50,7 +50,7 @@ The inspector window; by default, located on the left side of the screen will pr
 The hierarchy window displays all of the currently present instances of simulated objects during runtime. By clicking the drop-down for any present instance of simulated-objects, you will then be met with the option to select the object which will display it's public attributes in the inspector window.
 
 **Conclusion**
->**Implemented Fundementals**
+>**Implemented Fundementals**  
 >In my project you will find the following fundementals relevant to this module.
 > * Textures.
 > * Meshes.
