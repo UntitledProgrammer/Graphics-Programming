@@ -53,6 +53,7 @@ public:
 
 		ImGui::PushItemWidth(90);
 		Vec3Slider(&Hierarchy::selected->transform.position,"position");
+		Vec3Slider(&Hierarchy::selected->transform.rotation, "rotation");
 		ImGui::PushID(Hierarchy::selected->GetName().c_str());
 		Hierarchy::selected->OnGui();
 		ImGui::PopID();
@@ -63,11 +64,11 @@ private:
 	void Vec3Slider(glm::vec3* vector, const char* ID)
 	{
 		ImGui::PushID(ID);
-		ImGui::SliderFloat("X", &vector->x, 0, 100);
+		ImGui::SliderFloat("X", &vector->x, vector->x - 0.5, vector->x + 0.5);
 		ImGui::SameLine();
-		ImGui::SliderFloat("Y", &vector->y, 0, 100);
+		ImGui::SliderFloat("Y", &vector->y, vector->y - 0.5, vector->y + 0.5);
 		ImGui::SameLine();
-		ImGui::SliderFloat("Z", &vector->z, 0, 100);
+		ImGui::SliderFloat("Z", &vector->z, vector->z - 0.5, vector->z + 0.5);
 		ImGui::PopID();
 	}
 };

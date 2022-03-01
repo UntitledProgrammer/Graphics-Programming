@@ -12,18 +12,17 @@ ResourceManager* ResourceManager::Instance()
 	return defaultInstance;
 }
 
-Mesh* ResourceManager::LoadMesh(std::string filelocation, std::string ambiant, std::string diffuse, std::string spec, std::string normal)
+std::vector<Vertex> ResourceManager::LoadMesh(std::string filelocation, std::string ambiant, std::string diffuse, std::string spec, std::string normal, std::vector<unsigned int>& indices)
 {
 	//Defines:
 	std::string line;
 	std::string MatLibName;
 	std::string meshName;
 	//Vectors:
-	std::vector<glm::vec3> positions;
-	std::vector<glm::vec3> normals;
-	std::vector<glm::vec3> coordinates;
-	std::vector<Vertex> vertices;
-	std::vector<unsigned int> indices;
+	std::vector<glm::vec3> VertPositions;
+	std::vector<glm::vec3> VertNormals;
+	std::vector<glm::vec3> VertTextureCoords;
+	std::vector<Vertex> FinalVerts;
 
 	//Open the file:
 	std::ifstream file;
@@ -49,23 +48,23 @@ Mesh* ResourceManager::LoadMesh(std::string filelocation, std::string ambiant, s
 			else if (FirstWord == "v") //Vert pos.
 			{
 				std::string values = line.substr(line.find(' '), line.find('\n'));
-				glm::vec3 pos = glm::vec3(0);
-				sscanf_s(values.c_str(), "%f %f %f", &pos.x, &pos.y, &pos.z);
-				positions.push_back(pos);
+				float x, y, z;
+				sscanf_s(values.c_str(), "%f %f %f", &x, &y, &z);
+				VertPositions.push_back(glm::vec3(x,y,z));
 			}
 			else if (FirstWord == "vn") //Vert normals.
 			{
 				std::string values = line.substr(line.find(' '), line.find('\n'));
-				glm::vec3 pos = glm::vec3(0);
-				sscanf_s(values.c_str(), "%f %f %f", &pos.x, &pos.y, &pos.z);
-				normals.push_back(pos);
+				float x, y, z;
+				sscanf_s(values.c_str(), "%f %f %f", &x, &y, &z);
+				VertNormals.push_back(glm::vec3(x,y,z));
 			}
-			else if (FirstWord == "vt")
+			else if (FirstWord == "vt") //Texture coordinates.
 			{
 				std::string values = line.substr(line.find(' '), line.find('\n'));
-				glm::vec3 normal;
-				sscanf_s(values.c_str(), "%f %f %f", &normal.x, &normal.y, &normal.z);
-				coordinates.push_back(normal);
+				float x, y, z;
+				sscanf_s(values.c_str(), "%f %f %f", &x, &y, &z);
+				VertTextureCoords.push_back(glm::vec3(x,y,z));
 			}
 
 			else if (FirstWord == "usemtl") 
@@ -73,48 +72,45 @@ Mesh* ResourceManager::LoadMesh(std::string filelocation, std::string ambiant, s
 				meshName = line.substr(line.find(' '), line.find('\n'));
 				//LoadMaterial();
 			}
+
 			else if (FirstWord == "f")
 			{
-				std::string values = line.substr(line.find(' '), line.find('\n'));
+				std::string FaceValues = line.substr(line.find(' '), line.find('\n'));
 				Vertex vertsInFace[3];
 				unsigned int TmpPosition[3], TmpTexCoords[3], TmpNormals[3];
 
-				sscanf_s(values.c_str(), " %d/%d/%d %d/%d/%d %d/%d/%d", &TmpPosition[0], &TmpTexCoords[0], &TmpNormals[0],
+				sscanf_s(FaceValues.c_str(), " %d/%d/%d %d/%d/%d %d/%d/%d", 
+					&TmpPosition[0], &TmpTexCoords[0], &TmpNormals[0],
 					&TmpPosition[1], &TmpTexCoords[1], &TmpNormals[1],
 					&TmpPosition[2], &TmpTexCoords[2], &TmpNormals[2]
 					);
 
-				vertsInFace[0].position = positions[TmpPosition[0] - 1];
-				vertsInFace[0].uv = coordinates[TmpTexCoords[0] - 1];
-				vertsInFace[0].normal = normals[TmpNormals[0] - 1];
+				vertsInFace[0].position = VertPositions[TmpPosition[0] - 1];
+				vertsInFace[0].uv = VertTextureCoords[TmpTexCoords[0] - 1];
+				vertsInFace[0].normal = VertNormals[TmpNormals[0] - 1];
 
-				vertsInFace[1].position = positions[TmpPosition[1] - 1];
-				vertsInFace[1].uv = coordinates[TmpTexCoords[1] - 1];
-				vertsInFace[1].normal = normals[TmpNormals[1] - 1];
+				vertsInFace[1].position = VertPositions[TmpPosition[1] - 1];
+				vertsInFace[1].uv = VertTextureCoords[TmpTexCoords[1] - 1];
+				vertsInFace[1].normal = VertNormals[TmpNormals[1] - 1];
 
-				vertsInFace[2].position = positions[TmpPosition[2] - 1];
-				vertsInFace[2].uv = coordinates[TmpTexCoords[2] - 1];
-				vertsInFace[2].normal = normals[TmpNormals[2] - 1];
+				vertsInFace[2].position = VertPositions[TmpPosition[2] - 1];
+				vertsInFace[2].uv = VertTextureCoords[TmpTexCoords[2] - 1];
+				vertsInFace[2].normal = VertNormals[TmpNormals[2] - 1];
 
-				vertices.push_back(vertsInFace[0]);
-				vertices.push_back(vertsInFace[1]);
-				vertices.push_back(vertsInFace[2]);
+				FinalVerts.push_back(vertsInFace[0]);
+				FinalVerts.push_back(vertsInFace[1]);
+				FinalVerts.push_back(vertsInFace[2]);
 			}
 
 		}
-		for (int i = 0; i < vertices.size(); i++)
+		for (int i = 0; i < FinalVerts.size(); i++)
 		{
 			indices.push_back(i);
 		}
-
-		//Create new mesh:
-		Mesh* mesh = new Mesh(vertices, indices);
-		return mesh;
+		return FinalVerts;
 	}
 	else std::cerr << "Unable to load text file: " << filelocation.c_str() << std::endl;
-
-
-	return nullptr;
+	return std::vector<Vertex>();
 }
 
 void ResourceManager::LoadMaterial(const std::string& MatLibLoc, std::string& ambiantLoc, std::string& diffLoc, std::string& specLoc, std::string& normalLoc)

@@ -25,6 +25,7 @@ in vec2 fragTextureCoordinates;
 in vec3 fragNormal;
 in vec3 fragPos;
 in mat3 TBN;
+in vec3 testNormal;
 
 out vec4 colour;
 
@@ -71,21 +72,34 @@ vec3 AddDirectional(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 vec3 AddSpotlight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
 	//Calcuate angle:
-	vec3 lightDirection = normalize(-light.direction);
-	vec3 fragDirection = normalize(light.position - fragPos);
+	vec3 lightDirection = normalize(light.position - fragPos);
+	float theta = dot(lightDirection, normalize(-light.direction));
 	float angle = degrees(acos(dot(light.position, fragPos) / (mag(light.position) * mag(fragPos))));
 
 	if(angle >= light.angle) return vec3(0,0,0);
 
 	//Diffuse:
-	vec3 diffuse = max(dot(normal, lightDirection), 0.0) * light.colour;
+	vec3 diffuse = max(dot(normal, light.direction), 0.0) * light.colour;
 	vec3 reflectDir = reflect(-lightDirection, normal);
 
 	//Specular:
 	float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
 	vec3 specular = vec3(SPECULAR_STRENGTH * spec);
 
-	return vec3(specular + diffuse);
+	return vec3(diffuse + specular);
+}
+
+vec3 AddPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
+{
+	float ambientStrength = 0.1;
+    vec3 ambient = AMBIENT_STRENGTH * light.colour;
+	vec3 norm = normalize(normal);
+	vec3 lightDir = normalize(light.position - fragPos);
+
+	float diff = max(dot(norm, lightDir), 0.0);
+	vec3 diffuse = diff * light.colour;
+
+	return vec3 (ambient + diffuse);
 }
 
 
@@ -102,9 +116,9 @@ void main()
 	vec3 result;
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
-		if(lights[i].type == Directional) result += AddSpotlight(lights[i], normal, fragPos, viewDir);
-		else if(lights[i].type == Phong) result += AddSpotlight(lights[i], normal, fragPos, viewDir);
+		if(lights[i].type == Directional) result += AddPointLight(lights[i], fragNormal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddPointLight(lights[i], fragNormal, fragPos, viewDir);
 	}
 
-	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);
+	colour = vec4( vec3(1,1,0) * fragNormal, 1);
 }

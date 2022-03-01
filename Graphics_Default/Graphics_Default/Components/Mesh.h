@@ -28,6 +28,7 @@ private:
 	//Updated attributes.
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
+	std::vector<glm::vec3> norms;
 	//Updated attributes!
 
 public: 
@@ -40,14 +41,16 @@ public:
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
 	/// <summary>In the uncommon situaton where you don't have an indices use this method to construct a mesh that will simply use every vertex supplied.</summary>
 	Mesh(std::vector<Vertex> vertices);
-
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3> normals);
 	//Deconstructor:
 	~Mesh();
 	
 	//Methods:
 	void Draw();
-	void calculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
+	void CalculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
 	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3>);
+	void CalculateNormals();
 	
 	//Friends:
 	friend class ResourceManager;

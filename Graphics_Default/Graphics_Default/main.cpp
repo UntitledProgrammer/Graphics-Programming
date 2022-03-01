@@ -31,6 +31,50 @@
 #include<backends/imgui_impl_opengl3.h>
 */
 
+float svertices[] = {
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+};
+
 float mag(glm::vec3 v) { return glm::sqrt( glm::pow(v.x, 2) + glm::pow(v.y, 2) + glm::pow(v.z, 2)); }
 
 int main(int argc, char* argv[])
@@ -70,8 +114,9 @@ int main(int argc, char* argv[])
 
     //Lighting:
     Light* light = Light::Instance();
-    light->colour = glm::vec3(10,0,0);
+    light->colour = glm::vec3(1,0,0);
     light->category = LightCategory::Directional;
+    light->transform.position = glm::vec3(0, 0, 0);
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
@@ -89,32 +134,31 @@ int main(int argc, char* argv[])
     //Simulatables.Add(test);
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<CameraController>();
-    Entity* box = new Entity();
+    Entity* box = new Entity(), *box2 = new Entity();
+    box->transform.position = glm::vec3(50, 10, 22);
     Simulatables.Add(box);
-    MeshRenderer* box2 = new MeshRenderer();
-    box->SetMesh(Resources->LoadMesh("Resources/Objects/blocks_01.obj", "", "", "", ""));
+    Simulatables.Add(box2);
+    MeshRenderer box3 = MeshRenderer();
+    box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    std::vector<unsigned int> indices;
+    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/untitled.obj", "", "", "", "", indices);
+    Mesh* testMesh = new Mesh(vertices, indices);
+    box->SetMesh(testMesh);
+    box2->transform.position = glm::vec3(5, 0, 0);
+    box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
     
-    
-    
-    box->transform.position = glm::vec3(0, 14, 0);
-    box->transform.scale = glm::vec3(0.1, 0.1, 0.1);
-    box2->ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
-    box2->transform->scale = glm::vec3(20, 10, 20);
-    box2->transform->position = glm::vec3(0,-1.5, 0);
-    box2->transform->rotation = glm::vec3(glm::radians(-90.0f), 0, 0);
 
-
-    SurfaceMaterial surface = SurfaceMaterial();
     SolidMaterial solid = SolidMaterial();
     solid.Load("Visuals/Shaders/Solid");
-    solid.colour = glm::vec4(0, 1, 0, 0);
     solid.base = base;
+    box3.ApplyMaterial(&solid);
+    SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = normal;
     surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
-    box->SetMaterial(&surface);
+    box->SetMaterial(&solid);
     //box->ApplyExtension
-    box2->ApplyMaterial(&solid);
+    box2->SetMaterial(&solid);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, 800, 600);
@@ -158,16 +202,14 @@ int main(int argc, char* argv[])
         SDL_PollEvent(&sdlEvent);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        box2->Render();
-
         Resources->UpdateSimulated();
         toolbar.Update();
-
+        box3.transform->rotation.x += 0.05f;
+        box3.Render();
         SDL_GL_SwapWindow(window);
         INPUT->Update();
         SDL_Delay(16);
     }
-
 
 
     //Clean up program:

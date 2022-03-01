@@ -26,7 +26,7 @@ void Light::Draw()
 	Camera* camera = Camera::Instance();
 	//Setup:
 	glUseProgram(0); //Do not use a current shader program.
-	const float scale = 0.1f;
+	const float scale = 0.5f;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf((const GLfloat*)&camera->perspective); //In the perspective matrix above load the camera's current perspective.
@@ -42,21 +42,21 @@ void Light::Draw()
 	glColor3f(2, 0, 0); //Red. (0.0f - 1.0f : 0 - 255).
 	glVertex3fv(&p1.x);
 	p2 = p1 + glm::vec3(1, 0, 0) * scale;
-	glColor3f(0, 2, 0);// Green.
+	glColor3f(2, 0, 0);
 	glVertex3fv(&p2.x);
 
 	//Green line.
 	glColor3f(0, 2, 0); //Red. (0.0f - 1.0f : 0 - 255).
 	glVertex3fv(&p1.x);
 	p2 = p1 + glm::vec3(0, 1, 0) * scale;
-	glColor3f(0, 1, 0);// Green.
+	glColor3f(0, 2, 0);// Green.
 	glVertex3fv(&p2.x);
 
 	//Blue line.
 	glColor3f(0, 0, 2); //Blue.
 	glVertex3fv(&p1.x);
 	p2 = p1 + glm::vec3(0, 0, 1) * scale;
-	glColor3f(0, 0, 1);
+	glColor3f(0, 0, 2);
 	glVertex3fv(&p2.x);
 	glEnd();
 }

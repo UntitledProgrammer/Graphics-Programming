@@ -15,6 +15,7 @@ out vec2 fragTextureCoordinates;
 out vec3 fragNormal;
 out vec3 fragPos;
 out mat3 TBN;
+out vec3 testNormal;
 
 void main()
 {
@@ -27,7 +28,7 @@ void main()
 
 	fragPos = vec3(model * vec4(vp, 1.0));
 	fragNormal = mat3(transpose(inverse(model))) * Normal;
-
+	testNormal = Normal;
 	fragTextureCoordinates = textureCoordinates;
-	gl_Position = projection * view * model * vec4(vp, 1.0);
+	gl_Position = projection * view * vec4(fragPos, 1.0);
 }

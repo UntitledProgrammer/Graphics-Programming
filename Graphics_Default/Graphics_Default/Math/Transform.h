@@ -4,6 +4,7 @@
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 
+
 struct Transform
 {
 public:
@@ -37,7 +38,7 @@ public:
 		glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
 
 		//Return a matrix using the result of each vectors matrix.
-		return posMatrix * rotMatrix * scaleMatrix;
+		return scaleMatrix * rotMatrix * posMatrix;
 	}
 };
 #endif //!TRANSFORM_H

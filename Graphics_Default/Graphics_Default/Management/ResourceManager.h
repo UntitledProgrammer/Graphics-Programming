@@ -51,7 +51,7 @@ public:
 
 	//Static methods:
 	static ResourceManager* Instance();
-	static Mesh* LoadMesh(std::string filelocation, std::string ambiant, std::string diffuse, std::string spec, std::string normal);
+	static std::vector<Vertex> LoadMesh(std::string filelocation, std::string ambiant, std::string diffuse, std::string spec, std::string normal, std::vector<unsigned int>& indices);
 	static void LoadMaterial(const std::string& MatLibLoc, std::string& ambiantLoc, std::string& diffLoc, std::string& specLoc, std::string& normalLoc);
 };
 #endif //!RESOURCE_MANAGER_H

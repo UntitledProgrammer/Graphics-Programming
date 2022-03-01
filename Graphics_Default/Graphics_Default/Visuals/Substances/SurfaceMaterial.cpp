@@ -54,7 +54,7 @@ void SurfaceMaterial::Update(Transform& transform)
         sprintf_s(buffer, "lights[%i].type", i);
         SetUniformInt(buffer, (int)Light::lights[i]->category);
         sprintf_s(buffer, "lights[%i].angle", i);
-        SetUniformFloat(buffer, 20.0f);
+        SetUniformFloat(buffer, 5.0f);
     }
 
 

@@ -2,7 +2,7 @@
 #include<iostream>
 Camera* Camera::defaultInstance = 0;
 
-glm::mat4 Camera::GetMatrix()
+glm::mat4 Camera::GetModel()
 {
     return glm::lookAt(transform.position, transform.position + glm::vec3(0,0,0.01), up);
 }
@@ -10,9 +10,8 @@ glm::mat4 Camera::GetMatrix()
 Camera::Camera() : perspective(glm::mat4(1)) 
 { 
     transform = Transform();
-    perspective = glm::perspective(fov, aspect, 1.0f, 100.0f);
+    perspective = glm::perspective(glm::radians(fov), aspect, 1.0f, 100.0f);
     transform.position = glm::vec3(0.0f, 0.0f, 2.0f);
-
     forward = glm::vec3(0.0f, 0.0f, -1.0f);
     up = glm::vec3(0.0f, 1.0f, 0.0);
 

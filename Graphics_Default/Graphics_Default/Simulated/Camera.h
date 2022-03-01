@@ -29,7 +29,7 @@ public:
 	glm::vec3 forward, up, right, target;
 
 	//Methods:
-	glm::mat4 GetMatrix();
+	glm::mat4 GetModel();
 	void recalculate();
 	void Update();
 	glm::vec3 Direction() { return glm::normalize(transform.position - target); }

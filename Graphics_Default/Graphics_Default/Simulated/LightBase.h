@@ -44,6 +44,12 @@ public:
 	void Update();
 	void OnGui() override
 	{
+		ImGui::Text("Direction");
+		ImGui::SliderFloat("Xr", &transform.rotation.x, -1.0f, 1.0f);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Yr", &transform.rotation.y, -1.0f, 1.0f);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Zr", &transform.rotation.z, -1.0f, 1.0f);
 		if (category == LightCategory::Directional)
 		{
 			ImGui::Text("Direction");
