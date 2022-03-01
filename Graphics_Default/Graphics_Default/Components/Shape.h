@@ -31,6 +31,6 @@ public:
 
 	//Methods:
 	void draw(Light& light);
-	void setPrimitive(Primitives& verticies);
+	void setPrimitive(Primitives& vertexArrayID);
 };
 #endif // !SHAPE_H

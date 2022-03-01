@@ -1,120 +1,43 @@
 #include "Mesh.h"
 
-Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount)
+Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, bool calculateNormals) : vertices(vertices), indices(indices)
 {
-	NumVerts = indiciesCount;
-	std::vector<glm::vec3> positions;
-	std::vector<glm::vec2> coordinates;
-	std::vector<glm::vec3> tangents;
-	std::vector<glm::vec3> biTangents;
-
-	CalculateTangents(verticies, verticiesCount, indicies, indiciesCount);
-
-	for (unsigned int i = 0; i < verticiesCount; i++)
-	{
-		positions.push_back(verticies[i].position);
-		coordinates.push_back(verticies[i].uv);
-		tangents.push_back(verticies[i].tangent);
-		biTangents.push_back(verticies[i].biTangent);
-	}
-
-	//Lighting:
-	std::vector<glm::vec3> normals;
-	normals.resize(verticiesCount);
-	for (int i = 0; i < indiciesCount; i+=3)
-	{
-		glm::vec3 a = positions[indicies[i]];
-		glm::vec3 b = positions[indicies[i+1]];
-		glm::vec3 c = positions[indicies[i]+2];
-
-		glm::vec3 normal = glm::triangleNormal(a, b, c);
-		normals[indicies[i]] += normal;
-		normals[indicies[i+1]] += normal;
-		normals[indicies[i+2]] += normal;
-	}
-
-	//Tangents & Bitangents:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(tangents[0]), &tangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(TANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(TANGENT_VB);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[BITANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(biTangents[0]), &biTangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(BITANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(BITANGENT_VB);
-
-	//Normals:
-	glEnableVertexAttribArray(NORMAL_VB);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	//Lighting:
-
-	glGenVertexArrays(1, &this->verticies);
-	glBindVertexArray(this->verticies);
-	glGenBuffers(NUM_BUFFERS, vertexBuffer);
-
-	//Position:
-	glEnableVertexAttribArray(POSITION_VB);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[POSITION_VB]);
-	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(POSITION_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	//Texture Coordinates:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TEXTCOORD_VB]);
-	glBufferData(GL_ARRAY_BUFFER, indiciesCount * sizeof(coordinates[0]), &coordinates[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(TEXTCOORD_VB, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(TEXTCOORD_VB);
-
-
-	//Index:
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexBuffer[INDEX_VB]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indiciesCount * sizeof(unsigned int), indicies, GL_STATIC_DRAW);
-
-	glBindVertexArray(0);
+	if (calculateNormals) CalculateNormals();
+	Reload(this->vertices, this->indices);
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices) : vertices(vertices), indices(indices)
-{
-	Reload(vertices, indices);
-}
-
-Mesh::Mesh(std::vector<Vertex> vertices) : vertices(vertices), indices(indices)
+Mesh::Mesh(std::vector<Vertex> vertices, bool calculateNormals) : vertices(vertices), indices(indices)
 {
 	//Add indices:
 	std::vector<unsigned int> indices;
 	for (int i = 0; i < vertices.size(); i++) { indices.push_back(i); }
+
+	if (calculateNormals) CalculateNormals();
+
 	//Load mesh.
 	Reload(vertices, indices);
 }
 
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3> normals)
-{
-	Reload(vertices, indices, normals);
-}
-
 Mesh::~Mesh()
 {
-	glDeleteVertexArrays(1, &verticies);
+	glDeleteVertexArrays(1, &vertexArrayID);
 }
 
 void Mesh::Draw()
 {
-	glBindVertexArray(verticies);
+	glBindVertexArray(vertexArrayID);
 	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
-void Mesh::CalculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies)
+void Mesh::CalculateTangents(Vertex* vertices, unsigned int vertCount, unsigned int* indices, unsigned int numIndicies)
 {
 	//Calculate tangent and bitangent:
 	for (unsigned int i = 0; i < numIndicies; i += 3)
 	{
-		Vertex v0 = verticies[indicies[i]];
-		Vertex v1 = verticies[indicies[i+1]];
-		Vertex v2 = verticies[indicies[i+2]];
+		Vertex v0 = vertices[indices[i]];
+		Vertex v1 = vertices[indices[i+1]];
+		Vertex v2 = vertices[indices[i+2]];
 
 		glm::vec3 edge1 = v1.position - v0.position;
 		glm::vec3 edge2 = v2.position - v0.position;
@@ -145,15 +68,15 @@ void Mesh::CalculateTangents(Vertex* verticies, unsigned int vertCount, unsigned
 		v1.biTangent += bitangent;
 		v2.biTangent += bitangent;
 
-		verticies[indicies[i]] = v0;
-		verticies[indicies[i+1]] = v1;
-		verticies[indicies[i+2]] = v2;
+		vertices[indices[i]] = v0;
+		vertices[indices[i+1]] = v1;
+		vertices[indices[i+2]] = v2;
 	}
 
 	for (unsigned int i = 0; i < vertCount; i++)
 	{
-		verticies[i].tangent = glm::normalize(verticies[i].tangent);
-		verticies[i].biTangent = glm::normalize(verticies[i].biTangent);
+		vertices[i].tangent = glm::normalize(vertices[i].tangent);
+		vertices[i].biTangent = glm::normalize(vertices[i].biTangent);
 	}
 
 }
@@ -178,9 +101,9 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	}
 
 
-	//Lighting:
-	glGenVertexArrays(1, &this->verticies);
-	glBindVertexArray(this->verticies);
+	//Generate vertex arrays:
+	glGenVertexArrays(1, &this->vertexArrayID);
+	glBindVertexArray(this->vertexArrayID);
 	glGenBuffers(NUM_BUFFERS, vertexBuffer);
 
 	//Tangents & Bitangents:
@@ -200,7 +123,6 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-
 	//Position:
 	glEnableVertexAttribArray(POSITION_VB);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[POSITION_VB]);
@@ -213,89 +135,26 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	glVertexAttribPointer(TEXTCOORD_VB, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(TEXTCOORD_VB);
 
-
 	//Index:
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexBuffer[INDEX_VB]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
-	glBindVertexArray(0);
-}
-
-void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3> normals)
-{
-	NumVerts = indices.size();
-	std::vector<glm::vec3> positions;
-	std::vector<glm::vec2> coordinates;
-	std::vector<glm::vec3> tangents;
-	std::vector<glm::vec3> biTangents;
-	std::vector<glm::vec3> testNormals;
-	CalculateTangents(vertices.data(), vertices.size(), indices.data(), indices.size());
-
-	for (unsigned int i = 0; i < vertices.size(); i++)
-	{
-		positions.push_back(vertices[i].position);
-		coordinates.push_back(vertices[i].uv);
-		tangents.push_back(vertices[i].tangent);
-		biTangents.push_back(vertices[i].biTangent);
-		testNormals.push_back(vertices[i].normal);
-	}
-
-	//Normals:
-	normals.clear();
-	normals.resize(vertices.size());
-	for (int i = 0; i < indices.size(); i += 3)
-	{
-		glm::vec3 v1 = positions[indices[i]];
-		glm::vec3 v2 = positions[indices[i + 1]];
-		glm::vec3 v3 = positions[indices[i + 2]];
-		glm::vec3 normal = glm::triangleNormal(v1, v2, v3);
-		normals[indices[i]] += normal;
-		normals[indices[i + 1]] += normal;
-		normals[indices[i + 2]] += normal;
-	}
-	//Tangents & Bitangents:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(tangents[0]), &tangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(TANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(TANGENT_VB);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[BITANGENT_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(biTangents[0]), &biTangents[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(BITANGENT_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(BITANGENT_VB);
-
-	//Normals:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(NORMAL_VB);
-
-	//Lighting:
-	glGenVertexArrays(1, &this->verticies);
-	glBindVertexArray(this->verticies);
-	glGenBuffers(NUM_BUFFERS, vertexBuffer);
-
-	//Position:
-	glEnableVertexAttribArray(POSITION_VB);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[POSITION_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(positions[0]), &positions[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(POSITION_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-	//Texture Coordinates:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TEXTCOORD_VB]);
-	glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(coordinates[0]), &coordinates[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(TEXTCOORD_VB, 2, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(TEXTCOORD_VB);
-
-
-	//Index:
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertexBuffer[INDEX_VB]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
-
+	
+	//Bind array:
 	glBindVertexArray(0);
 }
 
 void Mesh::CalculateNormals()
 {
+	normals.clear();
+	for (int i = 0; i < indices.size(); i += 3)
+	{
+		glm::vec3 a = vertices[indices[i]].position;
+		glm::vec3 b = vertices[indices[i+1]].position;
+		glm::vec3 c = vertices[indices[i+2]].position;
 
+		glm::vec3 normal = glm::triangleNormal(a, b, c);
+		vertices[indices[i]].normal = normal;
+		vertices[indices[i+1]].normal = normal;
+		vertices[indices[i+2]].normal = normal;
+	}
 }

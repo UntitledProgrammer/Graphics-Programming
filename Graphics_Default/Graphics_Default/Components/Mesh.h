@@ -22,7 +22,7 @@ private:
 	//Attributes:
 	GLuint vertexBuffer[NUM_BUFFERS];
 	/// <summary>Keep's a reference to an array of vertices.</summary>
-	GLuint verticies = 0;
+	GLuint vertexArrayID = 0;
 	GLuint NumVerts =0 ;
 
 	//Updated attributes.
@@ -35,21 +35,20 @@ public:
 	//Attributes:
 	Transform transform;
 
-	//Constructor:
-	Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicies, int indiciesCount);
+	//Constructors:
+
 	/// <summary>The reccomended method for constructing a mesh.</summary>
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, bool calculateNormals = false);
 	/// <summary>In the uncommon situaton where you don't have an indices use this method to construct a mesh that will simply use every vertex supplied.</summary>
-	Mesh(std::vector<Vertex> vertices);
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3> normals);
+	Mesh(std::vector<Vertex> vertices, bool calculateNormals = false);
+
 	//Deconstructor:
 	~Mesh();
 	
 	//Methods:
 	void Draw();
-	void CalculateTangents(Vertex* verticies, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
+	void CalculateTangents(Vertex* vertexArrayID, unsigned int vertCount, unsigned int* indicies, unsigned int numIndicies);
 	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices);
-	void Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<glm::vec3>);
 	void CalculateNormals();
 	
 	//Friends:

@@ -117,8 +117,8 @@ void main()
 	vec3 result;
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
-		if(lights[i].type == Directional) result += AddDirectional(lights[i], testNormal, fragPos, viewDir);
-		else if(lights[i].type == Phong) result += AddDirectional(lights[i], testNormal, fragPos, viewDir);
+		if(lights[i].type == Directional) result += AddPhong(lights[i], fragNormal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddPhong(lights[i], fragNormal, fragPos, viewDir);
 	}
 
 	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);

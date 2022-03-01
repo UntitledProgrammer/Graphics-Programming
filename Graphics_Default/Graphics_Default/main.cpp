@@ -138,13 +138,13 @@ int main(int argc, char* argv[])
     Simulatables.Add(box);
     Simulatables.Add(box2);
     MeshRenderer box3 = MeshRenderer();
-    box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
     std::vector<unsigned int> indices;
     std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/cube.obj", "", "", "", "", indices);
     Mesh* testMesh = new Mesh(vertices, indices);
     box->SetMesh(testMesh);
     box2->transform.position = glm::vec3(5, 0, 0);
-    box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
+    box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
 
     SolidMaterial solid = SolidMaterial();
     solid.Load("Visuals/Shaders/Solid");
