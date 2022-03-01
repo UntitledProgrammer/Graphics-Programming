@@ -38,7 +38,7 @@ public:
 		glm::mat4 rotMatrix = rotZMatrix * rotYMatrix * rotXMatrix;
 
 		//Return a matrix using the result of each vectors matrix.
-		return scaleMatrix * rotMatrix * posMatrix;
+		return posMatrix * rotMatrix * scaleMatrix;
 	}
 };
 #endif //!TRANSFORM_H

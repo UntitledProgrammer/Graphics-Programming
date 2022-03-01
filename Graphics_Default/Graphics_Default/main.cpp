@@ -23,13 +23,12 @@
 #include"Simulated/Entity.h"
 #include"Simulated/Extensions/Animator.h"
 
-/*
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<imgui.h>
 #include<backends/imgui_impl_sdl.h>
 #include<backends/imgui_impl_opengl3.h>
-*/
+
 
 float svertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -141,7 +140,7 @@ int main(int argc, char* argv[])
     MeshRenderer box3 = MeshRenderer();
     box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
     std::vector<unsigned int> indices;
-    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/untitled.obj", "", "", "", "", indices);
+    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/blocks_01.obj", "", "", "", "", indices);
     Mesh* testMesh = new Mesh(vertices, indices);
     box->SetMesh(testMesh);
     box2->transform.position = glm::vec3(5, 0, 0);
@@ -151,17 +150,17 @@ int main(int argc, char* argv[])
     SolidMaterial solid = SolidMaterial();
     solid.Load("Visuals/Shaders/Solid");
     solid.base = base;
-    box3.ApplyMaterial(&solid);
     SurfaceMaterial surface = SurfaceMaterial();
+    box3.ApplyMaterial(&surface);
     surface.normal = normal;
     surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
-    box->SetMaterial(&solid);
+    box->SetMaterial(&surface);
     //box->ApplyExtension
-    box2->SetMaterial(&solid);
+    box2->SetMaterial(&surface);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     Light::Instance()->transform.position.z += 2;
 
     //Shadow mapping:
