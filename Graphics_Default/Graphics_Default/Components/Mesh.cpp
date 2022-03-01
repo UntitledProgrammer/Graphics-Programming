@@ -45,10 +45,11 @@ Mesh::Mesh(Vertex* verticies, unsigned int verticiesCount, unsigned int* indicie
 	glEnableVertexAttribArray(BITANGENT_VB);
 
 	//Normals:
+	glEnableVertexAttribArray(NORMAL_VB);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, verticiesCount * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glEnableVertexAttribArray(NORMAL_VB);
+	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
 	//Lighting:
 
 	glGenVertexArrays(1, &this->verticies);
@@ -102,7 +103,7 @@ Mesh::~Mesh()
 void Mesh::Draw()
 {
 	glBindVertexArray(verticies);
-	glDrawElements(GL_TRIANGLES, NumVerts, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 }
 
@@ -164,7 +165,6 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	std::vector<glm::vec2> coordinates;
 	std::vector<glm::vec3> tangents;
 	std::vector<glm::vec3> biTangents;
-	std::vector<glm::vec3> normals;
 
 	CalculateTangents(vertices.data(), vertices.size(), indices.data(), indices.size());
 
@@ -176,7 +176,12 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 		biTangents.push_back(vertices[i].biTangent);
 		normals.push_back(vertices[i].normal);
 	}
-	norms = normals;
+
+
+	//Lighting:
+	glGenVertexArrays(1, &this->verticies);
+	glBindVertexArray(this->verticies);
+	glGenBuffers(NUM_BUFFERS, vertexBuffer);
 
 	//Tangents & Bitangents:
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[TANGENT_VB]);
@@ -190,15 +195,11 @@ void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indice
 	glEnableVertexAttribArray(BITANGENT_VB);
 
 	//Normals:
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(NORMAL_VB);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer[NORMAL_VB]);
+	glBufferData(GL_ARRAY_BUFFER, indices.size() * sizeof(normals[0]), &normals[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(NORMAL_VB, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	//Lighting:
-	glGenVertexArrays(1, &this->verticies);
-	glBindVertexArray(this->verticies);
-	glGenBuffers(NUM_BUFFERS, vertexBuffer);
 
 	//Position:
 	glEnableVertexAttribArray(POSITION_VB);

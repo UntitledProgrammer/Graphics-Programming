@@ -25,10 +25,9 @@ void main()
 	vec3 N = normalize(vec3(model * vec4(Normal, 1.0)));
 
 	TBN = mat3(T,B,N);
-
+	testNormal = Normal;
 	fragPos = vec3(model * vec4(vp, 1.0));
 	fragNormal = mat3(transpose(inverse(model))) * Normal;
-	testNormal = Normal;
 	fragTextureCoordinates = textureCoordinates;
 	gl_Position = projection * view * model * vec4(vp, 1.0);
 }

@@ -20,6 +20,7 @@ struct Light
 
 uniform sampler2D texture_diffuse;
 uniform sampler2D texture_normal;
+uniform int SIZE;
 uniform Light lights[NUMBER_OF_LIGHTS];
 in vec2 fragTextureCoordinates;
 in vec3 fragNormal;
@@ -116,9 +117,9 @@ void main()
 	vec3 result;
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
-		if(lights[i].type == Directional) result += AddPointLight(lights[i], fragNormal, fragPos, viewDir);
-		else if(lights[i].type == Phong) result += AddPointLight(lights[i], fragNormal, fragPos, viewDir);
+		if(lights[i].type == Directional) result += AddDirectional(lights[i], testNormal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddDirectional(lights[i], testNormal, fragPos, viewDir);
 	}
 
-	colour = vec4( vec3(1,1,0) * fragNormal, 1);
+	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);
 }

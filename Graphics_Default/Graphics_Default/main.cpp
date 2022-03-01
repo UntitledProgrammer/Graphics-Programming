@@ -140,17 +140,17 @@ int main(int argc, char* argv[])
     MeshRenderer box3 = MeshRenderer();
     box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
     std::vector<unsigned int> indices;
-    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/blocks_01.obj", "", "", "", "", indices);
+    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/cube.obj", "", "", "", "", indices);
     Mesh* testMesh = new Mesh(vertices, indices);
     box->SetMesh(testMesh);
     box2->transform.position = glm::vec3(5, 0, 0);
     box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices()));
-    
 
     SolidMaterial solid = SolidMaterial();
     solid.Load("Visuals/Shaders/Solid");
     solid.base = base;
     SurfaceMaterial surface = SurfaceMaterial();
+    surface.normal = normal;
     box3.ApplyMaterial(&surface);
     surface.normal = normal;
     surface.base = base;

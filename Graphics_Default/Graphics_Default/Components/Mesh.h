@@ -28,7 +28,7 @@ private:
 	//Updated attributes.
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<glm::vec3> norms;
+	std::vector<glm::vec3> normals;
 	//Updated attributes!
 
 public: 

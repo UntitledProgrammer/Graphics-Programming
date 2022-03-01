@@ -36,7 +36,7 @@ Simulated* Entity::Instantiate()
 
 void Entity::SetMesh(Mesh* mesh)
 {
-	meshRenderer->ApplyMesh(mesh);
+	this->meshRenderer->ApplyMesh(mesh);
 }
 
 void Entity::SetMaterial(Substance* material)
