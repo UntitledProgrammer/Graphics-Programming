@@ -31,14 +31,14 @@ classDiagram
 >**Camera**
 >The main camera (simulated object) comes with one vital extension pre-applied to allow for movement during the projects runtime.
 >
->***Move Left*** : Key A
->***Move Right*** : Key D
->***Move Up*** : Key Q
->***Move Down*** : Key E
->***Move Forward*** : Key W
->***Move Backward*** : Key S
->***Rotate Camera*** : Mouse (Mouse Delta Position)
->***Freeze Camera Movement*** Left-Shift
+>***Move Left*** : Key A  
+>***Move Right*** : Key D  
+>***Move Up*** : Key Q  
+>***Move Down*** : Key E  
+>***Move Forward*** : Key W  
+>***Move Backward*** : Key S  
+>***Rotate Camera*** : Mouse (Mouse Delta Position)  
+>***Freeze Camera Movement*** Left-Shift  
 
 **User Interface**  
 >Also featured in my project is a simple user interface, providing some basic functionality for interacting with the simulated environment.  
