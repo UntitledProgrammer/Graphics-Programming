@@ -96,10 +96,10 @@ vec3 AddPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 	vec3 lightDir = normalize(light.position - fragPos);
 
-	float diff = max(dot(normal, lightDir), 0.0);
+	float diff = max(dot(normal, -lightDir), 0.0);
 	vec3 diffuse = diff * light.colour;
 
-	vec3 reflectDir = reflect(-lightDir, normal);
+	vec3 reflectDir = reflect(lightDir, normal);
 	float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
 	vec3 specular = vec3(10.0f * spec);
 
@@ -115,10 +115,10 @@ void main()
 
 
 	//Calculate bump normal:
-	vec3 normal = normalize(testNormal);
+	vec3 normal = normalize(fragNormal);
 	vec3 Tan = normalize(Tang);
 	Tan = normalize(Tan - dot(Tan, normal) * normal);
-	vec3 BiTan = cross(Tan, testNormal);
+	vec3 BiTan = cross(Tan, normal);
 	vec3 bumpNormal = texture(texture_normal, fragTextureCoordinates).xyz;
 	bumpNormal = 2.0 * bumpNormal - vec3(1.0,1.0,1.0);
 	vec3 NewNormal;
