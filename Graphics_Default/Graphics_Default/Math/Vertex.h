@@ -17,6 +17,7 @@ struct Vertex
 	Vertex(glm::vec3 position);
 	Vertex(float x, float y, float z);
 	Vertex(glm::vec3 pos, glm::vec2 coordinates);
+	Vertex(const Vertex &vertex);
 
 	//Deconstructor:
 	~Vertex();
@@ -34,14 +35,14 @@ struct Primitives
 
 	static std::vector<Vertex> Square()
 	{
-		std::vector<Vertex> vertexArrayID;
+		std::vector<Vertex> vertices;
 
-		vertexArrayID.push_back(Vertex( glm::vec3(-0.5f, 0.5f, 0.0f), glm::vec2(0,0) ));
-		vertexArrayID.push_back(Vertex(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec2(1, 0)));
-		vertexArrayID.push_back(Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(1, 1)));
-		vertexArrayID.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0, 1)));
+		vertices.push_back(Vertex( glm::vec3(-0.5f, 0.5f, 0.0f), glm::vec2(0,0) ));
+		vertices.push_back(Vertex(glm::vec3(0.5f, 0.5f, 0.0f), glm::vec2(1, 0)));
+		vertices.push_back(Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(1, 1)));
+		vertices.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0, 1)));
 
-		return vertexArrayID;
+		return vertices;
 	}
 
 	static std::vector<unsigned int> SqaureIndices()
@@ -52,13 +53,13 @@ struct Primitives
 
 	static std::vector<Vertex> Triangle()
 	{
-		std::vector<Vertex> vertexArrayID;
+		std::vector<Vertex> vertices;
 
-		vertexArrayID.push_back(Vertex(0.0f, 0.0f, 0.0f));
-		vertexArrayID.push_back(Vertex(0.1f, -0.2f, 0.0f));
-		vertexArrayID.push_back(Vertex(-0.1f, -0.2f, 0.0f));
+		vertices.push_back(Vertex(0.0f, 0.0f, 0.0f));
+		vertices.push_back(Vertex(0.1f, -0.2f, 0.0f));
+		vertices.push_back(Vertex(-0.1f, -0.2f, 0.0f));
 
-		return vertexArrayID;
+		return vertices;
 	}
 };
 #endif // !VERTEX_H

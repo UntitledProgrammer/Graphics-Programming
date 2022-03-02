@@ -27,7 +27,7 @@ in vec3 fragNormal;
 in vec3 fragPos;
 in mat3 TBN;
 in vec3 testNormal;
-
+in vec3 Tang;
 out vec4 colour;
 
 //Added:
@@ -92,15 +92,18 @@ vec3 AddSpotlight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 vec3 AddPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-	float ambientStrength = 0.1;
-    vec3 ambient = AMBIENT_STRENGTH * light.colour;
-	vec3 norm = normalize(normal);
+    vec3 ambient = 0.1 * light.colour;
+
 	vec3 lightDir = normalize(light.position - fragPos);
 
-	float diff = max(dot(norm, lightDir), 0.0);
+	float diff = max(dot(normal, lightDir), 0.0);
 	vec3 diffuse = diff * light.colour;
 
-	return vec3 (ambient + diffuse);
+	vec3 reflectDir = reflect(-lightDir, normal);
+	float spec = pow(max(dot(normal, reflectDir), 0.0), 32.0);
+	vec3 specular = vec3(10.0f * spec);
+
+	return vec3 (ambient + diffuse + specular);
 }
 
 
@@ -109,16 +112,25 @@ void main()
 	//Calculate view direction:
 	vec3 viewDir = normalize(cameraPosition - fragPos);
 
-	//Calculate normal:
-	vec3 normal = normalize(texture2D(texture_normal, fragTextureCoordinates).rgb);
-	normal = normalize((normal * 2.0)-1.0);
-	normal = normalize(TBN * normal);
+
+
+	//Calculate bump normal:
+	vec3 normal = normalize(testNormal);
+	vec3 Tan = normalize(Tang);
+	Tan = normalize(Tan - dot(Tan, normal) * normal);
+	vec3 BiTan = cross(Tan, testNormal);
+	vec3 bumpNormal = texture(texture_normal, fragTextureCoordinates).xyz;
+	bumpNormal = 2.0 * bumpNormal - vec3(1.0,1.0,1.0);
+	vec3 NewNormal;
+	mat3 TBN = mat3(Tan, BiTan, normal);
+	NewNormal = TBN * bumpNormal;
+	NewNormal = normalize(NewNormal);
 
 	vec3 result;
 	for(int i = 0; i < NUMBER_OF_LIGHTS; i++)
 	{
-		if(lights[i].type == Directional) result += AddPhong(lights[i], fragNormal, fragPos, viewDir);
-		else if(lights[i].type == Phong) result += AddPhong(lights[i], fragNormal, fragPos, viewDir);
+		if(lights[i].type == Directional) result += AddPointLight(lights[i], NewNormal, fragPos, viewDir);
+		else if(lights[i].type == Phong) result += AddPointLight(lights[i], NewNormal, fragPos, viewDir);
 	}
 
 	colour = vec4(texture2D(texture_diffuse, fragTextureCoordinates).rgb * result, 1);

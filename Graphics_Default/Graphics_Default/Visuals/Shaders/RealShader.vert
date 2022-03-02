@@ -16,13 +16,17 @@ out vec3 fragNormal;
 out vec3 fragPos;
 out mat3 TBN;
 out vec3 testNormal;
-
+out vec3 Tang;
 void main()
 {
 	//TBN:
-	vec3 T = normalize(vec3(model * vec4(Tangent, 1.0)));
-	vec3 B = normalize(vec3(model * vec4(BiTangent, 1.0)));
-	vec3 N = normalize(vec3(model * vec4(Normal, 1.0)));
+	vec3 T = normalize(vec3(model * vec4(Tangent, 0.0)));
+	vec3 B = normalize(vec3(model * vec4(BiTangent, 0.0)));
+	vec3 N = normalize(vec3(model * vec4(Normal, 0.0)));
+
+
+	Tang = Tangent;
+
 
 	TBN = mat3(T,B,N);
 	testNormal = Normal;
