@@ -3,7 +3,7 @@
 #define MESH_RENDERER_H
 
 //Includes:
-#include"Mesh.h"
+#include"../Math/Mesh.h"
 #include"../Visuals/Substances/Material.h"
 #include"../Management/ResourceManager.h"
 #include"../Visuals/Substances/SmartMaterial.h"

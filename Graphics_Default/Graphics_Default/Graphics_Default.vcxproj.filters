@@ -102,7 +102,7 @@
     <ClCompile Include="Math\Vertex.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Mesh.cpp">
+    <ClCompile Include="Math\Mesh.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\Texture.cpp">
@@ -182,7 +182,7 @@
     <ClInclude Include="imgui_sdl-master\imgui_sdl.h">
       <Filter>Header Files\External</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Mesh.h">
+    <ClInclude Include="Math\Mesh.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\Shape.h">
