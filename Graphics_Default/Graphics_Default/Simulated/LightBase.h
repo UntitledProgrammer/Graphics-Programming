@@ -1,6 +1,10 @@
 #pragma once
 #ifndef LIGHT_H
+//Defines:
 #define LIGHT_H
+#define LightSingleton Light::Instance()
+
+//Includes:
 #include<glew.h>
 #include<glm.hpp>
 #include<SDL_opengl.h>

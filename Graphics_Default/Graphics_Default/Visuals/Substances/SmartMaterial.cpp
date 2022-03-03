@@ -1,5 +1,10 @@
 #include "SmartMaterial.h"
 
+void Substance::UpdateShadows(Transform& transform, glm::mat4& lightSpaceMatrix)
+{
+    //glUniform
+}
+
 void Substance::Delete()
 {
     for (unsigned int i = 0; i < SHADER_TYPES; i++)

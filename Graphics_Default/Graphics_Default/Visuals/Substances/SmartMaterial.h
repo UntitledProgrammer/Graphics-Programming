@@ -37,7 +37,7 @@ public:
 	virtual void Update(Transform& transform) = 0;
 	/// <summary>Any binding of attributes such as textures should occur here.</summary>
 	virtual void Bind() = 0;
-
+	virtual void UpdateShadows(Transform& transform, glm::mat4& lightSpaceMatrix);
 	//Virtual methods:
 	virtual void Delete();
 
