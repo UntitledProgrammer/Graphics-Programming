@@ -61,6 +61,11 @@ void FlatSubstance::Update(Transform& transform)
 
 void FlatSubstance::Bind()
 {
+    glActiveTexture(GL_TEXTURE0);
+    GLuint TextureLoc = glGetUniformLocation(program, "texture_shadow");
+    glUniform1i(TextureLoc, 0);
+    glBindTexture(GL_TEXTURE_2D, shadowID);
+
     //Use this program.
     glUseProgram(program);
 }

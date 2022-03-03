@@ -24,6 +24,7 @@
 #include"Simulated/Extensions/Animator.h"
 #include"Obsolete/Serialisation.h"
 #include"Visuals/Substances/FlatShader.h"
+#include"Visuals/Substances/DepthSubstance.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -102,8 +103,6 @@ int main(int argc, char* argv[])
 
     FlatSubstance flat = FlatSubstance();
     flat.Load("Visuals/Shaders/FlatShader");
-    flat.normal = normal;
-    flat.base = base;
 
     SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = normal;
@@ -120,8 +119,10 @@ int main(int argc, char* argv[])
     Light::Instance()->transform.position.z += 2;
     SaveSimulation();
 
+    /*
     //Shadow mapping:
-    
+    DepthSubstance depthSubstance = DepthSubstance();
+    depthSubstance.Load("Visuals/Shaders/DepthShader");
     //Get some space on the GPU for passing a rendered image.
     GLuint depthMapFBO;
     glGenFramebuffers(1, &depthMapFBO);
@@ -149,6 +150,8 @@ int main(int argc, char* argv[])
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
+    flat.shadowID = shadowMapID;
+    */
     //Main window loop:
     Resources->InitaliseSimulated();
     while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
@@ -156,19 +159,23 @@ int main(int argc, char* argv[])
         //Exit loop if any key is pressed.
         SDL_PollEvent(&sdlEvent);
 
-        //Shadow map:
-        glViewport(0, 0, shadowWidth, shadowHeight);
-        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-        glClear(GL_DEPTH_BUFFER_BIT);
-
+        //Shadow map: 
+        /*
         GLfloat near_plane = 1.0f, far_plane = 100;
         glm::mat4 lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, near_plane, far_plane);
         glm::mat4 lightView = glm::lookAt(LightSingleton->transform.position, glm::vec3(0), glm::vec3(0, 1, 0)); //Note, add method to get position directly from matrix.
         glm::mat4 lightSpaceMatrix = lightProjection * lightView; //Note, implement these calculations into the light class.
+        depthSubstance.lightSpaceMatrix = lightSpaceMatrix;
 
+        glViewport(0, 0, shadowWidth, shadowHeight);
+        glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        depthSubstance.Update(testMesh->transform);
+        depthSubstance.Bind();
 
         //!Shadow map.
-
+        */
 
         glClearColor(0.0f, 0.15f, 0.3f, 1.0);
         glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);

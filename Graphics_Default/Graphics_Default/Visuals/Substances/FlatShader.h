@@ -3,10 +3,7 @@
 class FlatSubstance : public Substance
 {
 public:
-	/// <summary>The standard full colour texture as it is intended to look.</summary>
-	Texture* base;
-	/// <summary>The normal map intended for use with the base texture.</summary>
-	Texture* normal;
+	GLuint shadowID;
 
 	//Attributes:
 	glm::vec3 colour;

@@ -15,7 +15,9 @@ private:
 	//Attributes:
 	Mesh* mesh;
 	Substance* material;
-public://Change to private, at later date.
+public:
+	//Attrubutes:
+	bool shaded = true;
 	Transform* transform;
 public:
 	//Constructor:

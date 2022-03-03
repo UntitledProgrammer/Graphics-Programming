@@ -101,3 +101,12 @@ void Light::Update()
 	glVertex3fv(&p2.x);
 	glEnd();
 }
+
+glm::mat4 Light::GetProjectionMatrix()
+{
+	glm::mat4 lightProjection = glm::ortho(-20.0f, 20.0f, -20.0f, 20.0f, nearPlane, farPlane);
+	glm::mat4 lightView = glm::lookAt(transform.position, glm::vec3(0), glm::vec3(0, 1, 0)); //Note, add method to get position directly from matrix.
+	glm::mat4 lightSpaceMatrix = lightProjection * lightView; //Note, implement these calculations into the light class.
+
+	return lightSpaceMatrix;
+}

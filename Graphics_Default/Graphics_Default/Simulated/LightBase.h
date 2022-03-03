@@ -21,6 +21,7 @@ enum class LightCategory
 	Directional,
 	Point,
 	Flat,
+	Spotlight,
 	Size
 };
 
@@ -36,6 +37,7 @@ public:
 	glm::vec3 colour, direction = glm::vec3(0.0f,1.0f, 0.0f);
 	LightCategory category = LightCategory::Phong;
 	static std::vector<Light*> lights;
+	const float nearPlane = 1.0f, farPlane = 100.0f;
 
 	//Constructor:
 	Light();
@@ -46,15 +48,10 @@ public:
 	//Methods:
 	void Draw();
 	void Update();
+	glm::mat4 GetProjectionMatrix();
 	void OnGui() override
 	{
-		ImGui::Text("Direction");
-		ImGui::SliderFloat("Xr", &transform.rotation.x, -1.0f, 1.0f);
-		ImGui::SameLine();
-		ImGui::SliderFloat("Yr", &transform.rotation.y, -1.0f, 1.0f);
-		ImGui::SameLine();
-		ImGui::SliderFloat("Zr", &transform.rotation.z, -1.0f, 1.0f);
-		if (category == LightCategory::Directional)
+		if (category == LightCategory::Directional || category == LightCategory::Spotlight)
 		{
 			ImGui::Text("Direction");
 			ImGui::SliderFloat("X", &direction.x, -1.0f, 1.0f);

@@ -31,7 +31,7 @@ public:
 	void Initialise();
 	void SetName(std::string n){ name = n; }
 	std::string GetName() { return name; }
-	void DrawCentre(float scale = 1.0f);
+	void DrawPivot(float scale = 1.0f);
 	
 	//Methods:
 	template<typename ExtensionType> std::shared_ptr<ExtensionType> ApplyExtension()

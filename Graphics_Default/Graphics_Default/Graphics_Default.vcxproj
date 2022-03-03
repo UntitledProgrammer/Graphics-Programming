@@ -172,6 +172,7 @@
     <ClCompile Include="Editor\Toolbar.cpp" />
     <ClCompile Include="Visuals\Shader.cpp" />
     <ClCompile Include="Visuals\Skybox.cpp" />
+    <ClCompile Include="Visuals\Substances\DepthSubstance.cpp" />
     <ClCompile Include="Visuals\Substances\FlatShader.cpp" />
     <ClCompile Include="Visuals\Substances\Material.cpp" />
     <ClCompile Include="Visuals\Substances\SmartMaterial.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Visuals\Animator.h" />
     <ClInclude Include="Visuals\Shader.h" />
     <ClInclude Include="Visuals\Skybox.h" />
+    <ClInclude Include="Visuals\Substances\DepthSubstance.h" />
     <ClInclude Include="Visuals\Substances\FlatShader.h" />
     <ClInclude Include="Visuals\Substances\Material.h" />
     <ClInclude Include="Visuals\Substances\SmartMaterial.h" />

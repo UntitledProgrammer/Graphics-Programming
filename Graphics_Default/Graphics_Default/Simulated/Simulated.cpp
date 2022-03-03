@@ -10,7 +10,7 @@ void Simulated::Initialise()
 	for (int i = 0; i < extensions.size(); i++) { extensions[i]->Initialise(); }
 }
 
-void Simulated::DrawCentre(float scale)
+void Simulated::DrawPivot(float scale)
 {
 	//Setup:
 	glUseProgram(0); //Do not use a current shader program.

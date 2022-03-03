@@ -51,4 +51,5 @@ void Toolbar::LoadDefault()
     windows.push_back(new Inspector());
     windows.push_back(new Menu());
     windows.push_back(new Hierarchy());
+    windows.push_back(new Information());
 }

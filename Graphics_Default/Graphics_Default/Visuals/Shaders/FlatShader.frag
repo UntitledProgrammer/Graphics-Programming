@@ -20,6 +20,7 @@ struct Light
 #define TYPES_OF_LIGHTS 2
 
 //Uniforms:
+uniform sampler2D texture_shadow;
 uniform int SIZE;
 uniform Light lights[NUMBER_OF_LIGHTS];
 
@@ -129,4 +130,5 @@ void main()
 	vec3 specular = vec3(0.5f * spec);
 
 	colour = vec4(vec3(ambient + diffuse + specular), 1);
+	//colour = vec4(texture2D(texture_shadow, fragTextureCoordinates).rgb, 0);
 }

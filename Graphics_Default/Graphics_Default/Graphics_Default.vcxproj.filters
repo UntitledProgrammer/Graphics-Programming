@@ -150,6 +150,9 @@
     <ClCompile Include="Visuals\Substances\FlatShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visuals\Substances\DepthSubstance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -276,6 +279,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Visuals\Substances\FlatShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visuals\Substances\DepthSubstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

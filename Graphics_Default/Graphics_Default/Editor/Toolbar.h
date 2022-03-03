@@ -21,6 +21,7 @@ public:
 	//Abstract methods:
 	/// <summary>Render will be called on during every frame of simulation; write your ImGui draw code here.</summary>
 	virtual void Render() = 0;
+	void NewLine(int rows){ for (int i = 0; i < rows; i++) { ImGui::Spacing(); } }
 	/// <summary>The name / ID this instance of window will be refered to as.</summary>
 	std::string name = "Default";
 	/// <summary>When true this instance of window will be displayed on screen, when false it will it will be inactive on screen but persist in memory.</summary>

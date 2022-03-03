@@ -2,7 +2,7 @@
 
 void Substance::UpdateShadows(Transform& transform, glm::mat4& lightSpaceMatrix)
 {
-    //glUniform
+
 }
 
 void Substance::Delete()
