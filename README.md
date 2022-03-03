@@ -49,7 +49,17 @@ The inspector window; by default, located on the left side of the screen will pr
 >**Hierarchy**  
 The hierarchy window displays all of the currently present instances of simulated objects during runtime. By clicking the drop-down for any present instance of simulated-objects, you will then be met with the option to select the object which will display it's public attributes in the inspector window.
 
-**Conclusion**
+# Graphical User Interface
+>**Introduction**  
+>To allow dynamic interation and customisation during the runtime of my project I decided to implement a GUI. I decided to use the 'ImGui' library for it's fairly quick implementation into my project's environment.
+
+>**Hierarchy Window**  
+>When opened the hierarchy window will display all currently active instance's of simulated objects. When you click the drop down for anyone of these 'simulated' instances you will have the option to select the object where any other editor window that can zone in on a simulated instance will now use the newly selected object as it's reference.
+
+>**Inspector Window**  
+>The inspector window is designed to display all publically editable attributes of the currently selected simulated object. Since, all simulated objects must have a transform, you will always have the ability to change the position, rotation and scale of an object here and any extra's relating to the context of the objects type.
+
+# Conclusion
 >**Implemented Fundementals**  
 >In my project you will find the following fundementals relevant to this module.
 > * Textures.
@@ -65,3 +75,11 @@ The hierarchy window displays all of the currently present instances of simulate
 > * User Interface.
 > * Model loading.
 > * Material / Texture loading.
+> * Shadow Mapping.
+
+**Self Reflection**
+>Overall, I am confident with the outcome of this project. While developing this project certainly didn't come without it's complications, I feel I have used these challenging circumstances as a chance to learn and develop my knowledge for graphics programming.  
+>
+>A prime example of this would be when I first encounted issues when calculating the surface normals of a mesh. Looking for a solutuion, I found myself reading a variety of openGL documentations as well as math related publications that I would have never otherwise looked at. 
+>
+>As a result I was able to fine tune my knowledge for calculating a surface normal rather than simply copying from a tutorial without acknowledging the mathematics taking place behind the scene.
