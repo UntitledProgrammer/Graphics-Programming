@@ -105,7 +105,7 @@
     <ClCompile Include="Math\Mesh.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\Texture.cpp">
+    <ClCompile Include="Visuals\Textures\Texture.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\Shape.cpp">
@@ -188,7 +188,7 @@
     <ClInclude Include="Components\Shape.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\Texture.h">
+    <ClInclude Include="Visuals\Textures\Texture.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Simulated\Camera.h">

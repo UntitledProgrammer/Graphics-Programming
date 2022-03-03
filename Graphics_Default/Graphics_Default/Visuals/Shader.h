@@ -8,7 +8,7 @@
 #include"../Math/Transform.h"
 #include"../Simulated/Camera.h"
 #include"../Simulated/LightBase.h"
-#include"../Components/Texture.h"
+#include"../Visuals/Textures/Texture.h"
 
 class Shader
 {

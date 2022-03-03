@@ -4,7 +4,7 @@
 
 //Includes:
 #include"../Shader.h"
-#include"../Components/Texture.h"
+#include"../Visuals/Textures/Texture.h"
 
 class Material
 {

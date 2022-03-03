@@ -5,7 +5,7 @@
 //Includes:
 #include<vector>
 #include<SDL.h>
-#include"../Components/Texture.h"
+#include"../Visuals/Textures/Texture.h"
 #include"Extension.h"
 #include"../Visuals/Substances/SurfaceMaterial.h"
 #include"../Simulated/Entity.h"

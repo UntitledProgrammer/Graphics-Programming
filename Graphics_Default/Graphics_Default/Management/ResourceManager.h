@@ -17,7 +17,7 @@
 
 #include"../Math/Vertex.h"
 #include"../Visuals/Shader.h"
-#include"../Components/Texture.h"
+#include"../Visuals/Textures/Texture.h"
 #include"../Math/Mesh.h"
 #include"Resource.h"
 #include"../Entities/EntityManager.h"

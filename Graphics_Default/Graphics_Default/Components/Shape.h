@@ -2,7 +2,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 #include"../Visuals/Shader.h"
-#include"Texture.h"
+#include"../Visuals/Textures/Texture.h"
 #include"../Math/Mesh.h"
 #include"../Simulated/Camera.h"
 

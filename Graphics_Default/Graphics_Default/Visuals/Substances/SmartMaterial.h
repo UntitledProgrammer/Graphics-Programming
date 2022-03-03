@@ -7,7 +7,7 @@
 #include<glew.h>
 #include<glm.hpp>
 #include<fstream>
-#include"../Components/Texture.h"
+#include"../Visuals/Textures/Texture.h"
 #include"../Math/Transform.h"
 #include"../Simulated/Camera.h"
 #include"../Simulated/LightBase.h"

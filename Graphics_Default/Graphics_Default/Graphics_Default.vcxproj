@@ -147,7 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Math\Mesh.cpp" />
     <ClCompile Include="Components\Shape.cpp" />
-    <ClCompile Include="Components\Texture.cpp" />
+    <ClCompile Include="Visuals\Textures\Texture.cpp" />
     <ClCompile Include="imgui-1.74\examples\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui-master\backends\imgui_impl_sdl.cpp" />
@@ -183,7 +183,7 @@
   <ItemGroup>
     <ClInclude Include="Math\Mesh.h" />
     <ClInclude Include="Components\Shape.h" />
-    <ClInclude Include="Components\Texture.h" />
+    <ClInclude Include="Visuals\Textures\Texture.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor\Hierarchy.h" />
     <ClInclude Include="Editor\Windows.h" />
