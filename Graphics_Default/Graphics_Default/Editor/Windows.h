@@ -7,23 +7,23 @@ struct Menu : public Window
 {
 private:
 	//Attributes:
-	glm::vec3* position, *rotation;
 
 public:
 	//Constructor:
 	Menu()
 	{
 		name = "Menu";
-		position = &Camera::Instance()->transform.position;
-		rotation = &Camera::Instance()->transform.rotation;
 	}
 
 	//Methods:
 	void Render()
 	{
-		ImGui::Begin("Menu");
-		ImGui::Text("Main Camera");
-		ImGui::Text("Position");
+		ImGui::Begin(name.c_str());
+
+		if (ImGui::Button("Documentation"))
+		{
+
+		}
 
 
 		ImGui::End();
@@ -74,9 +74,27 @@ private:
 };
 
 
+struct Information : public Window
+{
+private:
 
 
+public:
+	//Constructor:
+	Information()
+	{
+		name = "Information";
+	}
 
+	//Methods:
+	void Render()
+	{
+		ImGui::Begin(name.c_str());
+		//ImGui::Text("Camera\n wdw");
+
+		ImGui::End();
+	}
+};
 
 
 

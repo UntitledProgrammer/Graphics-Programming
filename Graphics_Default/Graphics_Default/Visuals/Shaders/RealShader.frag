@@ -92,7 +92,8 @@ vec3 AddSpotlight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 
 vec3 AddPointLight(Light light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-    vec3 ambient = 0.1 * light.colour;
+	float d = distance(light.position, fragPos) * 1000;
+    vec3 ambient = min(vec3(light.colour.x / d, light.colour.y / d, light.colour.z / d)* AMBIENT_STRENGTH, 0);
 
 	vec3 lightDir = normalize(light.position - fragPos);
 

@@ -8,6 +8,7 @@
 #include"../Management/ResourceManager.h"
 #include"../Visuals/Substances/SmartMaterial.h"
 
+/// <summary>A mesh-renderer is designed to handle the pipeline of processes required before a mesh can be output to a screen.</summary>
 class MeshRenderer
 {
 private:

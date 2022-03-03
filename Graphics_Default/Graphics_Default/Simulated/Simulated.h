@@ -9,6 +9,7 @@
 #include<string>
 #include"../Math/Transform.h"
 #include"Extensions/Extension.h"
+#include<cereal/cereal.hpp>
 
 class Simulated
 {
@@ -49,4 +50,22 @@ public:
 	//Friends:
 	friend class Animator;
 };
+
+struct Vec
+{
+public:
+	Vec(glm::vec3 vec3) { x = vec3.x; y = vec3.y; z = vec3.z; }
+	int x, y, z;
+};
+
+template<class Archive> void load(Archive& archive, Simulated& m)
+{
+	archive(cereal::make_nvp("position", Vec(m.transform.position)));
+}
+
+template<class Archive> void save(Archive& archive, Simulated const& m)
+{
+	archive(cereal::make_nvp("position", Vec(m.transform.position)));
+}
+
 #endif SIMULATED_H //!SIMULATED_H

@@ -11,6 +11,8 @@
 #include<vector>
 #include<map>
 
+/// <summary>The advanced input class provides a high level of choice and functionality when it comes to detecting keyboard input. The class is designed to intergrate
+/// effortlessly into 'SDL2' as a singleton.</summary>
 class AdvancedInput
 {
 private:

@@ -7,6 +7,7 @@
 #include<iostream>
 #include"../stb_image.h"
 
+/// <summary></summary>
 class Texture
 {
 public:

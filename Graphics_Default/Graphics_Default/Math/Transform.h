@@ -4,7 +4,8 @@
 #include<glm.hpp>
 #include<gtx/transform.hpp>
 
-
+/// <summary>The transform structure keeps reference to the position, rotation and scale of an object. These are the minimal, necessary 
+///components needed for determining where the geometrical structure of an object should exist in world-space.</summary>
 struct Transform
 {
 public:
@@ -13,7 +14,7 @@ public:
 	glm::vec3 rotation;
 	glm::vec3 scale;
 
-	//Constructor:
+	//Constructors:
 	/// <summary>Scale will default to [1,1,1]. Position and Rotation will default to [0,0,0].</summary>
 	Transform() : position(glm::vec3(0,0,0)) , rotation(glm::vec3(0,0,0)), scale(glm::vec3(1,1,1)) {};
 	/// <param name="p :">Position</param> <param name="r :">Rotation</param><param name="s :">Scale</param>

@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.20\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Graphics_Default\Third Parties\SDL2-2.0.20\include;$(SolutionDir)\Graphics_Default\Third Parties\glm-0.9.9.8\glm;$(SolutionDir)\Graphics_Default\Third Parties\glew-2.1.0\include\GL;C:\Users\tomja\Documents\Programming for Graphics\Graphics-Programming-Stable\Graphics_Default\Graphics_Default\Third Parties\cereal-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -172,6 +172,7 @@
     <ClCompile Include="Editor\Toolbar.cpp" />
     <ClCompile Include="Visuals\Shader.cpp" />
     <ClCompile Include="Visuals\Skybox.cpp" />
+    <ClCompile Include="Visuals\Substances\FlatShader.cpp" />
     <ClCompile Include="Visuals\Substances\Material.cpp" />
     <ClCompile Include="Visuals\Substances\SmartMaterial.cpp" />
     <ClCompile Include="Visuals\Substances\SolidMaterial.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Management\Input.h" />
     <ClInclude Include="Components\MeshRenderer.h" />
     <ClInclude Include="Management\Resource.h" />
+    <ClInclude Include="Obsolete\Serialisation.h" />
     <ClInclude Include="Simulated\Entity.h" />
     <ClInclude Include="Math\Transform.h" />
     <ClInclude Include="Math\Vertex.h" />
@@ -214,6 +216,7 @@
     <ClInclude Include="Visuals\Animator.h" />
     <ClInclude Include="Visuals\Shader.h" />
     <ClInclude Include="Visuals\Skybox.h" />
+    <ClInclude Include="Visuals\Substances\FlatShader.h" />
     <ClInclude Include="Visuals\Substances\Material.h" />
     <ClInclude Include="Visuals\Substances\SmartMaterial.h" />
     <ClInclude Include="Visuals\Substances\SolidMaterial.h" />
@@ -221,6 +224,8 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Visuals\Shaders\FlatShader.frag" />
+    <None Include="Visuals\Shaders\FlatShader.vert" />
     <None Include="Visuals\Shaders\RealShader.frag" />
     <None Include="Visuals\Shaders\RealShader.vert" />
   </ItemGroup>

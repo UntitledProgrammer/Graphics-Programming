@@ -147,6 +147,9 @@
     <ClCompile Include="Simulated\Extensions\Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Visuals\Substances\FlatShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -269,9 +272,17 @@
     <ClInclude Include="Simulated\Extensions\PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Obsolete\Serialisation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Visuals\Substances\FlatShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Visuals\Shaders\RealShader.frag" />
     <None Include="Visuals\Shaders\RealShader.vert" />
+    <None Include="Visuals\Shaders\FlatShader.vert" />
+    <None Include="Visuals\Shaders\FlatShader.frag" />
   </ItemGroup>
 </Project>

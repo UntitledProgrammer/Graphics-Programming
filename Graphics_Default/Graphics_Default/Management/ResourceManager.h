@@ -22,6 +22,7 @@
 #include"Resource.h"
 #include"../Entities/EntityManager.h"
 
+/// <summary>The resource manager is a singleton class that keeps track of all relevant resources required to run this project.</summary>
 class ResourceManager
 {
 private:

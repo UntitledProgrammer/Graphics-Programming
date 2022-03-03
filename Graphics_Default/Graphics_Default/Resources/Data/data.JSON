@@ -1,0 +1,30 @@
+{
+    "Camera0": {
+        "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        }
+    },
+    "Light1": {
+        "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2
+        }
+    },
+    "Entity2": {
+        "position": {
+            "x": 50,
+            "y": 10,
+            "z": 22
+        }
+    },
+    "Entity3": {
+        "position": {
+            "x": 5,
+            "y": 0,
+            "z": 0
+        }
+    }
+}

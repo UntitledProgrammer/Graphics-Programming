@@ -22,57 +22,14 @@
 #include"Simulated/Extensions/PlayerController.h"
 #include"Simulated/Entity.h"
 #include"Simulated/Extensions/Animator.h"
+#include"Obsolete/Serialisation.h"
+#include"Visuals/Substances/FlatShader.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include<imgui.h>
 #include<backends/imgui_impl_sdl.h>
 #include<backends/imgui_impl_opengl3.h>
-
-
-float svertices[] = {
-    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-     0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-
-    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-     0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-
-    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-    -0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-    -0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-    -0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-
-     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-     0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-     0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-     0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-     0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-
-    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-     0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-     0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-    -0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-    -0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-
-    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-     0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-     0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-    -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-    -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-};
 
 float mag(glm::vec3 v) { return glm::sqrt( glm::pow(v.x, 2) + glm::pow(v.y, 2) + glm::pow(v.z, 2)); }
 
@@ -127,10 +84,7 @@ int main(int argc, char* argv[])
     //Camera:
     Simulatables.Add(Camera::Instance());
     Simulatables.Add(light);
-    //Light* test = new Light();
-    //test->colour = glm::vec3(0, 0, 0);
-    //test->SetName("Test Light");
-    //Simulatables.Add(test);
+
     Camera* camera = Camera::Instance();
     camera->ApplyExtension<CameraController>();
     Entity* box = new Entity(), *box2 = new Entity();
@@ -146,23 +100,24 @@ int main(int argc, char* argv[])
     box2->transform.position = glm::vec3(5, 0, 0);
     box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
 
-    SolidMaterial solid = SolidMaterial();
-    solid.Load("Visuals/Shaders/Solid");
-    solid.base = base;
+    FlatSubstance flat = FlatSubstance();
+    flat.Load("Visuals/Shaders/FlatShader");
+
+
     SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = normal;
-    box3.ApplyMaterial(&surface);
+    box3.ApplyMaterial(&flat);
     surface.normal = normal;
     surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
     box->SetMaterial(&surface);
     //box->ApplyExtension
-    box2->SetMaterial(&surface);
+    box2->SetMaterial(&flat);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     Light::Instance()->transform.position.z += 2;
-
+    SaveSimulation();
     //Shadow mapping:
     /*
     //Get some space on the GPU for passing a rendered image.

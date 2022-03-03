@@ -5,6 +5,8 @@
 #include<glm.hpp>
 #include<vector>
 
+/// <summary>Mathematically, a vertex is where two or more lines, curves or edges meet. This structure in practice is much the same with the addition
+///that it not only denotes the position of two or more lines meeting but also the normal, tangent and bi-tangent of the two lines.</summary>
 struct Vertex
 {
 	//Attributes:
