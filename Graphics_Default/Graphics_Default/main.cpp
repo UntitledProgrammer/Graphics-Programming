@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
     MeshRenderer box3 = MeshRenderer();
     box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
     std::vector<unsigned int> indices;
-    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/cube.obj", "", "", "", "", indices);
+    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/sphere.obj", "", "", "", "", indices);
     Mesh* testMesh = new Mesh(vertices, indices);
     box->SetMesh(testMesh);
     box2->transform.position = glm::vec3(5, 0, 0);
@@ -102,7 +102,8 @@ int main(int argc, char* argv[])
 
     FlatSubstance flat = FlatSubstance();
     flat.Load("Visuals/Shaders/FlatShader");
-
+    flat.normal = normal;
+    flat.base = base;
 
     SurfaceMaterial surface = SurfaceMaterial();
     surface.normal = normal;
@@ -110,7 +111,7 @@ int main(int argc, char* argv[])
     surface.normal = normal;
     surface.base = base;
     surface.Load("Visuals/Shaders/RealShader");
-    box->SetMaterial(&surface);
+    box->SetMaterial(&flat);
     //box->ApplyExtension
     box2->SetMaterial(&flat);
     Camera::Instance()->transform.position = glm::vec3(0, 0, 0);

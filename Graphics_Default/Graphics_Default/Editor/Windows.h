@@ -47,7 +47,7 @@ public:
 	void Render()
 	{
 		if (!Hierarchy::selected) return;
-		Hierarchy::selected->DrawCentre(50);
+		Hierarchy::selected->DrawCentre(5);
 
 		ImGui::Begin("Inspector");
 

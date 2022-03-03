@@ -29,7 +29,7 @@ bool FlatSubstance::Load(const std::string location)
     glValidateProgram(program);
     CheckShaderError(program, GL_VALIDATE_STATUS, true, "Error: Program is invalid: ");
 
-	return false;
+    return false;
 }
 
 void FlatSubstance::Update(Transform& transform)
@@ -40,15 +40,14 @@ void FlatSubstance::Update(Transform& transform)
     //Camera:
     SetUniformMat4("projection", Camera::Instance()->perspective);
     SetUniformMat4("view", Camera::Instance()->view);
-    SetUniformVec3("cameraPosition", Camera::Instance()->transform.position);
 
     //Light:
 
     for (int i = 0; i < Light::lights.size(); i++)
-    { 
+    {
         char buffer[64];
         sprintf_s(buffer, "lights[%i].colour", i);
-        SetUniformVec3(buffer , Light::lights[i]->colour);
+        SetUniformVec3(buffer, Light::lights[i]->colour);
         sprintf_s(buffer, "lights[%i].position", i);
         SetUniformVec3(buffer, Light::lights[i]->transform.position);
         sprintf_s(buffer, "lights[%i].direction", i);
