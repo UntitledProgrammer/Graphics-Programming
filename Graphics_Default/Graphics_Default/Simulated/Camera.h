@@ -1,6 +1,9 @@
 #pragma once
 #ifndef CAMERA_H
+
+//Defines:
 #define CAMERA_H
+#define MainCamera Camera::Instance()
 
 #include"Simulated.h"
 #include"../Constants.h"
