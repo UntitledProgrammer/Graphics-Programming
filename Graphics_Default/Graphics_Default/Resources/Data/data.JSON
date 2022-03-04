@@ -6,11 +6,11 @@
             "z": 0
         }
     },
-    "Light1": {
+    "Directional Light1": {
         "position": {
             "x": 0,
             "y": 0,
-            "z": 2
+            "z": 0
         }
     },
     "Entity2": {

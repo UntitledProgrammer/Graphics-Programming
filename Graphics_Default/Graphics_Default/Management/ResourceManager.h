@@ -6,6 +6,7 @@
 #define Resources ResourceManager::Instance()
 #define Simulatables ResourceManager::Instance()->sims
 #define Textures ResourceManager::Instance()->textures
+#define Meshes ResourceManager::Instance()->meshes
 
 //Includes:
 #include<string>
@@ -37,6 +38,7 @@ public:
 	Resource<Simulated*> simulatables;
 	SimulatedManager sims;
 	Resource<Texture*> textures;
+	Resource<Mesh*> meshes;
 
 	//Constructor:
 	ResourceManager();

@@ -1,11 +1,11 @@
 #include "Entity.h"
 
-Entity::Entity()
+Entity::Entity(std::string name)
 {
 	meshRenderer = new MeshRenderer();
 	transform = Transform();
 	meshRenderer->transform = &transform;
-	SetName("Entity");
+	SetName(name);
 }
 
 Entity::~Entity()

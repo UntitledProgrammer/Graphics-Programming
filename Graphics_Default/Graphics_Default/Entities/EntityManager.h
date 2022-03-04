@@ -31,6 +31,8 @@ public:
 
 	}
 
+	int End() { return entities.size() > 0 ? entities.size() - 1 : 0; }
+
 	int Size() { return entities.size(); }
 
 	Simulated* At(int i)

@@ -7,7 +7,7 @@
 #include<SDL.h>
 #include"../Visuals/Textures/Texture.h"
 #include"Extension.h"
-#include"../Visuals/Substances/SurfaceMaterial.h"
+#include"../../Visuals/Substances/SolidMaterial.h"
 #include"../Simulated/Entity.h"
 
 /// <summary>The animator class is designed to be attached to an entity where it will handle the changing of textures during runtime to simulate animation.</summary>
@@ -16,7 +16,7 @@ class Animator : public Extension
 private:
 	//Attributes:
 	std::vector<Texture*> frames;
-	SurfaceMaterial* material;
+	SolidMaterial* material;
 	float lastframeTime;
 	const int startframe = 0;
 	unsigned int currentframe;

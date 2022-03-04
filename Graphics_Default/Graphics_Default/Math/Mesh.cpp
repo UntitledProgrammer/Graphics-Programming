@@ -75,45 +75,7 @@ void Mesh::CalculateTangents(Vertex* vertices, unsigned int vertCount, unsigned 
 		vertices[i].biTangent = glm::normalize(vertices[i].biTangent);
 	}
 }
-/*
 
-		Vertex v0 = vertices[indices[i]];
-		Vertex v1 = vertices[indices[i+1]];
-		Vertex v2 = vertices[indices[i+2]];
-
-		glm::vec3 edge1 = v1.position - v0.position;
-		glm::vec3 edge2 = v2.position - v0.position;
-
-		GLfloat deltaU1 = v1.uv.x - v0.uv.x;
-		GLfloat deltaV1 = v1.uv.y - v0.uv.y;
-		GLfloat deltaU2 = v2.uv.x - v0.uv.x;
-		GLfloat deltaV2 = v2.uv.y - v0.uv.y;
-
-		GLfloat f = 1.0f / (deltaU1 * deltaV2 - deltaU2 * deltaV1);
-
-		glm::vec3 tangent;
-		glm::vec3 bitangent;
-
-		tangent.x = f * (deltaV2 * edge1.x - deltaV1 * edge2.x);
-		tangent.y = f * (deltaV2 * edge1.y - deltaV1 * edge2.y);
-		tangent.z = f * (deltaV2 * edge1.z - deltaV1 * edge2.z);
-
-		bitangent.x = f * (-deltaU2 * edge1.x + deltaU1 * edge2.x);
-		bitangent.y = f * (-deltaU2 * edge1.y + deltaU1 * edge2.y);
-		bitangent.z = f * (-deltaU2 * edge1.z + deltaU1 * edge2.z);
-
-		v0.tangent += tangent;
-		v1.tangent += tangent;
-		v2.tangent += tangent;
-
-		v0.biTangent += bitangent;
-		v1.biTangent += bitangent;
-		v2.biTangent += bitangent;
-
-		vertices[indices[i]] = v0;
-		vertices[indices[i+1]] = v1;
-		vertices[indices[i+2]] = v2;
-*/
 void Mesh::Reload(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
 	NumVerts = indices.size();

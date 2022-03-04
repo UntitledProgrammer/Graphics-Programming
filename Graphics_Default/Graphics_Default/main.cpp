@@ -24,7 +24,7 @@
 #include"Simulated/Extensions/Animator.h"
 #include"Obsolete/Serialisation.h"
 #include"Visuals/Substances/FlatShader.h"
-#include"Visuals/Substances/DepthSubstance.h"
+#include"Demonstration/DemoResources.h"
 
 //ImGui:
 #define IMGUI_IMPL_OPENGL_LOADER_GLEW
@@ -69,55 +69,15 @@ int main(int argc, char* argv[])
 
     SDL_Event sdlEvent;
 
-    //Lighting:
-    Light* light = Light::Instance();
-    light->colour = glm::vec3(1,0,0);
-    light->category = LightCategory::Directional;
-    light->transform.position = glm::vec3(0, 0, 0);
+    Demo::BuildSimulation();
 
     Toolbar toolbar = Toolbar(window, &glContext);
     toolbar.LoadDefault();
-    Texture* base = new Texture();
-    base->Load("0.jpg");
-    Texture* normal = new Texture();
-    normal->Load("brickwall_normal.jpg");
 
-    //Camera:
-    Simulatables.Add(Camera::Instance());
-    Simulatables.Add(light);
 
-    Camera* camera = Camera::Instance();
-    camera->ApplyExtension<CameraController>();
-    Entity* box = new Entity(), *box2 = new Entity();
-    box->transform.position = glm::vec3(50, 10, 22);
-    Simulatables.Add(box);
-    Simulatables.Add(box2);
-    MeshRenderer box3 = MeshRenderer();
-    box3.ApplyMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
-    std::vector<unsigned int> indices;
-    std::vector<Vertex> vertices = Resources->LoadMesh("Resources/Objects/sphere.obj", "", "", "", "", indices);
-    Mesh* testMesh = new Mesh(vertices, indices);
-    box->SetMesh(testMesh);
-    box2->transform.position = glm::vec3(5, 0, 0);
-    box2->SetMesh(new Mesh(Primitives::Square(), Primitives::SqaureIndices(), true));
 
-    FlatSubstance flat = FlatSubstance();
-    flat.Load("Visuals/Shaders/FlatShader");
-
-    SurfaceMaterial surface = SurfaceMaterial();
-    surface.normal = normal;
-    box3.ApplyMaterial(&flat);
-    surface.normal = normal;
-    surface.base = base;
-    surface.Load("Visuals/Shaders/RealShader");
-    box->SetMaterial(&flat);
-    //box->ApplyExtension
-    box2->SetMaterial(&flat);
-    Camera::Instance()->transform.position = glm::vec3(0, 0, 0);
     glClearColor(0.0f, 0.15f, 0.3f, 1.0f);
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-    Light::Instance()->transform.position.z += 2;
-    SaveSimulation();
 
     /*
     //Shadow mapping:
@@ -153,7 +113,9 @@ int main(int argc, char* argv[])
     flat.shadowID = shadowMapID;
     */
     //Main window loop:
+
     Resources->InitaliseSimulated();
+
     while (!AdvancedInput::Instance()->keyUp(SDLK_ESCAPE))
     {
         //Exit loop if any key is pressed.
@@ -183,8 +145,6 @@ int main(int argc, char* argv[])
 
         Resources->UpdateSimulated();
         toolbar.Update();
-        box3.transform->rotation.x += 0.05f;
-        box3.Render();
         SDL_GL_SwapWindow(window);
         INPUT->Update();
         SDL_Delay(16);

@@ -14,7 +14,7 @@ public:
 	MeshRenderer* meshRenderer;
 
 	//Constructor:
-	Entity();
+	Entity(std::string name = "Entity");
 
 	//Destructor:
 	~Entity();

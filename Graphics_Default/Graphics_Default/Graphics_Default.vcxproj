@@ -172,7 +172,6 @@
     <ClCompile Include="Editor\Toolbar.cpp" />
     <ClCompile Include="Visuals\Shader.cpp" />
     <ClCompile Include="Visuals\Skybox.cpp" />
-    <ClCompile Include="Visuals\Substances\DepthSubstance.cpp" />
     <ClCompile Include="Visuals\Substances\FlatShader.cpp" />
     <ClCompile Include="Visuals\Substances\Material.cpp" />
     <ClCompile Include="Visuals\Substances\SmartMaterial.cpp" />
@@ -181,8 +180,10 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Demonstration\DemoResources.h" />
     <ClInclude Include="Math\Mesh.h" />
     <ClInclude Include="Components\Shape.h" />
+    <ClInclude Include="Simulated\Extensions\Rotate.h" />
     <ClInclude Include="Visuals\Textures\Texture.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Editor\Hierarchy.h" />

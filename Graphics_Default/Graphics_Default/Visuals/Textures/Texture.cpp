@@ -54,7 +54,7 @@ bool Texture::Load(std::string location)
 
     data = stbi_load(location.c_str(), &width, &height, &componentsMagnitude, STBI_rgb_alpha);
 
-    if (data == NULL) std::cerr << "Texture loading failed for texture: " << location << std::endl;
+    if (data == NULL) { std::cerr << "Texture loading failed for texture: " << location << std::endl; return false; }
 
     switch(componentsMagnitude)
     {
@@ -79,7 +79,7 @@ bool Texture::Load(std::string location)
 
     stbi_image_free(data);
 
-    return false;
+    return true;
 }
 
 void Texture::LoadCubemap(std::vector<std::string> faces)

@@ -42,6 +42,6 @@ void Animator::Update()
 void Animator::Initialise()
 {
 	MeshRenderer* renderer = static_cast<Entity*>(body)->meshRenderer;
-	material = static_cast<SurfaceMaterial*>(renderer->material);
+	material = static_cast<SolidMaterial*>(renderer->material);
 	material->base = frames.front();
 }

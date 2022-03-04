@@ -35,6 +35,7 @@ void SolidMaterial::Update(Transform& transform)
     //Mesh:
     SetUniformMat4("model", transform.GetMatrix());
     SetUniformVec3("surfaceColour", colour);
+
     //Camera:
     SetUniformMat4("projection", Camera::Instance()->perspective);
     SetUniformMat4("view", Camera::Instance()->view);

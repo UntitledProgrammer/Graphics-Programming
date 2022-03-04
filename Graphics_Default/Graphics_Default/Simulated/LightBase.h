@@ -3,6 +3,7 @@
 //Defines:
 #define LIGHT_H
 #define LightSingleton Light::Instance()
+#define MAX_LIGHTS 3
 
 //Includes:
 #include<glew.h>
@@ -41,6 +42,7 @@ public:
 
 	//Constructor:
 	Light();
+	Light(std::string name, LightCategory category, glm::vec3 colour = glm::vec3(1,1,1));
 
 	//Deconstructor:
 	~Light();
@@ -51,6 +53,15 @@ public:
 	glm::mat4 GetProjectionMatrix();
 	void OnGui() override
 	{
+		ImGui::Text("Colour");
+		ImGui::PushID("Colour");
+		ImGui::SliderFloat("X", &direction.x, -1.0f, 1.0f);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Y", &direction.y, -1.0f, 1.0f);
+		ImGui::SameLine();
+		ImGui::SliderFloat("Z", &direction.z, -1.0f, 1.0f);
+		ImGui::PopID();
+
 		if (category == LightCategory::Directional || category == LightCategory::Spotlight)
 		{
 			ImGui::Text("Direction");
