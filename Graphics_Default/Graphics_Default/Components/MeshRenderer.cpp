@@ -33,3 +33,10 @@ void MeshRenderer::Render()
 	material->Update(*transform);
 	mesh->Draw();
 }
+
+void MeshRenderer::RenderShadows()
+{
+	if (!shaded) return;
+	//depthSubstance.Update(testMesh->transform);
+	//depthSubstance.Bind();
+}

@@ -33,6 +33,7 @@ public:
 	void ApplyMesh(Mesh* mesh);
 	void SetTransform(Transform* transform);
 	void Render();
+	void RenderShadows();
 
 	//Friends:
 	friend class Entity;

@@ -41,22 +41,7 @@ void SurfaceMaterial::Update(Transform& transform)
     SetUniformVec3("cameraPosition", Camera::Instance()->transform.position);
 
     //Light:
-
-    for (int i = 0; i < Light::lights.size(); i++)
-    { 
-        char buffer[64];
-        sprintf_s(buffer, "lights[%i].colour", i);
-        SetUniformVec3(buffer , Light::lights[i]->colour);
-        sprintf_s(buffer, "lights[%i].position", i);
-        SetUniformVec3(buffer, Light::lights[i]->transform.position);
-        sprintf_s(buffer, "lights[%i].direction", i);
-        SetUniformVec3(buffer, Light::lights[i]->direction);
-        sprintf_s(buffer, "lights[%i].type", i);
-        SetUniformInt(buffer, (int)Light::lights[i]->category);
-        sprintf_s(buffer, "lights[%i].angle", i);
-        SetUniformFloat(buffer, 5.0f);
-    }
-
+    SetUniformLights();
 
     SetUniformVec3("lightColour", Light::Instance()->colour);
     SetUniformVec3("lightPosition", Light::Instance()->transform.position);

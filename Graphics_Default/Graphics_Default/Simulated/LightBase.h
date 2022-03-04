@@ -21,7 +21,6 @@ enum class LightCategory
 	Phong,
 	Directional,
 	Point,
-	Flat,
 	Spotlight,
 	Size
 };
@@ -39,6 +38,7 @@ public:
 	LightCategory category = LightCategory::Phong;
 	static std::vector<Light*> lights;
 	const float nearPlane = 1.0f, farPlane = 100.0f;
+	bool active = true;
 
 	//Constructor:
 	Light();
@@ -53,23 +53,29 @@ public:
 	glm::mat4 GetProjectionMatrix();
 	void OnGui() override
 	{
+		ImGui::Checkbox("Active", &active);
+		ImGui::Spacing();
+
 		ImGui::Text("Colour");
 		ImGui::PushID("Colour");
-		ImGui::SliderFloat("X", &direction.x, -1.0f, 1.0f);
+		ImGui::SliderFloat("X", &colour.x, 0.0f, 1.0f);
 		ImGui::SameLine();
-		ImGui::SliderFloat("Y", &direction.y, -1.0f, 1.0f);
+		ImGui::SliderFloat("Y", &colour.y, 0.0f, 1.0f);
 		ImGui::SameLine();
-		ImGui::SliderFloat("Z", &direction.z, -1.0f, 1.0f);
+		ImGui::SliderFloat("Z", &colour.z, 0.0f, 1.0f);
 		ImGui::PopID();
+		ImGui::Spacing();
 
 		if (category == LightCategory::Directional || category == LightCategory::Spotlight)
 		{
+			ImGui::PushID("Directional");
 			ImGui::Text("Direction");
 			ImGui::SliderFloat("X", &direction.x, -1.0f, 1.0f);
 			ImGui::SameLine();
 			ImGui::SliderFloat("Y", &direction.y, -1.0f, 1.0f);
 			ImGui::SameLine();
 			ImGui::SliderFloat("Z", &direction.z, -1.0f, 1.0f);
+			ImGui::PopID();
 		}
 	}
 	Simulated* Instantiate()

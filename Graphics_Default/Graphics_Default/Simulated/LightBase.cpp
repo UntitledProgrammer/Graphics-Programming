@@ -16,8 +16,9 @@ Light::Light()
 	colour = glm::vec3(1, 1, 1);
 }
 
-Light::Light(std::string name, LightCategory category, glm::vec3 colour) : category(category), colour(colour)
+Light::Light(std::string name, LightCategory category, glm::vec3 colour) : colour(colour)
 {
+	this->category = category;
 	this->SetName(name);
 	lights.push_back(this);
 }
